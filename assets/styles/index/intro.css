@@ -8,7 +8,6 @@
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.85);    /*(red, green, blue, 투명도)*/
-    font-family: 'DotGothic16', 'IBM Plex Sans KR', sans-serif;
     color: #e6faff;
     text-shadow:
             0 0 1px #99ffff,
@@ -37,9 +36,7 @@
 
 
 #intro {
-    /*display: flex;*/
-    /*justify-content: center;*/
-    /*align-items: center;*/
+    font-family: 'PyeongChangPeace-Bold', sans-serif;
     overflow: hidden;
 }
 
