@@ -1,0 +1,285 @@
+@charset "UTF-8";
+
+/*로딩 화면 */
+#loadingForm {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);    /*(red, green, blue, 투명도)*/
+    font-family: 'DotGothic16', 'IBM Plex Sans KR', sans-serif;
+    color: #e6faff;
+    text-shadow:
+            0 0 1px #99ffff,
+            0 0 2px #66ffff,
+            0 0 3px rgba(102, 255, 255, 0.3); /* CRT 청록빛 느낌 */
+    line-height: 1.6;
+    letter-spacing: 0.03em;
+    font-size: 1.8rem;
+    display: flex;
+    justify-content: center;        /*수평 정렬 (가로 방향)*/
+    align-items: center;            /*수직 정렬 (세로 방향)*/
+    opacity: 1;
+    z-index: 100;
+}
+
+/*로딩 화면 서서히 사라짐 */
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+
+#intro {
+    /*display: flex;*/
+    /*justify-content: center;*/
+    /*align-items: center;*/
+    overflow: hidden;
+}
+
+/* CRT 스캔라인 효과 */
+#intro::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    background: repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.9) 0px, rgba(0, 0, 0, 0.9) 1px, transparent 2px, transparent 2px);
+    opacity: 0.2;
+    z-index: 1;
+}
+
+/* CRT 그라디언트 */
+#intro::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(0, 255, 0, 0.05) 10%, rgba(0, 0, 0, 0.95) 80%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* CRT 텍스트 화면 */
+#intro > .typing {
+    position: absolute;
+    background-color: black;
+    color: #56dfb4;
+    width: 1000px;
+    height: 500px;
+    border: 3px solid rgba(86, 223, 180, 0.6);
+    border-radius: 12px;
+    box-shadow: 0 0 8px #56dfb4,
+                0 0 20px rgba(0, 255, 0, 0.5),
+                inset 0 0 5px rgba(86, 223, 180, 0.3);
+
+    /* 텍스트 노이즈용 텍스처 오버레이 */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: cover;
+
+    opacity: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform-origin: center center;     /* 정중앙 기준으로 변형*/
+    transform: scale(1);                 /* 원래 크기 그대로 (요소 크기 조절) */
+    filter: brightness(0.3) blur(10px);  /* 밝기조절(30%낮춤), 흐림효과(10px만큼 흐리게) */
+
+    animation: crt-power-on 1.7s ease-out forwards,
+    crt-noise 3s linear 1s infinite,
+    crt-flicker 3s linear infinite,
+    static-flash 5.3s ease-in-out infinite;
+}
+
+/* CRT 전원 켜지는 애니메이션 */
+@keyframes crt-power-on {
+    0% {
+        transform: scale(0, 0.0001);
+        filter: brightness(50) blur(30px);
+        box-shadow: 0 0 100px white;
+        opacity: 0;
+    }
+    30% {
+        transform: scale(1.2, 0.05);
+        filter: brightness(20) blur(20px);
+        box-shadow: 0 0 80px white;
+        opacity: 0.7;
+    }
+    50% {
+        transform: scale(1, 0.8);
+        filter: brightness(5) blur(10px);
+        box-shadow: 0 0 40px white;
+        opacity: 0.5;
+    }
+    70% {
+        transform: scale(1, 1);
+        filter: brightness(2) blur(5px);
+        box-shadow: 0 0 20px white;
+        opacity: 0.9;
+    }
+    100% {
+        opacity: 1;
+        filter: brightness(1);
+        box-shadow: none;
+        pointer-events: auto;
+    }
+}
+
+/* CRT 화면 깜빡임 효과 */
+@keyframes crt-flicker {
+    0%, 100% { opacity: 1; }
+    3%   { opacity: 0.85; }
+    7%   { opacity: 0.65; }
+    11%  { opacity: 1; }
+    14%  { opacity: 0.5; }
+    17%  { opacity: 0.95; }
+    25%  { opacity: 1; }
+    29%  { opacity: 0.6; }
+    30%  { opacity: 0.9; }
+    45%  { opacity: 1; }
+    51%  { opacity: 0.7; }
+    54%  { opacity: 0.95; }
+    58%  { opacity: 0.5; }
+    63%  { opacity: 1; }
+    70%  { opacity: 0.85; }
+    78%  { opacity: 1; }
+    85%  { opacity: 0.7; }
+    91%  { opacity: 0.9; }
+    97%  { opacity: 1; }
+}
+
+/* 전원 플래시 효과 */
+@keyframes static-flash {
+    0%, 100% { opacity: 1; }
+    5%   { opacity: 1; }
+    10%  { opacity: 1; }
+    12%  { opacity: 0.9; }
+    14%  { opacity: 0.96; }
+    16%  { opacity: 0.88; }
+    22%  { opacity: 1; }
+    28%  { opacity: 0.93; }
+    35%  { opacity: 1; }
+    41%  { opacity: 0.87; }
+    43%  { opacity: 0.97; }
+    44%  { opacity: 0.85; }
+    46%  { opacity: 0.94; }
+    48%  { opacity: 0.83; }
+    50%  { opacity: 1; }
+    60%  { opacity: 1; }
+    65%  { opacity: 0.9; }
+    67%  { opacity: 0.96; }
+    70%  { opacity: 1; }
+    80%  { opacity: 1; }
+    86%  { opacity: 0.91; }
+    88%  { opacity: 0.97; }
+    90%  { opacity: 1; }
+}
+
+/* CRT 노이즈 그리드 효과 */
+@keyframes crt-noise {
+    0% {
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.0' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+    }
+    25% {
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.5' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
+    }
+    50% {
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='2.0' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.12'/%3E%3C/svg%3E");
+    }
+    75% {
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.1'/%3E%3C/svg%3E");
+    }
+    100% {
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.1'/%3E%3C/svg%3E");
+    }
+}
+
+#intro > .typing > .console {
+    display: inline-block;
+    white-space: nowrap;
+    text-shadow: 0 0 3px #56dfb4, 0 0 5px #56dfb4, 0 0 10px #00FF00;
+    /* [x-offset] [y-offset] [blur-radius] [color]; 겹쳐서 네온 효과*/
+    position: relative;
+}
+
+#intro > .typing > .console > .cursor {
+    display: inline-block;
+    animation: blink 0.8s infinite;
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
+
+#intro > .typing > .scanLines {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 10;
+}
+
+#intro > .typing > .scanLines::before,
+#intro > .typing > .scanLines::after {
+    display: block;
+    pointer-events: none;
+    content: '';
+    position: absolute;
+}
+
+#intro > .typing > .scanLines::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 1px; /* 스캔 라인 높이 */
+    background: rgba(0, 255, 0, 0.2);
+    opacity: 0.75;
+    animation: scan-moving 6s linear infinite;
+    z-index: 11;
+}
+
+#intro > .typing > .scanLines::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: repeating-linear-gradient(0deg, transparent, transparent 1px, rgba(0, 255, 0, 0.05) 3px);
+    background-size: 100% 4px; /* 줄무늬 크기 */
+    animation: scanLines 1s steps(60) infinite;
+    z-index: 10;
+}
+
+/* 스캔 라인이 위에서 아래로 움직이는 효과 */
+@keyframes scan-moving {
+    0% {
+        transform: translate3d(0, 100vh, 0);
+    }
+}
+
+/* 스캔 라인 애니메이션 */
+@keyframes scanLines {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 100%;
+    }
+}

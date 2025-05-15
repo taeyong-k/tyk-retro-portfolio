@@ -1,0 +1,59 @@
+@charset "UTF-8";
+
+@import "./index/intro.css";
+@import "./index/toolbar.css";
+@import "./index/about.css";
+
+
+/* 배경 */
+body {
+    margin: 0;
+    padding: 0;
+
+    /* 배경 고정 */
+    background-image: url("../images/texture.backgound.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;   /* 배경 고정 */
+
+    /* 배경 어둡게 블렌딩 */
+    background-color: rgba(0, 0, 0, 0.4);
+    background-blend-mode: multiply;
+
+    overflow-x: hidden;
+    scroll-behavior: smooth;    /* 스크롤 부드럽게 */
+}
+
+/* 어두운 필터 효과 */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: -1;
+    pointer-events: none;
+}
+
+#root {
+    height: auto;
+    position: relative;
+}
+
+/* 각 섹션을 스크롤되게 (화면 한 칸씩) */
+main article {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    height: 100%;
+    box-sizing: border-box;
+    background-color: transparent;
+    color: #56dfb4;
+    display: flex;      /* <-> block */
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
