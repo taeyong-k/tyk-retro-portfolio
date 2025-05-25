@@ -1,39 +1,31 @@
 @charset "UTF-8";
 
-
+/*로딩 화면 */
 #loadingForm {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.85);    /*(red, green, blue, 투명도)*/
+    background: rgba(0, 0, 0, 0.85);
     color: #e6faff;
     text-shadow:
             0 0 1px #99ffff,
             0 0 2px #66ffff,
-            0 0 3px rgba(102, 255, 255, 0.3); /* CRT 청록빛 느낌 */
+            0 0 3px rgba(102, 255, 255, 0.3);
     line-height: 1.6;
-    letter-spacing: 0.03em;
-    font-size: 1.8rem;
+    font-size: 24px;
+    z-index: 9999;
+    transition: opacity 1s ease;
+
+    align-items: center;
     display: flex;
-    justify-content: center;        /*수평 정렬 (가로 방향)*/
-    align-items: center;            /*수직 정렬 (세로 방향)*/
-    opacity: 1;
-    z-index: 100;
+    justify-content: center;
 }
 
-/*로딩 화면 서서히 사라짐 */
-@keyframes fadeOut {
-    0% {
-        opacity: 1;
-    }
-    100% {
-        opacity: 0;
-        visibility: hidden;
-    }
+#root {
+    display: none;
 }
-
 
 #intro {
     font-family: 'PyeongChangPeace-Bold', sans-serif;
