@@ -3,7 +3,7 @@ const texts = ['HELLO WORLD!', 'TY PORTFOLIO ✌️', 'JR. DEVELOPER']; // 타�
 let textIndex = 0; // 현재 타이핑할 텍스트의 인덱스
 let index = 0; // 현재 텍스트의 문자 위치
 let typingInterval; // 타이핑을 위한 setTimeout ID
-let isTyping = true; // 타이핑 상태 추적
+let isTyping = false; // 타이핑 상태 추적
 
 
 // 타이핑 함수
@@ -31,7 +31,9 @@ function typeText() {
         }, 5000); // 텍스트가 다 끝난 후 2초 후에 초기화하고 다시 시작
     }
 }
-
+// 나중에 지우기
+const toolbar = document.querySelector('#header > .toolbar');
+toolbar.classList.add('active');
 // 로딩창 함수
 document.addEventListener("DOMContentLoaded", function () {
     let loadingText = document.getElementById("loadingText");
