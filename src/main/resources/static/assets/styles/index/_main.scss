@@ -1,0 +1,57 @@
+@charset "UTF-8";
+
+// index 임포트 자리
+@import "../_def";
+@import "./main/toolbar";
+@import "./main/intro";
+@import "./main/about";
+@import "./main/career";
+@import "./main/skill";
+@import "./main/project";
+
+
+#main article {
+  @include flex(column, center, center);
+  position: relative;
+  min-height: 400px;
+  width: 100%;
+  height: auto;
+  box-sizing: border-box;
+  background-color: transparent;
+  color: #56dfb4;
+  z-index: 1;
+}
+
+#main article#intro {
+  height: 100vh;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+@media (min-width: 769px) {
+  #main article {
+    min-height: 100vh;
+    height: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  #main article:not(#intro) {
+    min-height: 500px; // 다른 article만
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

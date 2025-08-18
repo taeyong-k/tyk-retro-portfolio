@@ -1,0 +1,398 @@
+<!doctype html>
+<html lang=ko>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>김태용 | 백엔드 개발자 포트폴리오</title>
+    <link rel="stylesheet" href="/assets/styles/common.min.css" type="text/css">
+    <link rel="stylesheet" href="/assets/styles/index.min.css" type="text/css">
+    <script src="https://unpkg.com/gsap@3/dist/gsap.min.js"></script>
+    <script src="https://unpkg.com/gsap@3/dist/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/gsap@3/dist/MotionPathPlugin.min.js"></script>
+    <script src="https://assets.codepen.io/16327/Flip.min.js"></script>
+    <script defer src="/assets/scripts/index.js" type="module"></script>
+</head>
+<body>
+
+<div id="root">
+    <header id="header">
+        <section id="toolbar" class="toolbar">
+            <section class="menu">
+                <a href="#" class="menu">menu</a>
+            </section>
+            <section class="list">
+                <a href="#" class="aboutMe">About</a>
+                <a href="#" class="career">Career</a>
+                <a href="#" class="Skills">Skills</a>
+                <a href="#" class="Projects">Projects</a>
+            </section>
+        </section>
+    </header>
+    <main id="main">
+        <article id="intro">
+            <div class="video-wrapper">
+                <video autoplay muted playsinline src="/assets/videos/intro-video.mp4"></video>
+            </div>
+        </article>
+        <article id="about">
+            <div class="about-container">
+                <div class="about-title">About Me</div>
+                <section class="about-row">
+                    <section class="about-box box-padding">
+                        <div class="about-inner-box">
+                            <div class="about-title-bar">
+                                <span>ABOUT ME</span>
+                                <span class="about-title-bar-icon">_</span>
+                            </div>
+                            <div class="about-content-box">
+                                <div class="info-line">Name: Kim Tae Yong</div>
+                                <div class="info-line">MBTI: ISTJ</div>
+                                <div class="info-line">Phone: 010-3581-7365</div>
+                                <div class="info-line">Email: taeyong.k0902@gmail.com</div>
+                                <div class="info-line">Address: Jung-gu, Daegu</div>
+                            </div>
+                            <div class="btn-box">
+                                <button class="btn btn-ok">OK</button>
+                                <button class="btn btn-cancel">Cancel</button>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="contact-side-box">
+                        <div class="side-box box-padding">
+                            <div class="side-cont-title">CONTACT</div>
+                            <div class="side-content">010 3581 7365</div>
+                        </div>
+                        <div class="side-box box-padding">
+                            <div class="side-birth-title side-title-blue">BIRTHDAY</div>
+                            <div class="side-content">1996. 09.02</div>
+                        </div>
+                    </section>
+                </section>
+                <section class="lower-windows">
+                    <div class="edu-container">
+                        <section class="edu-window box-padding">
+                            <div class="edu-title-bar">
+                                <span>EDUCATION</span>
+                                <span>X</span>
+                            </div>
+                            <div class="edu-content-box">
+                                <div class="edu-line">
+                                    <span class="ko">포항대동고등학교</span>
+                                    <span>2012.03 - 2015.02</span>
+                                </div>
+                                <div class="edu-line">
+                                    <span class="ko">배재대학교․전자공학과</span>
+                                    <span>2015.03 - 2022.02</span>
+                                </div>
+                            </div>
+                        </section>
+                        <section class="link-window box-padding">
+                            <div class="link-title-bar">
+                                <span>LINKS</span>
+                                <span>OK</span>
+                            </div>
+                            <div class="link-content-box">
+                                <div class="link-box hint">
+                                    <a class="notion-link"
+                                       href="https://proximal-artichoke-2a0.notion.site/Y-DLog-1b78ab1dcef680f38ec6d013a823911a?pvs=4"
+                                       target="_blank">
+                                        <img alt="notion-icon" class="notion-icon"
+                                             src="/assets/images/about/notion.logo.png">
+                                        Notion
+                                    </a>
+                                </div>
+                                <div class="link-box hint">
+                                    <a class="tistory-link" href="https://ty3804.tistory.com/" target="_blank">
+                                        <img alt="tistory-icon" class="tistory-icon"
+                                             src="/assets/images/about/tistory.logo.png">
+                                        Notion
+                                    </a>
+                                </div>
+                                <div class="link-box hint">
+                                    <a class="github-link" href="https://github.com/taeyong-k" target="_blank">
+                                        <img alt="github-icon" class="github-icon"
+                                             src="/assets/images/about/github.logo.png">
+                                        Notion
+                                    </a>
+                                </div>
+                            </div>
+                        </section>
+                        <section class="info-window box-padding">
+                            <div class="info-title-bar" style="padding: 6px 10px;">
+                                <span>OK</span>
+                                <span>?</span>
+                            </div>
+                            <div class="info-content-box window-text">
+                                <div class="ko">
+                                    <p class="info-content-title">노력은 배신하지 않는다.</p>
+                                    <span class="info-content-caption">실패를 배움으로 삼아, 어제보다 나은 오늘을 만들어가는 개발자 김태용입니다. 배움의 재미를 따라 걷다 보니, 자연스럽게 개발이라는 길을 만나게 되었고, 이제는 백엔드 개발자로 한 걸음씩 성장해나가고 있습니다. 이제 시작이지만, 믿고 맡길 수 있는 개발자로 성장하고 싶습니다.</span>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </section>
+            </div>
+        </article>
+        <article id="career">
+            <div class="career-wrapper">
+                <div class="career-title">Career</div>
+                <div class="ticket-container">
+                    <div class="ticket-wrapper">
+                        <div class="ticket-shadow"></div> <!-- 테두리용 -->
+                        <div class="ticket">
+                            <div class="ticket-content-wrapper">
+                                <div class="clip"></div>
+                                <div class="tape"></div>
+                                <section class="side-zone">
+                                    <div class="barcode-line"></div>
+                                    <img alt="barcode" class="barcode-img" src="/assets/images/career/bacode.png">
+                                    <div class="stamp">APPROVED</div>
+                                </section>
+                                <section class="main-zone">
+                                    <div class="inner-border">
+                                        <div class="main-content">
+                                            <div class="title">RESPONSIBILITY</div>
+                                            <div class="place">포항신협본점·신용협동</div>
+                                            <div class="date">2024.07 - 2024.12</div>
+                                            <div class="tasks">
+                                                <span class="task-title">담당업무</span>
+                                                <span class="task-content">‣출납창구사무원 업무 담당</span>
+                                                <ul>
+                                                    <li>고객 금융 서비스 및 창구 업무</li>
+                                                    <li>금융 시스템 운영 및 데이터 처리</li>
+                                                    <li>보안 정책 준수 및 정보 보호</li>
+                                                    <li>팀 협업 및 문제 해결</li>
+                                                    <li>고객 소통 및 서비스 제공</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </section>
+                            </div>
+                        </div>
+                    </div>      <!-- 바코드있는 ver -->
+                    <div class="ticket-wrapper koreaIT">
+                        <div class="ticket-shadow"></div>
+                        <div class="ticket noBarcode koreaIT">
+                            <div class="ticket-content-wrapper">
+                                <div class="clip koreaIT"></div>
+                                <div class="tape koreaIT"></div>
+                                <!--                            <div class="stamp">APPROVED</div>-->
+                                <section class="main-zone noBarcode">
+                                    <div class="inner-border">
+                                        <div class="main-content">
+                                            <div class="title noBarcode">RESPONSIBILITY</div>
+                                            <div class="place noBarcode">KOREA IT ACADEMY</div>
+                                            <div class="date noBarcode">2025.02 - ing</div>
+                                            <div class="tasks">
+                                                <span class="task-title">담당업무</span>
+                                                <span class="task-content koreaIT">‣스마트웹 응용 프로그래밍 개발자 과정</span>
+                                                <ul class="koreaIT">
+                                                    <li>웹 개발 전반 기술 학습 및 백엔드 역량 강화</li>
+                                                    <li>백엔드 중심의 웹 개발 역량 강화</li>
+                                                    <li>MVC 기반의 Spring Boot 프로젝트 진행</li>
+                                                    <li>개인/팀 프로젝트를 통한 협업 및 실무 경험</li>
+                                                    <li>버전 관리, 협업 도구를 활용한 팀 협업 경험</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                    </div> <!-- 바코드없는 ver -->
+                    <div class="ticket-wrapper">
+                        <div class="ticket-shadow"></div>
+                        <div class="ticket comingSoon">
+                            <div class="ticket-content-wrapper">
+                                <div class="tape first"></div>
+                                <div class="tape second"></div>
+                                <section class="side-zone">
+                                    <div class="barcode-line"></div>
+                                    <img alt="barcode" class="barcode-img" src="/assets/images/career/bacode.png">
+                                    <div class="stamp">coming soon</div>
+                                </section>
+                                <section class="main-zone">
+                                    <div class="inner-border">
+                                        <div class="main-content">
+                                            <div class="title">RESPONSIBILITY</div>
+                                            <div class="place">Coming Soon</div>
+                                            <div class="date">2025.00 - 2025.00</div>
+                                            <div class="tasks">
+                                                <span class="task-title">담당업무</span>
+                                                <span class="task-content">‣Coming soon</span>
+                                                <ul>
+                                                    <li>예정</li>
+                                                    <li>-</li>
+                                                    <li>-</li>
+                                                    <li>-</li>
+                                                    <li>-</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+        <article id="skills">
+            <div class="skill-wrapper">
+                <h2 class="title">skills</h2>
+                <div class="skill-content">
+                    <ul class="skill-nav-list" id="skillNav">
+                        <li style="--clr:#2483ff;">
+                            <a href="#" data-category="languages">
+                                <span>Languages</span>
+                            </a>
+                        </li>
+                        <li style="--clr:#fff200;">
+                            <a href="#" data-category="frontend">
+                                <span>Frontend</span>
+                            </a>
+                        </li>
+                        <li style="--clr:#ff253f;">
+                            <a href="#" data-category="backend">
+                                <span>Backend</span>
+                            </a>
+                        </li>
+                        <li style="--clr:#25d366;">
+                            <a href="#" data-category="database">
+                                <span>Database</span>
+                            </a>
+                        </li>
+                        <li style="--clr:#f32ec8;">
+                            <a href="#" data-category="os">
+                                <span>OS</span>
+                            </a>
+                        </li>
+                        <li style="--clr:#00bcd4;">
+                            <a href="#" data-category="tools">
+                                <span>Tools</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="led-board">
+                        <div class="skill-board-left" id="skillLeft">
+                            <div class="skill-title">Languages</div>
+                            <div class="skill-container"></div>
+                        </div>
+                        <div class="skill-board-right" id="skillRight">
+                            <div class="skill-title">Highlights</div>
+                            <div class="skill-message">설명칸</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+        <article id="projects" style="display: none">
+            <div class="slider-header"></div>
+            <section class="slider-section">
+                <div class="wheel">
+                    <div class="wheel__card">
+                        <img src="https://assets.codepen.io/756881/amys-1.jpg"/>
+                    </div>
+                    <div class="wheel__card">
+                        <img src="https://assets.codepen.io/756881/amys-2.jpg"/>
+                    </div>
+                    <div class="wheel__card">
+                        <img src="https://assets.codepen.io/756881/amys-3.jpg"/>
+                    </div>
+                    <div class="wheel__card">
+                        <img src="https://assets.codepen.io/756881/amys-4.jpg"/>
+                    </div>
+                    <div class="wheel__card">
+                        <img src="https://assets.codepen.io/756881/amys-5.jpg"/>
+                    </div>
+                    <div class="wheel__card">
+                        <img src="https://assets.codepen.io/756881/amys-6.jpg"/>
+                    </div>
+                    <div class="wheel__card">
+                        <img src="https://assets.codepen.io/756881/amys-7.jpg"/>
+                    </div>
+                    <div class="wheel__card">
+                        <img src="https://assets.codepen.io/756881/amys-1.jpg"/>
+                    </div>
+                    <div class="wheel__card">
+                        <img src="https://assets.codepen.io/756881/amys-2.jpg"/>
+                    </div>
+                    <div class="wheel__card">
+                        <img src="https://assets.codepen.io/756881/amys-3.jpg"/>
+                    </div>
+                    <div class="wheel__card">
+                        <img src="https://assets.codepen.io/756881/amys-4.jpg"/>
+                    </div>
+                    <div class="wheel__card">
+                        <img src="https://assets.codepen.io/756881/amys-5.jpg"/>
+                    </div>
+                    <div class="wheel__card">
+                        <img src="https://assets.codepen.io/756881/amys-6.jpg"/>
+                    </div>
+                    <div class="wheel__card">
+                        <img src="https://assets.codepen.io/756881/amys-7.jpg"/>
+                    </div>
+                    <div class="wheel__card">
+                        <img src="https://assets.codepen.io/756881/amys-1.jpg"/>
+                    </div>
+                    <div class="wheel__card">
+                        <img src="https://assets.codepen.io/756881/amys-2.jpg"/>
+                    </div>
+                    <div class="wheel__card">
+                        <img src="https://assets.codepen.io/756881/amys-3.jpg"/>
+                    </div>
+                    <div class="wheel__card">
+                        <img src="https://assets.codepen.io/756881/amys-4.jpg"/>
+                    </div>
+                    <div class="wheel__card">
+                        <img src="https://assets.codepen.io/756881/amys-5.jpg"/>
+                    </div>
+                    <div class="wheel__card">
+                        <img src="https://assets.codepen.io/756881/amys-6.jpg"/>
+                    </div>
+                    <div class="wheel__card">
+                        <img src="https://assets.codepen.io/756881/amys-7.jpg"/>
+                    </div>
+                    <div class="wheel__card">
+                        <img src="https://assets.codepen.io/756881/amys-1.jpg"/>
+                    </div>
+                    <div class="wheel__card">
+                        <img src="https://assets.codepen.io/756881/amys-2.jpg"/>
+                    </div>
+                    <div class="wheel__card">
+                        <img src="https://assets.codepen.io/756881/amys-3.jpg"/>
+                    </div>
+                    <div class="wheel__card">
+                        <img src="https://assets.codepen.io/756881/amys-4.jpg"/>
+                    </div>
+                    <div class="wheel__card">
+                        <img src="https://assets.codepen.io/756881/amys-5.jpg"/>
+                    </div>
+                    <div class="wheel__card">
+                        <img src="https://assets.codepen.io/756881/amys-6.jpg"/>
+                    </div>
+                    <div class="wheel__card">
+                        <img src="https://assets.codepen.io/756881/amys-7.jpg"/>
+                    </div>
+                </div>
+            </section>
+
+            <div class="scroll-down">Scroll down
+                <div class="arrow"></div>
+            </div>
+        </article>
+        <article id="projectForms">프로젝트 폼 페이지</article>
+    </main>
+
+    <footer id="footer">
+        <!--        <div id="copyright">© 2025. Kim Tae Yong. All rights reserved.</div>-->
+    </footer>
+
+</div>
+
+</body>
+</html>

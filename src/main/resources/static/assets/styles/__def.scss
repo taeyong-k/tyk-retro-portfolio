@@ -1,0 +1,63 @@
+@charset "UTF-8";
+
+@use "sass:color";
+
+@mixin flex($flex-direction, $align-items: center, $justify-content: center, $gap: 0, $flex-wrap: nowrap) {
+  align-items: $align-items;
+  display: flex;
+  flex-direction: $flex-direction;
+  flex-wrap: $flex-wrap;
+  gap: $gap;
+  justify-content: $justify-content;
+
+  > * {
+    flex-grow: 0;
+    flex-shrink: 0;
+  }
+
+  > [data-mt-stretch] {
+    flex-grow: 1;
+    flex-shrink: 1;
+  }
+}
+
+@mixin fixedHeight($s) {
+  height: $s;
+  max-height: $s;
+  min-height: $s;
+}
+
+@mixin fixedWidth($s) {
+  width: $s;
+  max-width: $s;
+  min-width: $s;
+}
+
+@mixin fixedSize($w, $h: $w) {
+  @include fixedHeight($h);
+  @include fixedWidth($w);
+}
+
+$global-color-background: #111111;
+$global-color-background-lighten-5: color.adjust($global-color-background, $lightness: 5%);
+$global-color-background-lighten-10: color.adjust($global-color-background, $lightness: 10%);
+$global-color-background-lighten-20: color.adjust($global-color-background, $lightness: 20%);
+$global-color-background-lighten-30: color.adjust($global-color-background, $lightness: 30%);
+$global-color-background-lighten-40: color.adjust($global-color-background, $lightness: 40%);
+$global-color-background-lighten-50: color.adjust($global-color-background, $lightness: 50%);
+$global-color-border: #212121;
+$global-color-border-lighten-5: color.adjust($global-color-border, $lightness: 5%);
+$global-color-border-lighten-10: color.adjust($global-color-border, $lightness: 10%);
+$global-color-border-lighten-20: color.adjust($global-color-border, $lightness: 20%);
+$global-color-border-lighten-30: color.adjust($global-color-border, $lightness: 30%);
+$global-color-border-lighten-40: color.adjust($global-color-border, $lightness: 40%);
+$global-color-border-lighten-50: color.adjust($global-color-border, $lightness: 50%);
+$global-color-border-hover: color.adjust($global-color-border, $lightness: 25%);
+$global-color-border-focus: color.adjust($global-color-border, $lightness: 50%);
+$global-color-concept: #ff0134;
+$global-color-text: #fafafa;
+$global-color-text-darken-10: color.adjust($global-color-text, $lightness: -10%);
+$global-color-text-darken-20: color.adjust($global-color-text, $lightness: -20%);
+$global-color-text-darken-30: color.adjust($global-color-text, $lightness: -30%);
+$global-color-text-darken-40: color.adjust($global-color-text, $lightness: -40%);
+$global-color-text-darken-50: color.adjust($global-color-text, $lightness: -50%);
