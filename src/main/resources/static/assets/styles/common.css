@@ -1,27 +1,7 @@
 @charset "UTF-8";
-/*메인: 영어 폰트*/
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&display=swap");
+@import url("https://cdn.jsdelivr.net/gh/fonts-archive/Galmuri11/Galmuri11.css");
 @import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
-/*메인_센션: 타이틀 폰트*/
-@font-face {
-  font-family: "PyeongChangPeace-Bold";
-  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-02@1.0/PyeongChangPeace-Bold.woff2") format("woff2");
-  font-weight: 700;
-  font-style: normal;
-}
-/*메인: 한글 폰트*/
-@font-face {
-  font-family: "NeoDunggeunmo";
-  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.3/NeoDunggeunmo.woff") format("woff");
-  font-weight: normal;
-  font-style: normal;
-}
-/*영어 + 한글 통합 전용 폰트*/
-@font-face {
-  font-family: "DungGeunMo";
-  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/DungGeunMo.woff") format("woff");
-  font-weight: normal;
-  font-style: normal;
-}
 * {
   box-sizing: border-box;
 }
@@ -31,11 +11,14 @@ html {
 }
 
 body {
-  color: #56dfb4;
-  font-family: "Press Start 2P", "NeoDunggeunmo", cursive;
-  font-size: 72px;
-  letter-spacing: 5px;
-  line-height: 1.45;
+  font-family: "Galmuri11", "IBM Plex Mono", -apple-system, BlinkMacSystemFont, "Malgun Gothic", "맑은 고딕", helvetica, "Apple SD Gothic Neo", sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: -0.4px;
+  line-height: 1.5;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  font-synthesis: none;
 }
 
 button, input, select, textarea {
