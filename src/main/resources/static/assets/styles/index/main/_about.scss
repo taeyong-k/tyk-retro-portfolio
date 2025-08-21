@@ -135,11 +135,12 @@
                 position: relative;
 
                 &::after {
-                  content: "안녕하세요👋 백엔드 개발자 \A김태용입니다. 반가워요!";
+                  content: "안녕하세요👋 백엔드 개발자 김태용입니다. 반가워요!";
                   position: absolute;
                   top: -102px;
                   left: -150px;
-                  width: 185px;
+                  width: 215px;
+                  box-sizing: border-box;
 
                   background-color: #f8f8f8;
                   color: #0b3b41;
@@ -172,6 +173,7 @@
 
                   @media (max-width: 540px) {
                     left: -130px;
+                    //width: clamp(150px, 90%, 215px);
                   }
                 }
 
@@ -247,7 +249,7 @@
         align-self: flex-start;
 
         > .side-box {
-          width: 166px;
+          width: 159px;
           aspect-ratio: 1 / 1;
           background-color: #159188;
           border: 4px solid #0b3b41;
@@ -255,7 +257,7 @@
           box-sizing: border-box;
 
           > .side-cont-title {
-            color: #0b3b41;
+            color: #c8d7e2;
             background-color: #d49a30;
             padding: 5px;
             font-weight: bold;
