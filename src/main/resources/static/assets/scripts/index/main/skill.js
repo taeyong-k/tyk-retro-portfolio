@@ -33,43 +33,47 @@ const fontMap = {
 // 카테고리별 스킬 데이터 (텍스트 + 로고 이미지 경로)
 const skillsData = {
     languages: [
-        {text: 'HTML', logo: 'languages/html.png'},
-        {text: 'CSS', logo: 'languages/css.png'},
-        {text: 'SCSS', logo: 'languages/scss.png'},
-        {text: 'JAVASCRIPT', logo: 'languages/js.png'},
         {text: "JAVA", logo: 'languages/java.png'},
         {text: 'PYTHON', logo: 'languages/python.png'},
+        {text: 'JAVASCRIPT', logo: 'languages/js.png'},
+        {text: '', logo: 'default.png'},
     ],
     frontend: [
+        {text: 'HTML', logo: 'frontend/html.png'},
+        {text: 'CSS', logo: 'frontend/css.png'},
+        {text: 'SCSS', logo: 'frontend/scss.png'},
         {text: 'THYMELEAF', logo: 'frontend/thymeleaf.png'},
     ],
     backend: [
-        {text: 'Spring', logo: 'backend/spring.png'},
         {text: 'Spring Boot', logo: 'backend/springboot.png'},
-        // { text: 'Spring Data JPA', logo: 'backend/springdatajpa.png' },
-        {text: 'Spring Data', logo: 'backend/springdata.png'},
+        {text: 'Spring', logo: 'backend/spring.png'},
+        {text: 'JPA', logo: 'backend/jpa.png'},
         {text: 'MyBatis', logo: 'backend/mybatis.png'},
         {text: 'JDBC', logo: 'backend/jdbc.jpg'},
         {text: 'Lombok', logo: 'backend/lombok.png'},
     ],
     database: [
         {text: 'Maria DB', logo: 'database/mariadb.png'},
+        {text: '', logo: 'default.png'},
+        {text: '', logo: 'default.png'},
+        {text: '', logo: 'default.png'},
     ],
-    os: [
-        {text: 'Ubuntu', logo: 'os/ubuntuLinux.png'},
-        {text: 'Kali Linux', logo: 'os/kaliLinux.png'},
+    devOps: [
+        {text: 'Google Cloud', logo: 'devOps/gcp.png'},
+        {text: 'Cloudflare', logo: 'devOps/cloudflare.png'},
+        {text: 'Linux', logo: 'devOps/linux.png'},
+        {text: 'Gabia', logo: 'devOps/gabia.png'},
     ],
     tools: [
         {text: 'Eclipse', logo: 'tools/eclipse.png'},
         {text: 'IntelliJ', logo: 'tools/intellij.png'},
+        {text: 'pythonIDE', logo: 'tools/pythonIDE.png'},
         {text: 'Git', logo: 'tools/git.png'},
         {text: 'GitHub', logo: 'tools/github.png'},
-        {text: 'PuTTY', logo: 'tools/putty.png'},
-        {text: 'pythonIDE', logo: 'tools/pythonIDE.png'},
-        {text: 'VMware', logo: 'tools/vmware.png'},
-        {text: 'JDK', logo: 'tools/jdk.png'},
         {text: 'Maven', logo: 'tools/maven.png'},
-    ]
+        {text: 'JDK', logo: 'tools/jdk.png'},
+        {text: 'VMware', logo: 'tools/vmware.png'},
+    ],
 };
 
 // 메시지 LED dot 렌더링
@@ -107,7 +111,13 @@ function createSkillElement({text, logo}) {
     const img = document.createElement('img');
     img.className = 'logo';
     img.alt = text;
-    img.src = `./assets/images/skills/${logo}`;
+    img.src = logo.includes('/')
+        ? `./assets/images/skills/${logo}`
+        : `./assets/images/${logo}`;
+
+    if (logo === 'default.png') {
+        img.classList.add('logo-default');
+    }
 
     const led = document.createElement('div');
     led.className = 'led-message';
@@ -133,6 +143,7 @@ function updateSkillsBoard(category) {
     skillTitle.textContent = category.charAt(0).toUpperCase() + category.slice(1);
 
     const skillList = skillsData[category] || [];
+
     skillList.forEach(skillData => {
         const skillElem = createSkillElement(skillData);
         skillContainer.appendChild(skillElem);
@@ -163,7 +174,7 @@ document.querySelector('[data-category="languages"]').parentElement.classList.ad
 
 // 스킬 섹션에 머무를 때, 일정 시간마다 자동으로 카테고리를 바꾸고, 그 바뀔 때 hover 애니메이션도 같이 동작하게
 // 1. 순서 정의
-const skillCategories = ['languages', 'frontend', 'backend', 'database', 'os', 'tools'];
+const skillCategories = ['languages', 'frontend', 'backend', 'database', 'devOps', 'tools'];
 let currentCategoryIndex = 0;
 let autoRotateInterval = null;
 

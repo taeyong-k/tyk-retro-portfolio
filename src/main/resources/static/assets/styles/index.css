@@ -1043,9 +1043,6 @@
 
 #skills {
   height: 100vh;
-  font-size: 16px !important;
-  letter-spacing: normal !important;
-  line-height: 1.5 !important;
   padding: 60px 5vw;
   display: block;
 }
@@ -1088,8 +1085,6 @@
   justify-content: center;
   width: 100%;
   gap: clamp(20px, 4vw, 60px);
-  flex-wrap: wrap;
-  transform: translateX(-40px);
 }
 #skills > .skill-wrapper > .skill-content > * {
   flex-grow: 0;
@@ -1099,7 +1094,7 @@
   flex-grow: 1;
   flex-shrink: 1;
 }
-@media (max-width: 768px) {
+@media (max-width: 1450px) {
   #skills > .skill-wrapper > .skill-content {
     align-items: center;
     display: flex;
@@ -1107,7 +1102,6 @@
     flex-wrap: nowrap;
     gap: 0;
     justify-content: center;
-    transform: translateX(0);
     gap: 20px;
   }
   #skills > .skill-wrapper > .skill-content > * {
@@ -1132,7 +1126,7 @@
   grid-template-columns: repeat(2, 1fr);
   gap: 30px 40px;
 }
-@media (max-width: 768px) {
+@media (max-width: 1450px) {
   #skills > .skill-wrapper > .skill-content ul.skill-nav-list {
     grid-template-columns: repeat(3, 1fr);
     gap: 28px 40px;
@@ -1205,7 +1199,7 @@
 #skills > .skill-wrapper > .skill-content ul.skill-nav-list li a span {
   font-family: inherit;
   color: var(--clr);
-  font-size: 13px;
+  font-size: 17px;
   text-align: center;
   z-index: 10;
   transition: 0.5s ease transform, 0.5s ease filter;
@@ -1221,12 +1215,11 @@
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  gap: 0;
+  gap: 55px;
   justify-content: flex-start;
-  width: clamp(320px, 90vw, 1100px);
-  min-height: 70vh;
-  max-height: 80vh;
-  padding: clamp(30px, 3vw, 4vw) clamp(8px, 2vw, 3vw);
+  width: clamp(320px, 90vw, 930px);
+  aspect-ratio: 930/712;
+  padding: clamp(8px, 2vw, 3vw) clamp(8px, 2vw, 3vw) clamp(30px, 3vw, 4vw) clamp(8px, 2vw, 3vw);
   border-radius: 12px;
   background-image: linear-gradient(145deg, #222 0%, #111 100%);
   border-top: 8px solid #999;
@@ -1234,7 +1227,6 @@
   border-right: 8px solid #444;
   border-bottom: 8px solid #444;
   position: relative;
-  gap: 55px;
 }
 #skills > .skill-wrapper > .skill-content > .led-board > * {
   flex-grow: 0;
@@ -1244,102 +1236,54 @@
   flex-grow: 1;
   flex-shrink: 1;
 }
-@media (max-width: 768px) {
+#skills > .skill-wrapper > .skill-content > .led-board > .skill-board {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+#skills > .skill-wrapper > .skill-content > .led-board > .skill-board > .skill-title {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 0;
+  justify-content: flex-start;
+  color: #FF9505;
+  font-size: clamp(36px, 4vw, 40px);
+  font-weight: bold;
+  padding-bottom: clamp(24px, 2vw, 35px);
+}
+#skills > .skill-wrapper > .skill-content > .led-board > .skill-board > .skill-title > * {
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+#skills > .skill-wrapper > .skill-content > .led-board > .skill-board > .skill-title > [data-mt-stretch] {
+  flex-grow: 1;
+  flex-shrink: 1;
+}
+#skills > .skill-wrapper > .skill-content > .led-board > .skill-board > .skill-container {
+  display: grid;
+  grid-template-rows: repeat(6, 1fr);
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  height: calc(100% - 60px);
+  gap: 30px;
+  padding-right: 8px;
+  box-sizing: border-box;
+}
+@media (max-width: 930px) {
+  #skills > .skill-wrapper > .skill-content > .led-board > .skill-board > .skill-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+  }
+}
+@media (max-width: 1000px) {
   #skills > .skill-wrapper > .skill-content > .led-board {
     flex-direction: column;
     max-height: none;
   }
-}
-#skills > .skill-wrapper > .skill-content > .led-board > .skill-board-left {
-  width: 100%;
-  display: block;
-}
-#skills > .skill-wrapper > .skill-content > .led-board > .skill-board-left > .skill-title {
-  align-items: center;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  gap: 0;
-  justify-content: flex-start;
-  color: #FF9505;
-  font-size: clamp(18px, 4vw, 25px);
-  padding-bottom: clamp(12px, 2vw, 24px);
-  transform: scaleY(1.9);
-}
-#skills > .skill-wrapper > .skill-content > .led-board > .skill-board-left > .skill-title > * {
-  flex-grow: 0;
-  flex-shrink: 0;
-}
-#skills > .skill-wrapper > .skill-content > .led-board > .skill-board-left > .skill-title > [data-mt-stretch] {
-  flex-grow: 1;
-  flex-shrink: 1;
-}
-#skills > .skill-wrapper > .skill-content > .led-board > .skill-board-left > .skill-container {
-  align-items: flex-start;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  gap: 0;
-  justify-content: flex-start;
-  flex-wrap: wrap;
-  gap: clamp(6px, 1.5vw, 10px);
-  max-height: 510px;
-  overflow-y: auto;
-  overflow-x: hidden;
-  padding-right: 8px;
-  box-sizing: border-box;
-}
-#skills > .skill-wrapper > .skill-content > .led-board > .skill-board-left > .skill-container > * {
-  flex-grow: 0;
-  flex-shrink: 0;
-}
-#skills > .skill-wrapper > .skill-content > .led-board > .skill-board-left > .skill-container > [data-mt-stretch] {
-  flex-grow: 1;
-  flex-shrink: 1;
-}
-#skills > .skill-wrapper > .skill-content > .led-board > .skill-board-right {
-  width: 100%;
-  position: relative;
-  display: block;
-  opacity: 0.3;
-}
-#skills > .skill-wrapper > .skill-content > .led-board > .skill-board-right.active {
-  opacity: 1;
-}
-#skills > .skill-wrapper > .skill-content > .led-board > .skill-board-right > .skill-title {
-  align-items: center;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  gap: 0;
-  justify-content: flex-start;
-  color: #FF9505;
-  font-size: 25px;
-  padding-bottom: 24px;
-  transform: scaleY(1.9);
-}
-#skills > .skill-wrapper > .skill-content > .led-board > .skill-board-right > .skill-title > * {
-  flex-grow: 0;
-  flex-shrink: 0;
-}
-#skills > .skill-wrapper > .skill-content > .led-board > .skill-board-right > .skill-title > [data-mt-stretch] {
-  flex-grow: 1;
-  flex-shrink: 1;
-}
-#skills > .skill-wrapper > .skill-content > .led-board > .skill-board-right > .skill-message {
-  width: 100%;
-  min-height: 150px;
-  color: #ccc;
-  background-color: #1a1a1a;
-  font-family: "DungGeunMo", sans-serif;
-  font-size: 18px;
-  font-weight: normal;
-  line-height: 1.5;
-  padding: clamp(10px, 3vw, 20px);
-  position: relative;
-  border-radius: 10px;
-  border: 3px solid #444;
-  box-sizing: border-box;
 }
 #skills .skill {
   align-items: center;
@@ -1350,7 +1294,8 @@
   justify-content: flex-start;
   color: #ffcc00;
   cursor: pointer;
-  margin-bottom: clamp(10px, 2vw, 20px);
+  white-space: normal;
+  word-break: break-word;
 }
 #skills .skill > * {
   flex-grow: 0;
@@ -1360,15 +1305,16 @@
   flex-grow: 1;
   flex-shrink: 1;
 }
-#skills .skill:last-child {
-  margin-bottom: 0;
-}
 #skills .logo {
-  width: clamp(40px, 5vw, 60px);
-  height: clamp(40px, 5vw, 60px);
+  width: clamp(45px, 5vw, 60px);
+  height: clamp(45px, 5vw, 60px);
   background-color: #ddd;
   box-shadow: 0 0 5px #ff0;
-  margin-right: clamp(10px, 2vw, 30px);
+  margin-right: clamp(20px, 2vw, 30px);
+}
+#skills .logo-default {
+  background-color: transparent;
+  box-shadow: none;
 }
 #skills .led-message {
   display: grid;
@@ -1377,7 +1323,73 @@
 }
 @media (max-width: 768px) {
   #skills .led-message {
+    transform: scale(1);
+    transform-origin: left center;
+  }
+}
+@media (max-width: 660px) {
+  #skills .led-message {
+    transform: scale(0.95);
+    transform-origin: left center;
+  }
+}
+@media (max-width: 630px) {
+  #skills .led-message {
+    transform: scale(0.9);
+    transform-origin: left center;
+  }
+}
+@media (max-width: 600px) {
+  #skills .led-message {
+    transform: scale(0.85);
+    transform-origin: left center;
+  }
+}
+@media (max-width: 570px) {
+  #skills .led-message {
     transform: scale(0.8);
+    transform-origin: left center;
+  }
+}
+@media (max-width: 540px) {
+  #skills .led-message {
+    transform: scale(0.75);
+    transform-origin: left center;
+  }
+}
+@media (max-width: 510px) {
+  #skills .led-message {
+    transform: scale(0.7);
+    transform-origin: left center;
+  }
+}
+@media (max-width: 480px) {
+  #skills .led-message {
+    transform: scale(0.65);
+    transform-origin: left center;
+  }
+}
+@media (max-width: 455px) {
+  #skills .led-message {
+    transform: scale(0.6);
+    transform-origin: left center;
+  }
+}
+@media (max-width: 425px) {
+  #skills .led-message {
+    transform: scale(0.55);
+    transform-origin: left center;
+  }
+}
+@media (max-width: 400px) {
+  #skills .led-message {
+    transform: scale(0.5);
+    transform-origin: left center;
+  }
+}
+@media (max-width: 375px) {
+  #skills .led-message {
+    transform: scale(0.48);
     transform-origin: left center;
   }
 }
