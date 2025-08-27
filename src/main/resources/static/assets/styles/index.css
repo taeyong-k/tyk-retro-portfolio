@@ -1,82 +1,69 @@
 @charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Nunito&display=swap");
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 #header {
-  top: 0;
-  left: 50%;
-  width: 100%;
-  max-width: 100vw;
-  padding: clamp(12px, 1.5vw, 20px);
   position: fixed;
-  transform: translate(-50%);
-  box-sizing: border-box;
-  overflow-x: hidden;
-  z-index: 10;
-}
-#header > .toolbar {
-  align-items: center;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  gap: 0;
-  justify-content: space-between;
-  flex-wrap: wrap;
   width: 100%;
-  max-width: 100vw;
-  box-sizing: border-box;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-  color: #e6faff;
-  text-shadow: 0 0 1px #99ffff, 0 0 2px #66ffff, 0 0 3px rgba(102, 255, 255, 0.3);
-  /* CRT 청록빛 느낌 */
-  line-height: 1.6;
-  letter-spacing: 0.48px;
-  background: transparent;
-  font-size: clamp(14px, 1.2vw, 20px);
-  font-weight: 500;
-  margin: 0 auto;
-  padding-bottom: 12.8px;
-  position: relative;
-  /* 처음에는 숨겨진 상태 */
-  opacity: 0;
-  transform: translateY(-20px);
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-  /* 보여줄 때 활성화 클래스 */
-}
-#header > .toolbar > * {
-  flex-grow: 0;
-  flex-shrink: 0;
-}
-#header > .toolbar > [data-mt-stretch] {
-  flex-grow: 1;
-  flex-shrink: 1;
-}
-#header > .toolbar.active {
-  opacity: 1;
-  transform: translateY(0);
-}
-#header > .toolbar a {
-  color: #ccc;
-  cursor: pointer;
-  text-decoration: none;
-  transition: all 0.25s ease-in-out;
-  display: inline-block;
-}
-#header > .toolbar a:hover {
-  color: #ffffff;
-  text-shadow: 0 0 2px #99ffff, 0 0 6px #66ffff, 0 0 10px rgba(102, 255, 255, 0.6);
-  transform: scale(1.05);
-}
-#header > .toolbar > .menu {
-  display: block;
-}
-#header > .toolbar > .list {
   display: flex;
-  gap: clamp(8px, 1.5vw, 24px);
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background: rgb(18, 18, 18);
+  z-index: 10;
+  border-bottom: #cccccc 1px solid;
+}
+#header main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+#header main button {
+  --size: 60px;
+  border: none;
+  min-width: var(--size);
+  min-height: var(--size);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  transition: background 200ms ease, color 200ms ease;
+  cursor: none;
+}
+#header main:hover button {
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(255, 255, 255, 0.04);
+}
+#header main:hover button:hover {
+  color: #fff;
+}
+#header .support {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  padding: 10px;
+  display: flex;
+}
+#header .support a {
+  margin: 0 10px;
+  color: #fff;
+  font-size: 1.8rem;
+  backface-visibility: hidden;
+  transition: all 150ms ease;
+}
+#header .support a:hover {
+  transform: scale(1.1);
 }
 
 /* 애니메이션 진행 중 페이지 잠금 */
 .body-locked {
   overflow: hidden; /* 스크롤 막기 */
-  pointer-events: none; /* 클릭/마우스 이벤트 막기 */
 }
 
 #intro {
@@ -261,7 +248,6 @@
   height: 36px;
   aspect-ratio: 1/1;
   border: 4px solid #0b3b41;
-  cursor: default;
   padding-bottom: 4px;
 }
 #about > .about-container > .about-row > .about-box > .about-inner-box > .about-title-bar > .about-title-bar-icon > * {
@@ -324,7 +310,6 @@
   background-color: #d49a30;
   border: 2px solid #0b3b41;
   color: #0b3b41;
-  cursor: help;
   text-shadow: 2px 2px 1px #5c3b00;
   position: relative;
 }
@@ -369,7 +354,6 @@
   background-color: #1a4b85;
   border: 2px solid #0b3b41;
   color: #ffffff;
-  cursor: help;
   text-shadow: 2px 2px 1px #000;
   position: relative;
 }
@@ -521,9 +505,6 @@
   flex-grow: 1;
   flex-shrink: 1;
 }
-#about > .about-container > .lower-windows > .edu-container .edu-title-bar span:last-child {
-  cursor: default;
-}
 #about > .about-container > .lower-windows > .edu-container .info-title-bar {
   align-items: flex-start;
   display: flex;
@@ -547,9 +528,6 @@
   flex-grow: 1;
   flex-shrink: 1;
 }
-#about > .about-container > .lower-windows > .edu-container .info-title-bar span:last-child {
-  cursor: default;
-}
 #about > .about-container > .lower-windows > .edu-container .link-title-bar {
   align-items: flex-start;
   display: flex;
@@ -572,9 +550,6 @@
 #about > .about-container > .lower-windows > .edu-container .link-title-bar > [data-mt-stretch] {
   flex-grow: 1;
   flex-shrink: 1;
-}
-#about > .about-container > .lower-windows > .edu-container .link-title-bar span:last-child {
-  cursor: default;
 }
 #about > .about-container > .lower-windows > .edu-container > .edu-window {
   width: clamp(300px, 100%, 767px);
@@ -1144,7 +1119,6 @@
   max-width: 100px;
   width: 100%;
   aspect-ratio: 1/1;
-  cursor: pointer;
   transition: 0.5s;
 }
 #skills > .skill-wrapper > .skill-content ul.skill-nav-list li > * {
@@ -1293,7 +1267,6 @@
   gap: 0;
   justify-content: flex-start;
   color: #ffcc00;
-  cursor: pointer;
   white-space: normal;
   word-break: break-word;
 }
@@ -1469,13 +1442,11 @@
   width: 6%;
   max-width: 200px;
   aspect-ratio: 1/1;
-  cursor: pointer;
 }
 #projects img {
   width: 100%;
   pointer-events: none;
   z-index: 999;
-  cursor: pointer;
 }
 #projects .slider-header {
   position: fixed;
@@ -1486,7 +1457,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
 }
 #projects .slider-header img {
   width: 40vw;
@@ -1589,8 +1559,29 @@ body::before {
 }
 
 #root {
-  height: auto;
+  width: 100%;
+  height: 100%;
   position: relative;
+  display: block;
+}
+#root .cursor {
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  pointer-events: none;
+  z-index: 100;
+}
+#root .cursor--large {
+  --size: 40px;
+  border: 1px solid rgb(255, 60, 60);
+}
+#root .cursor--small {
+  --size: 10px;
+  background: rgb(255, 60, 60);
+  transform: translate(-50%, -50%);
 }
 
 /*# sourceMappingURL=index.css.map */

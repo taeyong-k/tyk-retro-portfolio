@@ -81,7 +81,6 @@
               height: 36px;
               aspect-ratio: 1/1;
               border: 4px solid #0b3b41;
-              cursor: default;
               padding-bottom: 4px;
 
               span {
@@ -130,7 +129,6 @@
                 background-color: #d49a30;
                 border: 2px solid #0b3b41;
                 color: #0b3b41;
-                cursor: help;
                 text-shadow: 2px 2px 1px #5c3b00;
                 position: relative;
 
@@ -187,7 +185,6 @@
                 background-color: #1a4b85;
                 border: 2px solid #0b3b41;
                 color: #ffffff;
-                cursor: help;
                 text-shadow: 2px 2px 1px #000;
                 position: relative;
 
@@ -313,7 +310,7 @@
           background-color: #f2b133;
 
           span:last-child {
-            cursor: default;
+            //cursor: default;
           }
         }
 
@@ -328,7 +325,7 @@
           background-color: #1a4b85;
 
           span:last-child {
-            cursor: default;
+            //cursor: default;
           }
         }
 
@@ -343,7 +340,7 @@
           background-color: #ed2d87;
 
           span:last-child {
-            cursor: default;
+            //cursor: default;
           }
         }
 
