@@ -124,6 +124,7 @@
               font-weight: 600;
               text-align: center;
               box-shadow: inset -2px -2px 0 #ffffff33, inset 2px 2px 0 #00000066;
+              cursor: none;
 
               &.btn-ok {
                 background-color: #d49a30;
@@ -425,6 +426,7 @@
                 @include flex(row, center, flex-start, 6px);
                 color: inherit;
                 text-decoration: none;
+                cursor: none;
 
                 .notion-icon, .tistory-icon, .github-icon {
                   height: clamp(16px, 2vw, 24px);

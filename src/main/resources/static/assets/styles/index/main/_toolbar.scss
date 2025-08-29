@@ -15,9 +15,10 @@
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  background: rgb(18, 18, 18);
-  z-index: 10;
-  border-bottom: #cccccc 1px solid; // 테스트
+  background: transparent;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  z-index: 1000;
 
   main {
     display: flex;
@@ -51,13 +52,13 @@
     }
   }
 
-
   .support {
     position: absolute;
     right: 10px;
-    bottom: 10px;
+    bottom: 0;
     padding: 10px;
     display: flex;
+    cursor: none;
 
     a {
       margin: 0 10px;
@@ -65,6 +66,7 @@
       font-size: 1.8rem;
       backface-visibility: hidden;
       transition: all 150ms ease;
+      cursor: none;
 
       &:hover {
         transform: scale(1.1);

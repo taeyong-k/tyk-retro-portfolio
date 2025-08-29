@@ -24,21 +24,16 @@ document.addEventListener("DOMContentLoaded", () => {
         scrollHeight = window.scrollY;
     });
 
-    // 커서 크기 원본 상태 저장 (버튼 위에서 커졌다 돌아올 때)
-    let cursorOuterOriginalState = {
-        width: cursorOuter.getBoundingClientRect().width,
-        height: cursorOuter.getBoundingClientRect().height,
-    };
-
     // 버튼에 마우스 이벤트 (cursorOuter 커짐 <-> 원상복구)
     const buttons = document.querySelectorAll("button");
-
     buttons.forEach((button) => {
         button.addEventListener("pointerenter", handleMouseEnter);
         button.addEventListener("pointerleave", handleMouseLeave);
     });
 
+    // 마우스 이동 시 좌표 업데이트
     document.body.addEventListener("pointermove", updateCursorPosition);
+
     // 클릭 시, 작은 커서 애니메이션 (scale: 1만큼 커지기)
     document.body.addEventListener("pointerdown", () => {
         gsap.to(cursorInner, 0.15, {
@@ -51,18 +46,28 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
+
+    let cursorOuterOriginalState = { width: 0, height: 0 };
+    let isFirstMove = true;
     // 마우스 좌표 추적 (현재 마우스 위치 실시간으로 저장)
     function updateCursorPosition(e) {
         mouse.x = e.pageX;
         mouse.y = e.pageY;
+
+        // 첫 마우스 움직임 시에만 커서 크기 측정
+        if (isFirstMove) {
+            cursorOuterOriginalState.width = cursorOuter.getBoundingClientRect().width;
+            cursorOuterOriginalState.height = cursorOuter.getBoundingClientRect().height;
+            isFirstMove = false;
+        }
     }
 
     // 커서 위치 업데이트 애니메이션
     function updateCursor() {
         // 작은 커서: 항상 마우스 따라다니도록
         gsap.set(cursorInner, {
-            x: mouse.x,
-            y: mouse.y,
+            x: mouse.x - cursorInner.offsetWidth / 2,
+            y: mouse.y - cursorInner.offsetHeight / 2,
         });
 
         // 큰 커서: 버튼 위가 아닐때만, 따라 다니도록
@@ -104,4 +109,5 @@ document.addEventListener("DOMContentLoaded", () => {
             backgroundColor: "transparent",
         });
     }
+
 });

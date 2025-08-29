@@ -36,9 +36,10 @@ body {
 
 #root {
   width: 100%;
-  height: 100%;
-  position: relative;
+  min-height: 100vh;
   display: block;
+  cursor: none;
+  position: relative;
 
   .cursor {
     width: var(--size);
@@ -48,7 +49,7 @@ body {
     left: 0;
     top: 0;
     pointer-events: none;
-    z-index: 100;
+    z-index: 9999;
 
     &--large {
       --size: 40px;
@@ -58,7 +59,6 @@ body {
     &--small {
       --size: 10px;
       background: rgb(255, 60, 60);
-      transform: translate(-50%, -50%);
     }
   }
 }
