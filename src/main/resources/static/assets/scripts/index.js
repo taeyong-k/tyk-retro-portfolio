@@ -47,8 +47,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 
-    let cursorOuterOriginalState = { width: 0, height: 0 };
+    let cursorOuterOriginalState = {width: 0, height: 0};
     let isFirstMove = true;
+
     // 마우스 좌표 추적 (현재 마우스 위치 실시간으로 저장)
     function updateCursorPosition(e) {
         mouse.x = e.pageX;
@@ -109,5 +110,4 @@ document.addEventListener("DOMContentLoaded", () => {
             backgroundColor: "transparent",
         });
     }
-
 });

@@ -14,16 +14,29 @@
   align-items: center;
   overflow: hidden;
   background: transparent;
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+#header.visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+#header .toolbar {
+  width: 100%;
+  display: block;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
-  z-index: 1000;
 }
-#header main {
+#header .toolbar main {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 }
-#header main button {
+#header .toolbar main button {
   --size: 60px;
   border: none;
   min-width: var(--size);
@@ -37,14 +50,14 @@
   transition: background 200ms ease, color 200ms ease;
   cursor: none;
 }
-#header main:hover button {
+#header .toolbar main:hover button {
   background: rgba(255, 255, 255, 0.04);
   color: rgba(255, 255, 255, 0.04);
 }
-#header main:hover button:hover {
+#header .toolbar main:hover button:hover {
   color: #fff;
 }
-#header .support {
+#header .toolbar .support {
   position: absolute;
   right: 10px;
   bottom: 0;
@@ -52,7 +65,7 @@
   display: flex;
   cursor: none;
 }
-#header .support a {
+#header .toolbar .support a {
   margin: 0 10px;
   color: #fff;
   font-size: 1.8rem;
@@ -60,7 +73,7 @@
   transition: all 150ms ease;
   cursor: none;
 }
-#header .support a:hover {
+#header .toolbar .support a:hover {
   transform: scale(1.1);
 }
 

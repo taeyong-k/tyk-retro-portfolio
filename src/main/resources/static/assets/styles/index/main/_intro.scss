@@ -5,7 +5,6 @@
 /* 애니메이션 진행 중 페이지 잠금 */
 .body-locked {
   overflow: hidden;         /* 스크롤 막기 */
-  //pointer-events: none;     /* 클릭/마우스 이벤트 막기 */
 }
 
 #intro {
