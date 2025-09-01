@@ -110,4 +110,35 @@ document.addEventListener("DOMContentLoaded", () => {
             backgroundColor: "transparent",
         });
     }
+
+    // 스킬 nav 링크 선택
+    const skillItems = document.querySelectorAll("#skillNav li");
+
+    skillItems.forEach((li) => {
+        li.addEventListener("pointerenter", (e) => {
+            isStuck = true;
+            const rect = li.getBoundingClientRect();
+            const padding = 8; // li::before inset 값에 맞춤
+            gsap.to(cursorOuter, 0.2, {
+                x: rect.left - padding,
+                y: rect.top - padding + scrollHeight,
+                width: rect.width + padding * 2,
+                height: rect.height + padding * 2,
+                borderRadius: 0,
+                backgroundColor: "rgba(255, 255, 255, 0.1)",
+            });
+        });
+
+        li.addEventListener("pointerleave", () => {
+            isStuck = false;
+            gsap.to(cursorOuter, 0.2, {
+                width: cursorOuterOriginalState.width,
+                height: cursorOuterOriginalState.height,
+                borderRadius: "50%",
+                backgroundColor: "transparent",
+            });
+        });
+    });
+
+
 });
