@@ -1,109 +1,77 @@
-@import url("https://fonts.googleapis.com/css2?family=Nunito&display=swap");
-
-@font-face {
-  font-family: "longline";
-  src: url("https://assets.codepen.io/756881/Longline+Quart+FREE.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
 }
 
 #projects {
-  padding: 0;
+  //height: 100vh;
   margin: 0;
-  height: 600vh;
-  width: 100vw;
-  font-family: "Nunito", sans-serif;
-  background-color: #e34f37 !important;
-  color: white;
-  position: relative;
+  color: black;
+  font-weight: 600;
+  width: 100%;
+  overflow-x: hidden;
 
-  h1 {
-    font-family: "longline";
-  }
-
-  .slider-section {
-    height: 22vh;
-    bottom: 0;
-    position: fixed;
-    width: 100%;
-  }
-
-  h1 {
-    font-size: 10vw;
-  }
-
-  .wheel {
+  .container {
+    background-color: white;
+    width: 100vw;
+    height: 100vh;
+    height: -webkit-fill-available;
     position: absolute;
+    left: 0;
     top: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 300vw;
-    height: 300vw;
-    max-width: 2000px;
-    max-height: 2000px;
-    left: 50%;
-    transform: translateX(-50%);
+    user-select: none;
+    overflow: hidden;
   }
 
-  .wheel__card {
+  .center {
+    height: 100vh;
+    position: absolute;
+    left: 22%;
+    top: 50%;
+    transform: translate(-50%);
+    user-select: none;
+  }
+
+  .items {
+    transform-origin: -60vh center;
+    transform: rotate(0);
+    user-select: none;
+    display: flex;
+  }
+
+  .item {
+    position: absolute;
+    opacity: 0; // 페이지 도달 전엔 안 보임
+    user-select: none;
+    cursor: pointer;
+    transform: translateY(-50%);
+  }
+
+  .card {
+    display: block;
+    width: 380px;
+    height: 380px;
+    color: #fff;
+    user-select: none;
+    border-radius: 17px;
+    overflow: hidden;
+    cursor: grab;
+    position: relative;
+    border: 10px solid black;
+  }
+
+  .image {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
     position: absolute;
     top: 0;
     left: 0;
-    width: 6%;
-    max-width: 200px;
-    aspect-ratio: 1 / 1;
-    //cursor: pointer;
-  }
-
-  img {
-    width: 100%;
+    filter: grayscale(100);
     pointer-events: none;
-    z-index: 999;
-    //cursor: pointer;
   }
 
-  .slider-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 60vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    //cursor: pointer;
 
-    img {
-      width: 40vw;
-      height: 40vw;
-      max-height: 350px;
-      max-width: 350px;
-    }
-  }
-
-  /* SCROLL DOWN */
-  .scroll-down {
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translate(-50%, 0);
-    color: white;
-    font-weight: 400;
-    text-transform: uppercase;
-    font-size: 14px;
-    overflow: visible;
-
-    .arrow {
-      position: relative;
-      top: 0px;
-      margin: 0 auto;
-      width: 15px;
-      height: 15px;
-      filter: invert(1);
-      background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KPHBhdGggZmlsbD0iYmxhY2siIGQ9Ik00ODMuMiwxOTIuMmMtMjAuNS0yMC41LTUzLjUtMjAuOC03My43LTAuNkwyNTcsMzQ0LjFMMTA0LjUsMTkxLjZjLTIwLjItMjAuMi01My4yLTE5LjktNzMuNywwLjYKCWMtMjAuNSwyMC41LTIwLjgsNTMuNS0wLjYsNzMuN2wxOTAsMTkwYzEwLjEsMTAuMSwyMy40LDE1LjEsMzYuOCwxNWMxMy4zLDAuMSwyNi43LTQuOSwzNi44LTE1bDE5MC0xOTAKCUM1MDMuOSwyNDUuNyw1MDMuNywyMTIuNyw0ODMuMiwxOTIuMnoiLz4KPC9zdmc+);
-      background-size: contain;
-    }
-  }
 }
 

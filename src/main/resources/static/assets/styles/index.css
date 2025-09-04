@@ -1,5 +1,4 @@
 @charset "UTF-8";
-@import url("https://fonts.googleapis.com/css2?family=Nunito&display=swap");
 * {
   box-sizing: border-box;
   margin: 0;
@@ -406,7 +405,8 @@
   transform: translateY(0);
 }
 #about > .about-container > .about-row > .about-box > .about-inner-box > .btn-box > .btn.pulse {
-  animation: pulse-shake 2.5s ease forwards;
+  -webkit-animation: shake-top 0.8s cubic-bezier(0.455, 0.03, 0.515, 0.955) both;
+  animation: shake-top 0.8s cubic-bezier(0.455, 0.03, 0.515, 0.955) both;
 }
 #about > .about-container > .about-row > .contact-side-box {
   align-items: flex-start;
@@ -724,18 +724,60 @@
   color: #e6dfcd;
 }
 
-@keyframes pulse-shake {
-  0%, 70%, 100% {
-    transform: scale(1) rotate(0deg);
+@-webkit-keyframes shake-top {
+  0%, 100% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+    -webkit-transform-origin: 50% 0;
+    transform-origin: 50% 0;
   }
-  20% {
-    transform: scale(0.94) rotate(-2deg);
+  10% {
+    -webkit-transform: rotate(2deg);
+    transform: rotate(2deg);
   }
-  40% {
-    transform: scale(0.94) rotate(2deg);
+  20%, 40%, 60% {
+    -webkit-transform: rotate(-4deg);
+    transform: rotate(-4deg);
   }
-  50% {
-    transform: scale(0.935) rotate(0deg);
+  30%, 50%, 70% {
+    -webkit-transform: rotate(4deg);
+    transform: rotate(4deg);
+  }
+  80% {
+    -webkit-transform: rotate(-2deg);
+    transform: rotate(-2deg);
+  }
+  90% {
+    -webkit-transform: rotate(2deg);
+    transform: rotate(2deg);
+  }
+}
+@keyframes shake-top {
+  0%, 100% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+    -webkit-transform-origin: 50% 0;
+    transform-origin: 50% 0;
+  }
+  10% {
+    -webkit-transform: rotate(2deg);
+    transform: rotate(2deg);
+  }
+  20%, 40%, 60% {
+    -webkit-transform: rotate(-4deg);
+    transform: rotate(-4deg);
+  }
+  30%, 50%, 70% {
+    -webkit-transform: rotate(4deg);
+    transform: rotate(4deg);
+  }
+  80% {
+    -webkit-transform: rotate(-2deg);
+    transform: rotate(-2deg);
+  }
+  90% {
+    -webkit-transform: rotate(2deg);
+    transform: rotate(2deg);
   }
 }
 @keyframes hint-blink {
@@ -1416,97 +1458,72 @@
     opacity: 0.5;
   }
 }
-@font-face {
-  font-family: "longline";
-  src: url("https://assets.codepen.io/756881/Longline+Quart+FREE.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
 }
+
 #projects {
-  padding: 0;
   margin: 0;
-  height: 600vh;
+  color: black;
+  font-weight: 600;
+  width: 100%;
+  overflow-x: hidden;
+}
+#projects .container {
+  background-color: white;
   width: 100vw;
-  font-family: "Nunito", sans-serif;
-  background-color: #e34f37 !important;
-  color: white;
-  position: relative;
-  /* SCROLL DOWN */
-}
-#projects h1 {
-  font-family: "longline";
-}
-#projects .slider-section {
-  height: 22vh;
-  bottom: 0;
-  position: fixed;
-  width: 100%;
-}
-#projects h1 {
-  font-size: 10vw;
-}
-#projects .wheel {
+  height: 100vh;
+  height: -webkit-fill-available;
   position: absolute;
+  left: 0;
   top: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 300vw;
-  height: 300vw;
-  max-width: 2000px;
-  max-height: 2000px;
-  left: 50%;
-  transform: translateX(-50%);
+  user-select: none;
+  overflow: hidden;
 }
-#projects .wheel__card {
+#projects .center {
+  height: 100vh;
+  position: absolute;
+  left: 22%;
+  top: 50%;
+  transform: translate(-50%);
+  user-select: none;
+}
+#projects .items {
+  transform-origin: -60vh center;
+  transform: rotate(0);
+  user-select: none;
+  display: flex;
+}
+#projects .item {
+  position: absolute;
+  opacity: 0;
+  user-select: none;
+  cursor: pointer;
+  transform: translateY(-50%);
+}
+#projects .card {
+  display: block;
+  width: 380px;
+  height: 380px;
+  color: #fff;
+  user-select: none;
+  border-radius: 17px;
+  overflow: hidden;
+  cursor: grab;
+  position: relative;
+  border: 10px solid black;
+}
+#projects .image {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
   position: absolute;
   top: 0;
   left: 0;
-  width: 6%;
-  max-width: 200px;
-  aspect-ratio: 1/1;
-}
-#projects img {
-  width: 100%;
+  filter: grayscale(100);
   pointer-events: none;
-  z-index: 999;
-}
-#projects .slider-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 60vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-#projects .slider-header img {
-  width: 40vw;
-  height: 40vw;
-  max-height: 350px;
-  max-width: 350px;
-}
-#projects .scroll-down {
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translate(-50%, 0);
-  color: white;
-  font-weight: 400;
-  text-transform: uppercase;
-  font-size: 14px;
-  overflow: visible;
-}
-#projects .scroll-down .arrow {
-  position: relative;
-  top: 0px;
-  margin: 0 auto;
-  width: 15px;
-  height: 15px;
-  filter: invert(1);
-  background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KPHBhdGggZmlsbD0iYmxhY2siIGQ9Ik00ODMuMiwxOTIuMmMtMjAuNS0yMC41LTUzLjUtMjAuOC03My43LTAuNkwyNTcsMzQ0LjFMMTA0LjUsMTkxLjZjLTIwLjItMjAuMi01My4yLTE5LjktNzMuNywwLjYKCWMtMjAuNSwyMC41LTIwLjgsNTMuNS0wLjYsNzMuN2wxOTAsMTkwYzEwLjEsMTAuMSwyMy40LDE1LjEsMzYuOCwxNWMxMy4zLDAuMSwyNi43LTQuOSwzNi44LTE1bDE5MC0xOTAKCUM1MDMuOSwyNDUuNyw1MDMuNywyMTIuNyw0ODMuMiwxOTIuMnoiLz4KPC9zdmc+);
-  background-size: contain;
 }
 
 #main article {
