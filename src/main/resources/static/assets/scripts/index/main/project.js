@@ -4,52 +4,81 @@ const imageSize = images.length;
 const total = images.length;
 const degree = 360 / total;
 
-let animationTriggered = false; // 애니메이션 실행 여부를 체크하는 변수
+let animationTriggered = false; // 애니메이션 실행 여부 플래그
+let draggableInstance; // 드래그 인스턴스 저장
 
+// 초기 설정 및 스크롤 이벤트 등록
 const init = () => {
-    // 초기 상태 설정: 애니메이션이 시작되기 전까지 이미지를 숨김
-    // 기존 애니메이션이 'from' 방식으로 화면 밖에서 날아오므로,
-    // 초기에는 이미지를 완전히 보이지 않게 처리할 필요가 있습니다.
-    gsap.set(images, {opacity: 0});
+    // 초기에는 이미지 숨김
+    gsap.set(images, { opacity: 0 });
 
-    // 스크롤 이벤트 리스너 등록
+    // 스크롤 이벤트로 프로젝트 섹션 감지
     window.addEventListener('scroll', checkProjectSection);
 
-    // 페이지 로드 시에도 한 번 체크 (이미 프로젝트 섹션이 보이는 경우를 위해)
-    // 약간의 딜레이를 주어 초기 렌더링에 방해되지 않게 합니다.
+    // 페이지 로드 시 초기 체크 (딜레이로 렌더링 보정)
     setTimeout(checkProjectSection, 100);
 };
 
-// 프로젝트 섹션이 화면에 보이는지 체크
+// 프로젝트 섹션이 화면에 보이는지 감지
 const checkProjectSection = () => {
-    if (animationTriggered) return; // 이미 애니메이션이 실행됐으면 더 이상 진행하지 않음
-
     const projectsSection = document.getElementById('projects');
-    if (!projectsSection) {
-        console.warn("#projects 엘리먼트를 찾을 수 없습니다.");
-        return;
-    }
+    if (!projectsSection) return;
 
     const rect = projectsSection.getBoundingClientRect();
+    const triggerPoint = window.innerHeight * 0.5; // 50% 노출 시 애니메이션 실행
 
-    // 프로젝트 섹션이 뷰포트에 75% 이상 들어왔을 때 (원하시는 도착 시점 기준으로 조정 가능)
-    // rect.bottom >= 0 : 섹션의 하단이 뷰포트 상단보다 아래에 있음
-    // rect.top <= window.innerHeight * 0.75 : 섹션의 상단이 뷰포트 75% 높이 지점보다 위에 있음
-    if (rect.bottom >= 0 && rect.top <= window.innerHeight * 0.75) {
-        animationTriggered = true; // 애니메이션 실행 표시
-        window.removeEventListener('scroll', checkProjectSection); // 한 번 실행 후 이벤트 리스너 제거
-        runAnimation(); // 원래의 애니메이션 로직 실행
+    // 프로젝트 섹션이 화면에 진입했을 때
+    if (!animationTriggered && rect.bottom >= 0 && rect.top <= triggerPoint) {
+        animationTriggered = true;
+        runAnimation();
+    }
+
+    // 프로젝트 섹션이 화면에서 완전히 벗어났을 때 -> 상태 초기화
+    if (animationTriggered && (rect.bottom < 0 || rect.top > window.innerHeight)) {
+        resetAnimation(); // 애니메이션 상태 초기화 함수 호출
+        animationTriggered = false;
     }
 };
 
-// 와이님의 원래 애니메이션 로직을 담은 함수
+// 애니메이션 상태 초기화 함수
+const resetAnimation = () => {
+    // 모든 애니메이션 타임라인 중지 및 초기화
+    gsap.killTweensOf(images);
+
+    // 이미지 상태 초기화
+    gsap.set(images, {
+        opacity: 0,
+        x: 0,
+        y: 0,
+        rotation: 0,
+        scale: 1,
+        transformOrigin: "center center"
+    });
+
+    // 드래그 상태 초기화
+    if (draggableInstance) {
+        draggableInstance.rotation = 0; // Draggable 내부 rotation 값 초기화
+        draggableInstance.update();    // 상태 반영
+        draggableInstance.disable();
+    }
+};
+
+// 프로젝트 이미지 원형 배치 및 애니메이션 실행
 const runAnimation = () => {
-    const timeline = gsap.timeline();
+    if (draggableInstance) draggableInstance.disable(); // 애니메이션 시작 전 드래그 비활성화
+
+    const timeline = gsap.timeline({
+        onComplete: () => {
+            if (draggableInstance) draggableInstance.enable(); // 애니메이션 끝나면 드래그 활성화
+        }
+    });
+
+    // const timeline = gsap.timeline();
 
     images.forEach((image, index) => {
-        // 이미지가 날아와서 펼쳐지는 시작점에서는 불투명하게 만듦
-        gsap.set(image, {opacity: 1});
+        gsap.set(image, { opacity: 1 });
 
+        // 초기 회전 각도 및 크기 설정
         const sign = Math.floor((index / 2) % 2) ? 1 : -1;
         const value = Math.floor((index + 4) / 4) * 4;
         const rotation = index > imageSize - 3 ? 0 : sign * value;
@@ -59,10 +88,11 @@ const runAnimation = () => {
             scale: 0.5,
         });
 
+        // 이미지가 화면 밖에서 날아오는 애니메이션
         timeline.from(
             image,
             {
-                x: window.innerHeight - image.clientHeight,
+                x: 0,
                 y: index % 2
                     ? -window.innerHeight - image.clientHeight * 4
                     : window.innerHeight + image.clientHeight * 4,
@@ -78,6 +108,7 @@ const runAnimation = () => {
 
         let rotationAngle = -index * degree;
 
+        // 최종 크기를 1로 복원
         timeline.to(
             image,
             {
@@ -87,6 +118,7 @@ const runAnimation = () => {
             0.15 * (imageSize / 2 - 1) + 1
         );
 
+        // 원형 배치로 정렬하는 애니메이션
         timeline.to(
             image,
             {
@@ -101,9 +133,10 @@ const runAnimation = () => {
     });
 };
 
+// 드래그로 이미지 원형 회전 기능 활성화
 const draggable = () => {
     let start = 0;
-    Draggable.create(".items", {
+    draggableInstance = Draggable.create(".items", {
         type: "rotation",
 
         onDragStart: function () {
@@ -111,11 +144,12 @@ const draggable = () => {
         },
         onDragEnd: function () {
             const rotation = this.rotation;
-            const snapUnit = degree * 2; // 2개 묶음 단위
+            const snapUnit = degree * 2; // 2개 단위 스냅
 
             const offset = Math.abs(rotation - start);
             let targetRotation;
 
+            // 드래그 방향에 따라 회전값 계산
             if (rotation > start) {
                 if (rotation - start < degree / 2) {
                     targetRotation = rotation - offset;
@@ -129,7 +163,8 @@ const draggable = () => {
                     targetRotation = rotation - (2 * degree - offset);
                 }
             }
-            // 계산된 회전값을 가장 가까운 스냅 위치로 보정
+
+            // 스냅 단위로 회전값 보정
             targetRotation = Math.round(targetRotation / snapUnit) * snapUnit;
 
             gsap.to(".items", {
@@ -138,8 +173,20 @@ const draggable = () => {
                 ease: "power2.out"
             });
         },
-    });
+    })[0];
 };
 
-init(); // 초기화 함수만 바로 호출하여 스크롤 이벤트를 감지 시작
-draggable(); // 드래그 기능은 항상 활성화
+// 초기 실행
+init(); // 스크롤 감지 및 애니메이션 준비
+draggable(); // 드래그 회전 기능 활성화
+
+
+
+
+
+
+
+
+
+
+

@@ -90,12 +90,17 @@ document.addEventListener("DOMContentLoaded", () => {
     function handleMouseEnter(e) {
         isStuck = true;
         const targetBox = e.currentTarget.getBoundingClientRect();
+
+        // 버튼의 실제 border-radius 가져오기
+        const style = window.getComputedStyle(e.currentTarget);
+        const borderRadius = style.borderRadius;
+
         gsap.to(cursorOuter, 0.2, {
             x: targetBox.left,
             y: targetBox.top + scrollHeight,
             width: targetBox.width,
             height: targetBox.height,
-            borderRadius: 0,
+            borderRadius: borderRadius, // 버튼 모서리 그대로 적용
             backgroundColor: "rgba(255, 255, 255, 0.1)",
         });
     }
