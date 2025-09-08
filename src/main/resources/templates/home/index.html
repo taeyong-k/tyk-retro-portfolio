@@ -20,7 +20,12 @@
     <script defer src="/assets/scripts/index.js" type="module"></script>
 </head>
 <body>
-
+<div class="image-modal">
+    <div class="modal-content">
+        <img src="" alt="img">
+    </div>
+    <button class="close-button">닫기</button>
+</div>
 <div id="root">
     <div class="cursor cursor--large"></div>
     <div class="cursor cursor--small"></div>
@@ -286,7 +291,7 @@
                                     <div class="inner">
                                         <img
                                                 class="image"
-                                                src="https://www.themoviedb.org/t/p/original/bX2xnavhMYjWDoZp1VM6VnU1xwe.jpg"
+                                                src="/assets/images/project/pixterest/home.png"
                                         />
                                     </div>
                                 </div>
@@ -383,9 +388,26 @@
                             </div>
                         </div>
                     </div>
-                    <div class="right-area">
+                    <div class="right-area" data-site-url="https://pixterest.taeyong.dev/" data-github-url="https://github.com/taeyong-k/pixterest">
                         <div class="gradient-border" id="box">
-                            <img src="#" alt="">
+                            <div class="container">
+                                <div class="slide"
+                                     style="background-image: url('/assets/images/project/pixterest/board.png');">
+
+                                </div>
+                                <div class="slide" style="background-image: url('/assets/images/project/pixterest/pin.png');">
+
+                                </div>
+                                <div class="slide" style="background-image: url('/assets/images/project/pixterest/home.png');">
+
+                                </div>
+                                <div class="slide" style="background-image: url('/assets/images/project/pixterest/pin-more.png');">
+
+                                </div>
+                                <div class="slide" style="background-image: url('/assets/images/project/pixterest/pin-edit.png');">
+
+                                </div>
+                            </div>
                         </div>
                         <div class="info">
                             <div class="header">
@@ -447,10 +469,14 @@
                                 <div class="feature">
                                     <h3>주요 기능 및 특징</h3>
                                     <ol>
-                                        <li>Pinterest를 클론한 Pixterest 프로젝트로, 2인 팀이 실사용 가능한 수준의 기능과 배포까지 목표로 진행했습니다.</li>
-                                        <li>Spring Boot 백엔드, Thymeleaf 프론트, MariaDB를 활용해 전체 구조 설계 및 핵심 기능 구현을 담당했습니다.</li>
-                                        <li>핀/보드 CRUD, 이미지 업로드, 댓글 시스템, Masonry 레이아웃, 전역 UI 컴포넌트와 Toast 메시지 시스템 등을 직접 설계하고 구현했습니다.</li>
-                                        <li>Google Cloud와 Cloudflare를 통해 배포하여 실제 서비스 환경에서 테스트 가능한 프로젝트로 완성했습니다.</li>
+                                        <li>Pinterest를 모티브로 한 이미지 기반 SNS 서비스 Pixterest를 2인 팀 프로젝트로 개발하며,
+                                            실사용 가능한 기능 구현과 완성도 높은 프로젝트 제작을 목표로 진행했습니다.</li>
+                                        <li>Spring Boot, Thymeleaf, MariaDB를 활용해 전체 시스템 구조를 설계하고,
+                                            백엔드 핵심 기능 개발을 주도했습니다.</li>
+                                        <li>Masonry.js 기반 홈 피드 벽돌형 레이아웃을 구현하고,
+                                            무한 스크롤 기능을 적용해 사용자 경험을 향상시켰습니다.</li>
+                                        <li>핀/보드 CRUD, 이미지 업로드, 댓글 시스템, Toast 메시지 등 주요 기능을 설계 및 개발하고,
+                                            Google Cloud와 Cloudflare를 활용해 실제 서비스 환경에서 운영 가능하도록 구성했습니다.</li>
                                     </ol>
                                 </div>
                             </div>
@@ -463,7 +489,6 @@
                 </div>
             </main>
         </article>
-        <article id="projectForms">프로젝트 폼 페이지</article>
     </main>
 
     <footer id="footer">
