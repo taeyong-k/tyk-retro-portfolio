@@ -1,3 +1,6 @@
+import { projectsData } from './projectData.js';
+
+
 const images = gsap.utils.toArray(".item");
 
 const imageSize = images.length;
@@ -12,8 +15,23 @@ const init = () => {
     // 초기에는 이미지 숨김
     gsap.set(images, {opacity: 0});
 
-    // 스크롤 이벤트로 프로젝트 섹션 감지
-    window.addEventListener('scroll', checkProjectSection);
+    // IntersectionObserver로 프로젝트 섹션 감지
+    const projectsSection = document.getElementById('projects');
+    if (projectsSection) {
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !animationTriggered) {
+                    animationTriggered = true;
+                    runAnimation();
+                } else if (!entry.isIntersecting && animationTriggered) {
+                    resetAnimation();
+                    animationTriggered = false;
+                }
+            });
+        }, { threshold: 0.7 }); // 화면 70% 보이면 실행
+
+        observer.observe(projectsSection);
+    }
 
     // 페이지 로드 시 초기 체크 (딜레이로 렌더링 보정)
     setTimeout(checkProjectSection, 100);
@@ -82,7 +100,13 @@ const resetAnimation = () => {
         draggableInstance.update();    // 상태 반영
         draggableInstance.disable();
     }
+
+    // ➤ track-label 초기화 추가
+    const trackLabels = document.querySelectorAll('.track-label');
+    trackLabels.forEach(label => label.classList.remove('animate'));
 };
+
+let initialAnimationDone = false; // 최초 갤러리 애니메이션 완료 여부
 
 // 프로젝트 이미지 원형 배치 및 애니메이션 실행
 const runAnimation = () => {
@@ -97,6 +121,12 @@ const runAnimation = () => {
     galleryAnimationTimeline = gsap.timeline({
         onComplete: () => {
             if (draggableInstance) draggableInstance.enable(); // 애니메이션 끝나면 드래그 활성화
+            animateTrackLabels(); // ✅ 애니메이션 끝나면 라벨 실행
+            // 현재 중앙 트랙 index로 previousActiveIndex 초기화
+            const centerRotation = 0; // 초기 중앙 기준 회전값
+            const snapUnit = degree * 2;
+            previousActiveIndex = Math.round((centerRotation % 360) / snapUnit);
+            initialAnimationDone = true; // 최초 완료 표시
         }
     });
 
@@ -160,8 +190,8 @@ const runAnimation = () => {
     // ➤ 오른쪽 영역 등장 애니메이션
     galleryAnimationTimeline.fromTo(
         ".right-area",                  // 애니메이션 적용 대상
-        { opacity: 0, x: 50 },          // 시작 상태: 투명 + 오른쪽으로 50px 이동
-        { opacity: 1, x: 0, duration: 0.8, ease: "power2.out" }, // 종료 상태: 불투명 + 원래 위치
+        { opacity: 0, x: 50, pointerEvents: "none" },          // 시작 상태: 투명 + 오른쪽으로 50px 이동
+        { opacity: 1, x: 0, duration: 0.8, ease: "power2.out", pointerEvents: "auto" }, // 종료 상태: 불투명 + 원래 위치
         "-=0.5"                         // 타이밍: 이전 애니메이션 끝나기 0.5초 전에 시작
     );
 
@@ -186,7 +216,6 @@ const draggable = () => {
         onDragEnd: function () {
             const rotation = this.rotation;
             const snapUnit = degree * 2; // 2개 단위 스냅
-
             const offset = Math.abs(rotation - start);
             let targetRotation;
 
@@ -211,7 +240,11 @@ const draggable = () => {
             gsap.to(".items", {
                 rotation: targetRotation,
                 duration: 0.8,
-                ease: "power2.out"
+                ease: "power2.out",
+                onComplete: () => {
+                    // ➤ 드래그로 인한 회전일 때만 updateRightArea
+                    updateRightArea(targetRotation, true);
+                }
             });
         },
     })[0];
@@ -222,6 +255,109 @@ init(); // 스크롤 감지 및 애니메이션 준비
 draggable(); // 드래그 회전 기능 활성화
 
 
+let previousActiveIndex = null; // 마지막으로 표시된 프로젝트 인덱스
+
+function updateRightArea(currentRotation, isFromDrag = false) {
+    const snapUnit = degree * 2;
+    let activeIndex = Math.round((currentRotation % 360) / snapUnit);
+
+    if (activeIndex < 0) activeIndex += total / 2;
+
+    const isSameTrack = activeIndex === previousActiveIndex;
+    previousActiveIndex = activeIndex;
+    if (isFromDrag && isSameTrack) return;
+
+    const projectData = projectsData[activeIndex];
+    const rightArea = document.querySelector(".right-area");
+    if (!projectData || !rightArea) return;
+
+    // ✅ 변경 체크 후 DOM 갱신
+    if (rightArea.querySelector(".title h1").textContent !== projectData.title) {
+        rightArea.querySelector(".title h1").textContent = projectData.title;
+    }
+    if (rightArea.querySelector(".date p").textContent !== projectData.date) {
+        rightArea.querySelector(".date p").textContent = projectData.date;
+    }
+
+    const updateInnerHTML = (containerSelector, dataArray) => {
+        const container = rightArea.querySelector(containerSelector);
+        if (!container) return;
+        const newHTML = dataArray.map(d => `<p>${d}</p>`).join("");
+        if (container.innerHTML !== newHTML) container.innerHTML = newHTML;
+    }
+
+    updateInnerHTML(".type div div", projectData.type);
+    updateInnerHTML(".language div div", projectData.language);
+    updateInnerHTML(".framework div div", projectData.framework);
+    updateInnerHTML(".etc div div", projectData.etc);
+
+    const featureList = rightArea.querySelector(".feature ol");
+    if (featureList) {
+        const newHTML = projectData.features.map(f => `<li>${f}</li>`).join("");
+        if (featureList.innerHTML !== newHTML) featureList.innerHTML = newHTML;
+    }
+
+    const slideContainer = rightArea.querySelector(".container");
+    if (slideContainer) {
+        const newSlidesHTML = projectData.slides
+            .map(slide => `<div class="slide" style="background-image:url('${slide}')"></div>`)
+            .join("");
+        if (slideContainer.innerHTML !== newSlidesHTML) {
+            slideContainer.innerHTML = newSlidesHTML;
+            slidesPlugin(); // 슬라이드 이벤트 재설정
+        }
+    }
+
+    rightArea.dataset.siteUrl = projectData.siteUrl;
+    rightArea.dataset.githubUrl = projectData.githubUrl;
+
+    animateTrackLabels();
+
+    // 오른쪽 영역 등장 애니메이션
+    const infoItems = rightArea.querySelectorAll(".info > *");
+    const rightTimeline = gsap.timeline();
+    rightTimeline.fromTo(
+        rightArea,
+        { opacity: 0, x: 50, pointerEvents: "none" },
+        { opacity: 1, x: 0, duration: 1.5, ease: "power3.out", pointerEvents: "auto" }
+    );
+    rightTimeline.fromTo(
+        infoItems,
+        { y: 20, opacity: 0 },
+        { y: 0, opacity: 1, duration: 1, stagger: 0.2, ease: "power3.out" },
+        "-=1.2"
+    );
+}
+
+// 화면 중앙에 있는 right-area의 track-label만 애니메이션 실행
+function animateTrackLabels() {
+    const trackLabels = document.querySelectorAll('.track-label');
+    const centerX = window.innerWidth / 2;
+
+    let closestLabel = null;
+    let minDistance = Infinity;
+
+    trackLabels.forEach(label => {
+        const rect = label.getBoundingClientRect();
+        const labelCenter = rect.left + rect.width / 2;
+        const distance = Math.abs(centerX - labelCenter);
+
+        if (distance < minDistance) {
+            minDistance = distance;
+            closestLabel = label;
+        }
+    });
+
+    // 모든 라벨에서 animate 제거
+    trackLabels.forEach(label => label.classList.remove('animate'));
+
+    // 화면 중앙에 있는 라벨만 animate 적용
+    if (closestLabel) {
+        closestLabel.classList.add('animate');
+    }
+}
+
+
 // GSAP 이미지 슬라이드
 function slidesPlugin() {
     const projects = document.querySelectorAll(".right-area");
@@ -229,29 +365,35 @@ function slidesPlugin() {
     projects.forEach((project) => {
         const slides = project.querySelectorAll(".slide");
 
-        slides[2].classList.add("active");
+        // 초기 활성화 상태 (3번째 슬라이드)
+        if (slides.length > 2) {
+            slides.forEach(slide => slide.classList.remove("active"));
+            slides[2].classList.add("active");
+        }
 
-        for (const slide of slides) {
+        slides.forEach((slide) => {
+            slide.replaceWith(slide.cloneNode(true)); // 이벤트 초기화
+        });
+
+        // 이벤트 재설정
+        project.querySelectorAll(".slide").forEach((slide) => {
             slide.addEventListener("click", () => {
                 if (slide.classList.contains("active")) {
                     openModal(slide);
                     return;
                 }
-
-                clearActiveClasses();
+                project.querySelectorAll(".slide").forEach(s => s.classList.remove("active"));
                 slide.classList.add("active");
             });
-        }
-
-        function clearActiveClasses() {
-            slides.forEach((slide) => {
-                slide.classList.remove("active");
-            });
-        }
+        });
     });
 }
 
+
+
+// ✅ 최초 실행
 slidesPlugin();
+
 
 // 모달 열기 함수
 function openModal(slide) {
