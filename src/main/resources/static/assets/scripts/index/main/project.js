@@ -399,6 +399,7 @@ slidesPlugin();
 function openModal(slide) {
     const modal = document.querySelector(".image-modal");
     const modalImg = modal.querySelector("img");
+    const closeBtn = modal.querySelector(".close-button");
 
     // 슬라이드 배경 이미지를 모달에 적용
     const bg = slide.style.backgroundImage;
@@ -407,6 +408,11 @@ function openModal(slide) {
     modal.classList.add("show");
 
     document.body.style.overflow = "hidden";    // 스크롤 막기
+
+    // 이미지 로드 후 버튼 폭 맞추기
+    modalImg.onload = () => {
+        closeBtn.style.width = modalImg.clientWidth + "px";
+    };
 }
 
 const modal = document.querySelector(".image-modal");
@@ -430,22 +436,52 @@ closeBtn.addEventListener("click", () => {
     closeModal();
 });
 
-/* ------------------------------------------------------------------------------ */
-// 모든 프로젝트의 버튼 처리
+
+const projectModal = document.getElementById("modal");
+const modalMessage = document.getElementById("modalMessage");
+const projectCloseBtn = projectModal.querySelector(".close-button");
+
+// 모든 프로젝트 버튼 처리
 document.querySelectorAll(".right-area").forEach((project) => {
     const viewBtn = project.querySelector(".button-area button:nth-child(1)");
     const githubBtn = project.querySelector(".button-area button:nth-child(2)");
 
-    // 보기 버튼 클릭
+    // "보기" 버튼 클릭
     viewBtn.addEventListener("click", () => {
-        // 해당 프로젝트 URL 가져오기
-        const siteUrl = project.dataset.siteUrl; // data-site-url 속성으로 URL 지정
-        if (siteUrl) window.open(siteUrl, "_blank");
+        const siteUrl = project.dataset.siteUrl;
+        if (siteUrl && siteUrl !== "#" && siteUrl !== "local") {
+            window.open(siteUrl, "_blank");
+        } else {
+            modalMessage.innerHTML = "🚧 이 프로젝트는 현재 배포되지 않았습니다.<br>GitHub에서 코드를 확인하실 수 있습니다.";
+            projectModal.classList.add("show");
+            document.body.style.overflow = "hidden"; // 스크롤 막기
+        }
     });
 
-    // 깃허브 버튼 클릭
+    // "GitHub" 버튼 클릭
     githubBtn.addEventListener("click", () => {
-        const githubUrl = project.dataset.githubUrl; // data-github-url 속성으로 URL 지정
-        if (githubUrl) window.open(githubUrl, "_blank");
+        const githubUrl = project.dataset.githubUrl;
+        if (githubUrl && githubUrl !== "#") {
+            window.open(githubUrl, "_blank");
+        } else {
+            modalMessage.innerHTML = "🚧 GitHub 링크가 준비되지 않았습니다.";
+            projectModal.classList.add("show");
+            document.body.style.overflow = "hidden";
+        }
     });
 });
+
+// 모달 닫기: 외부 클릭
+projectModal.addEventListener("click", (e) => {
+    if (e.target === projectModal) {
+        projectModal.classList.remove("show");
+        document.body.style.overflow = ""; // 스크롤 해제
+    }
+});
+
+// 닫기 버튼 클릭
+projectCloseBtn.addEventListener("click", () => {
+    projectModal.classList.remove("show");
+    document.body.style.overflow = "";
+});
+
