@@ -107,6 +107,7 @@ const resetAnimation = () => {
 };
 
 let initialAnimationDone = false; // 최초 갤러리 애니메이션 완료 여부
+const itemsContainer = document.querySelector(".items");
 
 // 프로젝트 이미지 원형 배치 및 애니메이션 실행
 const runAnimation = () => {
@@ -117,6 +118,7 @@ const runAnimation = () => {
     }
 
     if (draggableInstance) draggableInstance.disable(); // 애니메이션 시작 전 드래그 비활성화
+    itemsContainer.classList.remove("hover-enabled");   // 애니메이션 시작 전에는 hover 비활성화
 
     galleryAnimationTimeline = gsap.timeline({
         onComplete: () => {
@@ -127,6 +129,7 @@ const runAnimation = () => {
             const snapUnit = degree * 2;
             previousActiveIndex = Math.round((centerRotation % 360) / snapUnit);
             initialAnimationDone = true; // 최초 완료 표시
+            itemsContainer.classList.add("hover-enabled");  // hover 활성화
         }
     });
 

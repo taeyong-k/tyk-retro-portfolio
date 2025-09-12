@@ -281,6 +281,12 @@
     left: 0;
     filter: grayscale(100);
     pointer-events: none;
+    transition: transform 0.25s ease, filter 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .hover-enabled .card:hover .image {
+    transform: scale(1.05);
+    filter: grayscale(0);
   }
 }
 
