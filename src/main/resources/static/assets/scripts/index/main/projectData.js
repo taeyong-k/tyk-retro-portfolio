@@ -6,7 +6,7 @@ export const projectsData = [
         type: ["팀", "사이드", "반응형"],
         language: ["Java", "HTML, SCSS, CSS, JS", "MariaDB", "JDK"],
         framework: ["Spring Boot, Spring MVC", "Thymeleaf", "MyBatis", "Lombok", "Masonry.js, imagesLoaded"],
-        etc: ["IntelliJ, Maven", "Git, GitHub, Notion", "Google Cloud, Cloudflare", "Gabia", "빌드/배포: WAR"],
+        etc: ["IntelliJ, Maven", "Git, GitHub, Notion", "Google Cloud", "Cloudflare", "Gabia"],
         features: [
             "Pinterest를 모티브로 한 이미지 기반 SNS 서비스 Pixterest를 2인 팀 프로젝트로 개발하며, 실사용 가능한 기능 구현과 완성도 높은 프로젝트 제작을 목표로 진행했습니다.",
             "Spring Boot, Thymeleaf, MariaDB를 활용해 전체 시스템 구조를 설계하고, 백엔드 핵심 기능 개발을 주도했습니다.",
@@ -30,7 +30,7 @@ export const projectsData = [
         language: ["Java", "HTML, SCSS, CSS, JS", "MariaDB", "JDK"],
         // framework: ["Spring Boot, Spring MVC", "Thymeleaf", "MyBatis", "Lombok", "GSAP", "Font Awesome, Ionicons"],
         framework: ["Spring Boot, Spring MVC", "Lombok", "GSAP", "Font Awesome, Ionicons"],
-        etc: ["IntelliJ, Maven", "Git, GitHub, Notion", "Google Cloud, Cloudflare", "Gabia", "빌드/배포: WAR"],
+        etc: ["IntelliJ, Maven", "Git, GitHub, Notion", "Google Cloud", "Cloudflare", "Gabia"],
         features: [
             "레트로 스타일 기반 포트폴리오 '포트폴리오-레트로버전 v2'를 1인 프로젝트로 개발하며, 이전 포트폴리오의 한계를 개선하고 시각적 완성도와 직관적인 UI/UX 구현을 목표로 진행했습니다.",
             "HTML, CSS/SCSS, JavaScript, Thymeleaf로 원페이지 스크롤, 레트로 테마, 인터랙티브 애니메이션 및 LED 스킬 보드 UI/UX를 구현했습니다.",

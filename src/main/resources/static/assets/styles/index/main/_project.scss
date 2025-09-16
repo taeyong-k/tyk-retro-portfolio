@@ -25,6 +25,7 @@
 
 #projects {
   margin: 0;
+  min-height: 100vh;
   width: 100%;
   overflow-x: hidden;
 
@@ -41,23 +42,58 @@
     .center {
       height: 100vh;
       position: absolute;
-      left: 22%;
+      //left: 22%;
+      left: 22vw;
       top: 50%;
       transform: translate(-50%);
       user-select: none;
+      z-index: 999;
+
+      @media (max-width: 1460px) {
+        left: 15vw;
+      }
+      @media (max-width: 1250px) {
+        left: 8vw;
+      }
+      //@media (max-width: 1150px) {
+      //  left: 5vw;
+      //}
     }
 
     .right-area {
       @include flex(column, center, flex-start);
+      max-height: fit-content;
       position: absolute;
       top: 0;
       right: 0;
-      width: calc(100vw - 50%);
+      width: clamp(600px, 70vw, 1500px);
       height: 100vh;
-      padding: 100px 140px 50px 10px;
+      //padding: 100px clamp(5vw, 0px, 200px) 50px clamp(3vw, 350px, 500px);
+      padding: clamp(75px, 10vw, 125px) clamp(10px, 5vw, 200px) clamp(50px, 10vw, 60px) clamp(10px, 20vw, 350px);
+      // top / right / bottom / left
       overflow: hidden;
       pointer-events: none;
       opacity: 0;
+
+      @media (max-width: 1750px) {
+        padding: clamp(75px, 10vw, 145px) clamp(10px, 5vw, 200px) clamp(50px, 10vw, 70px) clamp(10px, 18vw, 350px);
+      }
+      @media (max-width: 1450px) {
+        padding: clamp(75px, 8vw, 145px) clamp(10px, 5vw, 200px) clamp(50px, 10vw, 70px) clamp(10px, 18vw, 350px);
+      }
+      @media (max-width: 1250px) {
+        padding: clamp(75px, 8vw, 145px) clamp(10px, 5vw, 200px) clamp(50px, 10vw, 70px) clamp(10px, 14vw, 350px);
+      }
+      @media (max-width: 1150px) {
+        padding: clamp(75px, 15vw, 170px) clamp(10px, 5vw, 200px) clamp(50px, 10vw, 70px) clamp(10px, 14vw, 350px);
+      }
+      @media (max-width: 1000px) {
+        padding: clamp(75px, 15vw, 170px) clamp(10px, 5vw, 200px) clamp(50px, 10vw, 70px) clamp(10px, 11vw, 350px);
+      }
+      //@media (max-width: 950px) {
+      //  padding: clamp(75px, 15vw, 170px) clamp(10px, 5vw, 200px) clamp(50px, 10vw, 70px) clamp(10px, 8vw, 350px);
+      //}
+      // 900px에서 정렬 변경!!!
 
       #box {
         @include flex(row, center, center);
@@ -67,6 +103,7 @@
       .gradient-border {
         @include flex(column, center, center);
         flex: 1; // 상단 사진 영역
+        min-height: 155px;
         width: 100%;
         --borderWidth: 3px;
         position: relative;
@@ -122,7 +159,16 @@
         color: #bbbbbb;
         font-size: 18px;
         font-weight: 500;
-        overflow: hidden;
+        overflow: visible;
+
+        @media (max-width: 1750px) {
+          font-size: clamp(14px, 2vw, 17px);
+          gap: clamp(12px, 3vw, 20px);
+        }
+        @media (max-width: 1150px) {
+          font-size: 14px;
+          gap: 12px;
+        }
 
         .header {
           padding-top: 12px;
@@ -132,6 +178,13 @@
               color: #f5f5f5;
               font-size: 45px;
               font-weight: bold;
+
+              @media (max-width: 1750px) {
+                font-size: clamp(25px, 4vw, 43px);
+              }
+              @media (max-width: 1150px) {
+                font-size: 35px;
+              }
             }
           }
         }
@@ -141,12 +194,26 @@
           width: 100%;
           flex: 1;
 
+          @media (max-width: 1750px) {
+            gap: clamp(10px, 2vw, 18px);
+          }
+          @media (max-width: 1150px) {
+            gap: 10px;
+          }
+
           h3 {
             color: #f5f5f5;
             font-size: 20px;
             font-weight: 500;
             text-shadow: 0.2px 0 currentColor,
             -0.2px 0 currentColor;
+
+            @media (max-width: 1750px) {
+              font-size: clamp(16px, 2vw, 18px);
+            }
+            @media (max-width: 1150px) {
+              font-size: 16px;
+            }
           }
 
           .details {
@@ -154,6 +221,15 @@
             width: 100%;
             padding-right: 8px;
             font-size: 16px;
+
+            @media (max-width: 1750px) {
+              font-size: clamp(14px, 1.8vw, 15px);
+              gap: clamp(12px, 3vw, 26px);
+            }
+            @media (max-width: 1150px) {
+              font-size: 14px;
+              gap: 12px;
+            }
           }
         }
 
@@ -181,6 +257,10 @@
         flex: 0 0 auto;
         display: flex;
         gap: 8px;
+
+        @media (max-width: 1150px) {
+          font-size: 16px;
+        }
 
         button {
           flex: 1;
@@ -246,7 +326,8 @@
 
   .card {
     display: block;
-    width: 380px;
+    //width: 380px;
+    width: clamp(260px, 35vw, 380px);
     height: 380px;
     color: #fff;
     user-select: none;
@@ -259,6 +340,10 @@
     //background: linear-gradient(135deg, #252b22, #0f1c2c); // 다크 올리브: 오묘함
     padding: 10px; /* 테두리 두께 */
     box-sizing: border-box;
+
+    @media (max-width: 1000px) {
+      width: clamp(260px, 28vw, 380px);
+    }
 
     .inner {
       width: 100%;
@@ -395,6 +480,11 @@
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
     border: 1px solid rgba(255, 255, 255, .7);
 
+    @media (max-width: 1000px) {
+      max-width: 80%;
+      max-height: 80%;
+    }
+
     img {
       width: 100%;
       height: 100%;
@@ -509,3 +599,57 @@
 }
 
 
+// 모바일 대응용
+@media (max-width: 900px) {
+  #projects {
+    height: 100vh;
+
+    .container {
+      position: relative;
+
+      .center {
+        display: none;
+      }
+
+      .right-area {
+        @include flex(column, center, center);
+        position: relative;
+        width: 90%;
+        height: auto;
+        margin: 0 auto;
+        padding: clamp(30px, 5vw, 50px) clamp(10px, 5vw, 20px);
+        top: auto;
+        right: auto;
+
+        .info {
+          font-size: clamp(14px, 2.5vw, 18px);
+
+          .header {
+            .title {
+              h1 {
+                font-size: clamp(25px, 4vw, 45px);
+              }
+            }
+          }
+
+          .main {
+            gap: clamp(10px, 2vw, 20px);
+
+            h3 {
+              font-size: clamp(16px, 2vw, 20px);
+            }
+
+            .details {
+              font-size: clamp(14px, 1.8vw, 16px);
+              gap: clamp(12px, 3vw, 26px);
+            }
+          }
+        }
+
+        .button-area {
+          font-size: clamp(16px, 2.5vw, 18px);
+        }
+      }
+    }
+  }
+}

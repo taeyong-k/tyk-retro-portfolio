@@ -409,35 +409,34 @@ function openModal(slide) {
     modalImg.src = bg.slice(5, -2); // url("...") 형태니까 자르기
 
     modal.classList.add("show");
+    document.body.style.overflow = "hidden"; // 스크롤 막기
 
-    document.body.style.overflow = "hidden";    // 스크롤 막기
-
-    // 이미지 로드 후 버튼 폭 맞추기
-    modalImg.onload = () => {
+    // 버튼 폭 맞추는 함수
+    const updateButtonWidth = () => {
         closeBtn.style.width = modalImg.clientWidth + "px";
     };
+
+    // 이미지 로드 후 초기 폭 설정
+    modalImg.onload = updateButtonWidth;
+
+    // 리사이즈 시 폭 자동 업데이트
+    window.addEventListener("resize", updateButtonWidth);
+
+    // 모달 닫기 함수
+    const closeModal = () => {
+        modal.classList.remove("show");
+        document.body.style.overflow = "";
+        window.removeEventListener("resize", updateButtonWidth); // 이벤트 제거
+    };
+
+    // 모달 외부 클릭 시 닫기
+    modal.addEventListener("click", (e) => {
+        if (e.target === modal) closeModal();
+    });
+
+    // 닫기 버튼 클릭 시
+    closeBtn.addEventListener("click", closeModal);
 }
-
-const modal = document.querySelector(".image-modal");
-const closeBtn = modal.querySelector(".close-button");
-
-// 모달 닫기 함수
-function closeModal() {
-    modal.classList.remove("show");
-    document.body.style.overflow = "";
-}
-
-// 모달 외부 클릭 시: 닫기
-modal.addEventListener("click", (e) => {
-    if (e.target === modal) {
-        closeModal();
-    }
-});
-
-// 닫기 버튼 클릭 시: 닫기
-closeBtn.addEventListener("click", () => {
-    closeModal();
-});
 
 
 const projectModal = document.getElementById("modal");
@@ -487,4 +486,7 @@ projectCloseBtn.addEventListener("click", () => {
     projectModal.classList.remove("show");
     document.body.style.overflow = "";
 });
+
+
+
 
