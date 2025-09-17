@@ -1507,6 +1507,16 @@
     left: 8vw;
   }
 }
+@media (max-width: 950px) {
+  #projects .container .center {
+    left: 5vw;
+  }
+}
+@media (max-width: 850px) {
+  #projects .container .center {
+    left: 2vw;
+  }
+}
 #projects .container .right-area {
   align-items: center;
   display: flex;
@@ -1555,7 +1565,17 @@
 }
 @media (max-width: 1000px) {
   #projects .container .right-area {
-    padding: clamp(75px, 15vw, 170px) clamp(10px, 5vw, 200px) clamp(50px, 10vw, 70px) clamp(10px, 11vw, 350px);
+    padding: clamp(75px, 16vw, 170px) clamp(10px, 5vw, 200px) clamp(50px, 10vw, 70px) clamp(10px, 11vw, 350px);
+  }
+}
+@media (max-width: 950px) {
+  #projects .container .right-area {
+    padding: clamp(75px, 17vw, 170px) clamp(10px, 5vw, 200px) clamp(50px, 10vw, 70px) clamp(10px, 8vw, 350px);
+  }
+}
+@media (max-width: 850px) {
+  #projects .container .right-area {
+    padding: clamp(75px, 18vw, 170px) clamp(10px, 4vw, 200px) clamp(50px, 10vw, 70px) clamp(10px, 8vw, 350px);
   }
 }
 #projects .container .right-area #box {
@@ -2124,7 +2144,7 @@
   filter: brightness(0.85);
 }
 
-@media (max-width: 900px) {
+@media (max-width: 800px) {
   #projects {
     height: 100vh;
   }
@@ -2145,7 +2165,7 @@
     width: 90%;
     height: auto;
     margin: 0 auto;
-    padding: clamp(30px, 5vw, 50px) clamp(10px, 5vw, 20px);
+    padding: clamp(130px, 15vw, 125px) clamp(10px, 5vw, 20px) clamp(120px, 3vw, 60px);
     top: auto;
     right: auto;
   }
@@ -2157,6 +2177,18 @@
     flex-grow: 1;
     flex-shrink: 1;
   }
+}
+@media (max-width: 800px) and (max-width: 686px) {
+  #projects .container .right-area {
+    padding: clamp(10px, 12vw, 125px) clamp(10px, 5vw, 20px) clamp(10px, 10vw, 60px);
+  }
+}
+@media (max-width: 800px) and (max-width: 540px) {
+  #projects .container .right-area {
+    padding: clamp(50px, 20vw, 125px) clamp(10px, 5vw, 20px) clamp(10px, 10vw, 60px);
+  }
+}
+@media (max-width: 800px) {
   #projects .container .right-area .info {
     font-size: clamp(14px, 2.5vw, 18px);
   }
@@ -2172,6 +2204,10 @@
   #projects .container .right-area .info .main .details {
     font-size: clamp(14px, 1.8vw, 16px);
     gap: clamp(12px, 3vw, 26px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
   }
   #projects .container .right-area .button-area {
     font-size: clamp(16px, 2.5vw, 18px);

@@ -200,20 +200,24 @@ function autoRotateSkills() {
 
 // 3. 스킬 섹션이 화면에 보일 때만 작동
 const skillSection = document.getElementById('skills');
+
 const observer = new IntersectionObserver(entries => {
-    if (entries[0].isIntersecting) {
-        // 진입
-        if (!autoRotateInterval) {
-            autoRotateInterval = setInterval(autoRotateSkills, 5000);
-        }
-    } else {
-        // 벗어남
-        clearInterval(autoRotateInterval);
-        autoRotateInterval = null;
+    const entry = entries[0];
+
+    // 시작 조건: 30% 이상 보이면 시작
+    if (entry.intersectionRatio >= 0.3) {
+        startAutoRotate();
     }
-}, { threshold: 0.3 });
+
+    // 멈춤 조건: 20% 이하만 남으면 멈춤
+    if (entry.intersectionRatio <= 0.2) {
+        stopAutoRotate();
+        clearTimeout(inactivityTimer);
+    }
+}, { threshold: Array.from({length: 101}, (_, i) => i / 100) }); // 0~1, 0.01 단위로 촘촘하게 감지
 
 observer.observe(skillSection);
+
 
 // 사용자 활동 감지로 자동전환 잠시 멈춤 & 다시 시작 기능
 let inactivityTimer;

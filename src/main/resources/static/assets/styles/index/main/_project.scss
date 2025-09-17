@@ -42,7 +42,6 @@
     .center {
       height: 100vh;
       position: absolute;
-      //left: 22%;
       left: 22vw;
       top: 50%;
       transform: translate(-50%);
@@ -55,9 +54,12 @@
       @media (max-width: 1250px) {
         left: 8vw;
       }
-      //@media (max-width: 1150px) {
-      //  left: 5vw;
-      //}
+      @media (max-width: 950px) {
+        left: 5vw;
+      }
+      @media (max-width: 850px) {
+        left: 2vw;
+      }
     }
 
     .right-area {
@@ -68,9 +70,8 @@
       right: 0;
       width: clamp(600px, 70vw, 1500px);
       height: 100vh;
-      //padding: 100px clamp(5vw, 0px, 200px) 50px clamp(3vw, 350px, 500px);
-      padding: clamp(75px, 10vw, 125px) clamp(10px, 5vw, 200px) clamp(50px, 10vw, 60px) clamp(10px, 20vw, 350px);
       // top / right / bottom / left
+      padding: clamp(75px, 10vw, 125px) clamp(10px, 5vw, 200px) clamp(50px, 10vw, 60px) clamp(10px, 20vw, 350px);
       overflow: hidden;
       pointer-events: none;
       opacity: 0;
@@ -88,12 +89,15 @@
         padding: clamp(75px, 15vw, 170px) clamp(10px, 5vw, 200px) clamp(50px, 10vw, 70px) clamp(10px, 14vw, 350px);
       }
       @media (max-width: 1000px) {
-        padding: clamp(75px, 15vw, 170px) clamp(10px, 5vw, 200px) clamp(50px, 10vw, 70px) clamp(10px, 11vw, 350px);
+        padding: clamp(75px, 16vw, 170px) clamp(10px, 5vw, 200px) clamp(50px, 10vw, 70px) clamp(10px, 11vw, 350px);
       }
-      //@media (max-width: 950px) {
-      //  padding: clamp(75px, 15vw, 170px) clamp(10px, 5vw, 200px) clamp(50px, 10vw, 70px) clamp(10px, 8vw, 350px);
-      //}
-      // 900px에서 정렬 변경!!!
+      @media (max-width: 950px) {
+        padding: clamp(75px, 17vw, 170px) clamp(10px, 5vw, 200px) clamp(50px, 10vw, 70px) clamp(10px, 8vw, 350px);
+      }
+      @media (max-width: 850px) {
+        padding: clamp(75px, 18vw, 170px) clamp(10px, 4vw, 200px) clamp(50px, 10vw, 70px) clamp(10px, 8vw, 350px);
+      }
+      // 800px에서 모바일 대응 (card 삭제)
 
       #box {
         @include flex(row, center, center);
@@ -600,7 +604,7 @@
 
 
 // 모바일 대응용
-@media (max-width: 900px) {
+@media (max-width: 800px) {
   #projects {
     height: 100vh;
 
@@ -617,9 +621,16 @@
         width: 90%;
         height: auto;
         margin: 0 auto;
-        padding: clamp(30px, 5vw, 50px) clamp(10px, 5vw, 20px);
+        padding: clamp(130px, 15vw, 125px) clamp(10px, 5vw, 20px) clamp(120px, 3vw, 60px);
         top: auto;
         right: auto;
+        
+        @media (max-width: 686px) {
+          padding: clamp(10px,12vw,125px) clamp(10px,5vw,20px) clamp(10px,10vw,60px);
+        }
+        @media (max-width: 540px) {
+          padding: clamp(50px,20vw,125px) clamp(10px,5vw,20px) clamp(10px,10vw,60px);
+        }
 
         .info {
           font-size: clamp(14px, 2.5vw, 18px);
@@ -642,6 +653,10 @@
             .details {
               font-size: clamp(14px, 1.8vw, 16px);
               gap: clamp(12px, 3vw, 26px);
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              flex-wrap: wrap;
             }
           }
         }
