@@ -32,6 +32,11 @@
 
 @media (min-width: 769px) {
   #main article {
+    min-height: 150vh;
+    height: auto;
+  }
+
+  #main article#projects {
     min-height: 100vh;
     height: auto;
   }

@@ -6,11 +6,14 @@
 }
 
 #header {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 0;
+  justify-content: center;
   position: fixed;
   width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   overflow: hidden;
   background: transparent;
   z-index: 1000;
@@ -18,6 +21,14 @@
   pointer-events: none;
   transform: translateY(-20px);
   transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+#header > * {
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+#header > [data-mt-stretch] {
+  flex-grow: 1;
+  flex-shrink: 1;
 }
 #header.visible {
   opacity: 1;
@@ -31,13 +42,24 @@
   backdrop-filter: blur(10px);
 }
 #header .toolbar main {
-  display: flex;
-  flex-wrap: wrap;
   align-items: center;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 0;
   justify-content: center;
+  flex-wrap: wrap;
   width: max-content;
   height: max-content;
   margin: 0 auto;
+}
+#header .toolbar main > * {
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+#header .toolbar main > [data-mt-stretch] {
+  flex-grow: 1;
+  flex-shrink: 1;
 }
 @media (max-width: 550px) {
   #header .toolbar main {
@@ -45,18 +67,29 @@
   }
 }
 #header .toolbar main button {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 0;
+  justify-content: center;
   --size: 60px;
   border: none;
   min-width: var(--size);
   min-height: var(--size);
-  display: flex;
-  justify-content: center;
-  align-items: center;
   font-size: 1.2rem;
   background: rgba(255, 255, 255, 0.08);
   color: #fff;
   transition: background 200ms ease, color 200ms ease;
   cursor: none;
+}
+#header .toolbar main button > * {
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+#header .toolbar main button > [data-mt-stretch] {
+  flex-grow: 1;
+  flex-shrink: 1;
 }
 #header .toolbar main:hover button {
   background: rgba(255, 255, 255, 0.04);
@@ -128,8 +161,6 @@
 }
 #about {
   min-height: 100vh;
-  background-color: #0d1b1e;
-  background-image: repeating-linear-gradient(0deg, #0d1b1e 0px, #0d1b1e 2px, #0c181b 2px, #0c181b 4px);
   color: #f3d547;
   padding: 60px 5vw;
   display: block;
@@ -2399,6 +2430,10 @@ svg {
 
 @media (min-width: 769px) {
   #main article {
+    min-height: 150vh;
+    height: auto;
+  }
+  #main article#projects {
     min-height: 100vh;
     height: auto;
   }
@@ -2434,7 +2469,7 @@ body::before {
 
 #root {
   width: 100%;
-  min-height: 100vh;
+  min-height: 150vh;
   display: block;
   cursor: none;
   position: relative;

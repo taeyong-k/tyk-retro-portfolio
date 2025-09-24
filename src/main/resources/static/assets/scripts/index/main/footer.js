@@ -20,7 +20,8 @@
     var params = {
         colorful_mode: true,
         amount: 5,
-        bg_color: "#222",
+        bg_color: "none",
+        // bg_color: "#222",
         vx: 2,
         vy: 4,
         size: 10

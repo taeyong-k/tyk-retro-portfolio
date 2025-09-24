@@ -5,6 +5,7 @@ import './index/main/skill.js'
 import './index/main/project.js'
 import './index/main/footer.js'
 
+
 document.addEventListener("DOMContentLoaded", () => {
     console.clear();
 
@@ -145,6 +146,5 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
     });
-
 
 });

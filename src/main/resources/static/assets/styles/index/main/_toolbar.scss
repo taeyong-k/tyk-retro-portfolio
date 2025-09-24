@@ -9,11 +9,9 @@
 }
 
 #header {
+  @include flex(row, center, center);
   position: fixed;
   width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   overflow: hidden;
   background: transparent;
   z-index: 1000;
@@ -36,10 +34,8 @@
     backdrop-filter: blur(10px);
 
     main {
-      display: flex;
+      @include flex(row, center, center);
       flex-wrap: wrap;
-      align-items: center;
-      justify-content: center;
 
       width: max-content;
       height: max-content;
@@ -50,13 +46,11 @@
       }
 
       button {
+        @include flex(row, center, center);
         --size: 60px;
         border: none;
         min-width: var(--size);
         min-height: var(--size);
-        display: flex;
-        justify-content: center;
-        align-items: center;
         font-size: 1.2rem;
         background: rgba(255, 255, 255, 0.08);
         color: #fff;
