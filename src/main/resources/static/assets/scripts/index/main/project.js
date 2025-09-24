@@ -1,5 +1,9 @@
-import { projectsData } from './projectData.js';
+import {projectsData} from './projectData.js';
 
+document.addEventListener("DOMContentLoaded", () => {
+    // 페이지 진입 시 첫 프로젝트(Pixterest) 정보 세팅
+    updateRightArea(0, false);
+});
 
 const images = gsap.utils.toArray(".item");
 
@@ -28,7 +32,7 @@ const init = () => {
                     animationTriggered = false;
                 }
             });
-        }, { threshold: 0.7 }); // 화면 70% 보이면 실행
+        }, {threshold: 0.7}); // 화면 70% 보이면 실행
 
         observer.observe(projectsSection);
     }
@@ -90,9 +94,12 @@ const resetAnimation = () => {
 
     // 오른쪽 영역 초기화
     if (rightArea) {
-        gsap.set(rightArea, { opacity: 0, x: 50 });
-        gsap.set(infoItems, { opacity: 0, y: 20 });
+        gsap.set(rightArea, {opacity: 0, x: 50});
+        gsap.set(infoItems, {opacity: 0, y: 20});
     }
+
+    // items 컨테이너 회전값 강제 리셋 (항상 첫 프로젝트가 중앙으로 오게)
+    gsap.set(".items", {rotation: 0});
 
     // 드래그 상태 초기화
     if (draggableInstance) {
@@ -120,15 +127,24 @@ const runAnimation = () => {
     if (draggableInstance) draggableInstance.disable(); // 애니메이션 시작 전 드래그 비활성화
     itemsContainer.classList.remove("hover-enabled");   // 애니메이션 시작 전에는 hover 비활성화
 
+    // 1animation 실행 전에 right-area 데이터 업데이트
+    updateRightArea(0, false); // 첫 프로젝트 기준, 실제 데이터 바로 세팅
+    gsap.set(".right-area", {opacity:0, x:50}); // 완전히 숨김 상태에서 시작
+
     galleryAnimationTimeline = gsap.timeline({
         onComplete: () => {
             if (draggableInstance) draggableInstance.enable(); // 애니메이션 끝나면 드래그 활성화
-            animateTrackLabels(); // ✅ 애니메이션 끝나면 라벨 실행
+            animateTrackLabels();
+
+            // ✅ 항상 첫 번째 프로젝트(Pixterest)로 초기화
+            previousActiveIndex = 0;
+
             // 현재 중앙 트랙 index로 previousActiveIndex 초기화
             const centerRotation = 0; // 초기 중앙 기준 회전값
             const snapUnit = degree * 2;
             previousActiveIndex = Math.round((centerRotation % 360) / snapUnit);
             initialAnimationDone = true; // 최초 완료 표시
+
             itemsContainer.classList.add("hover-enabled");  // hover 활성화
         }
     });
@@ -193,16 +209,16 @@ const runAnimation = () => {
     // ➤ 오른쪽 영역 등장 애니메이션
     galleryAnimationTimeline.fromTo(
         ".right-area",                  // 애니메이션 적용 대상
-        { opacity: 0, x: 50, pointerEvents: "none" },          // 시작 상태: 투명 + 오른쪽으로 50px 이동
-        { opacity: 1, x: 0, duration: 0.8, ease: "power2.out", pointerEvents: "auto" }, // 종료 상태: 불투명 + 원래 위치
+        {opacity: 0, x: 50, pointerEvents: "none"},          // 시작 상태: 투명 + 오른쪽으로 50px 이동
+        {opacity: 1, x: 0, duration: 0.8, ease: "power2.out", pointerEvents: "auto"}, // 종료 상태: 불투명 + 원래 위치
         "-=0.5"                         // 타이밍: 이전 애니메이션 끝나기 0.5초 전에 시작
     );
 
     // ➤ 오른쪽 내부 정보 stagger 등장
     galleryAnimationTimeline.fromTo(
         ".right-area .info > *",         // 오른쪽 영역 info 하위 요소들을 아래에서 위로 순차적으로 나타나게 함
-        { y: 20, opacity: 0 },           // 시작 상태: 아래로 20px 이동 + 투명
-        { y: 0, opacity: 1, duration: 0.6, stagger: 0.1, ease: "power2.out" }, // 종료 상태: 원래 위치 + 보이게, 0.6초, 0.1초 간격, 자연스러운 감속
+        {y: 20, opacity: 0},           // 시작 상태: 아래로 20px 이동 + 투명
+        {y: 0, opacity: 1, duration: 0.6, stagger: 0.1, ease: "power2.out"}, // 종료 상태: 원래 위치 + 보이게, 0.6초, 0.1초 간격, 자연스러운 감속
         "-=0.3"                          // 이전 애니메이션 끝나기 0.3초 전에 시작
     );
 };
@@ -317,19 +333,22 @@ function updateRightArea(currentRotation, isFromDrag = false) {
     animateTrackLabels();
 
     // 오른쪽 영역 등장 애니메이션
-    const infoItems = rightArea.querySelectorAll(".info > *");
-    const rightTimeline = gsap.timeline();
-    rightTimeline.fromTo(
-        rightArea,
-        { opacity: 0, x: 50, pointerEvents: "none" },
-        { opacity: 1, x: 0, duration: 1.5, ease: "power3.out", pointerEvents: "auto" }
-    );
-    rightTimeline.fromTo(
-        infoItems,
-        { y: 20, opacity: 0 },
-        { y: 0, opacity: 1, duration: 1, stagger: 0.2, ease: "power3.out" },
-        "-=1.2"
-    );
+    // + 드래그로 호출된 경우만 등장 애니메이션 실행
+    if (isFromDrag) {
+        const infoItems = rightArea.querySelectorAll(".info > *");
+        const rightTimeline = gsap.timeline();
+        rightTimeline.fromTo(
+            rightArea,
+            {opacity: 0, x: 50, pointerEvents: "none"},
+            {opacity: 1, x: 0, duration: 1.5, ease: "power3.out", pointerEvents: "auto"}
+        );
+        rightTimeline.fromTo(
+            infoItems,
+            {y: 20, opacity: 0},
+            {y: 0, opacity: 1, duration: 1, stagger: 0.2, ease: "power3.out"},
+            "-=1.2"
+        );
+    }
 }
 
 // 화면 중앙에 있는 right-area의 track-label만 애니메이션 실행
@@ -391,7 +410,6 @@ function slidesPlugin() {
         });
     });
 }
-
 
 
 // ✅ 최초 실행

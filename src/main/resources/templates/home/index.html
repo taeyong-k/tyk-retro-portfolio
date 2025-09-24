@@ -17,6 +17,16 @@
     <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.3/gsap.min.js'></script>
     <script src='https://unpkg.com/gsap@3/dist/Draggable.min.js'></script>
 
+    <!-- partial:index.partial.html -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no"/>
+    <!-- Stats.js -->
+    <script src="https://dl.dropbox.com/s/m1qor6z15o64wkc/stats.min.js?dl=0"></script>
+    <!-- dat.gui.js -->
+    <script src="https://dl.dropbox.com/s/sk7fbhx9burholi/dat.gui.min.js?dl=0"></script>
+    <link href="https://fonts.googleapis.com/css?family=Oswald:400&display=swap" rel="stylesheet">
+    <!--텍스트 이펙트-->
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Ruda:wght@900&amp;display=swap'>
+
     <script defer src="/assets/scripts/index.js" type="module"></script>
 </head>
 <body>
@@ -418,10 +428,10 @@
                         <div class="info">
                             <div class="header">
                                 <div class="title">
-                                    <h1>Pixterest</h1>
+                                    <h1></h1>
                                 </div>
                                 <div class="date">
-                                    <p>2025.06.20 - 25.08.05</p>
+                                    <p></p>
                                 </div>
                             </div>
                             <div class="main">
@@ -430,9 +440,9 @@
                                         <div>
                                             <h3>타입</h3>
                                             <div>
-                                                <p>팀</p>
-                                                <p>사이드</p>
-                                                <p>반응형</p>
+                                                <p></p>
+                                                <p></p>
+                                                <p></p>
                                             </div>
                                         </div>
                                     </div>
@@ -440,10 +450,10 @@
                                         <div>
                                             <h3>언어/DB</h3>
                                             <div>
-                                                <p>Java</p>
-                                                <p>HTML, SCSS, CSS, JS</p>
-                                                <p>MairaDB</p>
-                                                <p>JDK</p>
+                                                <p></p>
+                                                <p></p>
+                                                <p></p>
+                                                <p></p>
                                             </div>
                                         </div>
                                     </div>
@@ -451,11 +461,11 @@
                                         <div>
                                             <h3>프레임워크/라이브러리</h3>
                                             <div>
-                                                <p>Spring Boot, Spring MVC</p>
-                                                <p>Thymeleaf</p>
-                                                <p>MyBatis</p>
-                                                <p>Lombok</p>
-                                                <p>Masonry.js, imagesLoaded</p>
+                                                <p></p>
+                                                <p></p>
+                                                <p></p>
+                                                <p></p>
+                                                <p></p>
                                             </div>
                                         </div>
                                     </div>
@@ -463,11 +473,11 @@
                                         <div>
                                             <h3>ETC</h3>
                                             <div>
-                                                <p>IntelliJ, Maven</p>
-                                                <p>Git, GitHub, Notion</p>
-                                                <p>Google Cloud</p>
-                                                <p>Cloudflare</p>
-                                                <p>Gabia</p>
+                                                <p></p>
+                                                <p></p>
+                                                <p></p>
+                                                <p></p>
+                                                <p></p>
                                             </div>
                                         </div>
                                     </div>
@@ -475,18 +485,10 @@
                                 <div class="feature">
                                     <h3>주요 기능 및 특징</h3>
                                     <ol>
-                                        <li>Pinterest를 모티브로 한 이미지 기반 SNS 서비스 Pixterest를 2인 팀 프로젝트로 개발하며,
-                                            실사용 가능한 기능 구현과 완성도 높은 프로젝트 제작을 목표로 진행했습니다.
-                                        </li>
-                                        <li>Spring Boot, Thymeleaf, MariaDB를 활용해 전체 시스템 구조를 설계하고,
-                                            백엔드 핵심 기능 개발을 주도했습니다.
-                                        </li>
-                                        <li>Masonry.js 기반 홈 피드 벽돌형 레이아웃을 구현하고,
-                                            무한 스크롤 기능을 적용해 사용자 경험을 향상시켰습니다.
-                                        </li>
-                                        <li>핀/보드 CRUD, 이미지 업로드, 댓글 시스템, Toast 메시지 등 주요 기능을 설계 및 개발하고,
-                                            Google Cloud와 Cloudflare를 활용해 실제 서비스 환경에서 운영 가능하도록 구성했습니다.
-                                        </li>
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
                                     </ol>
                                 </div>
                             </div>
@@ -500,9 +502,31 @@
             </main>
         </article>
     </main>
-
     <footer id="footer">
-        <div id="copyright" style="width: 100%; color: white">© 2025. Kim Tae Yong. All rights reserved.</div>
+        <div id="myCanvas">
+            <canvas></canvas>
+        </div>
+        <div class="canvasTTL">
+<!--            <p>THX</p>-->
+            <section class="footer-text-effect">
+                <p class="vote">끝까지 봐주셔서<br>감사합니다.</p>
+                <p class="little"><span>앞으로도</span><span>계속 성장하겠습니다.</span></p>
+                <p class="empathy">계속 배우며 더 나은<br>서비스를 만들겠습니다.</p>
+            </section>
+            <svg viewBox="0 0 100 100">
+                <defs>
+                    <filter id="drawn">
+                        <feTurbulence baseFrequency="0.45" numOctaves="7" />
+                        <feDisplacementMap in="SourceGraphic" scale="7" />
+                    </filter>
+                    <filter id="drawn2">
+                        <feTurbulence baseFrequency="0.35" numOctaves="7" />
+                        <feDisplacementMap in="SourceGraphic" scale="7" />
+                    </filter>
+                </defs>
+            </svg>
+        </div>
+        <div id="copyright">© 2025. Kim Tae Yong. All rights reserved.</div>
     </footer>
 
 </div>
