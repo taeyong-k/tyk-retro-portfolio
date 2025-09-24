@@ -11,17 +11,17 @@
 
   width: 100%;
   height: 100vh;
-  padding: 60px 14px;
+  padding: clamp(30px, 5vw, 60px) clamp(10px, 2vw, 14px);
   display: block;
 
   > .career-wrapper {
-    @include flex(column, center, flex-start, 64px);
+    @include flex(column, center, flex-start, clamp(24px, 6vw, 64px));
     max-width: 1024px;
     height: 100%;
     margin: 0 auto;
 
     > .career-container {
-      @include flex(row, center, center, 40px);
+      @include flex(row, center, center, clamp(16px, 4vw, 40px));
       width: 100%;
       margin: 0;
 
@@ -32,8 +32,8 @@
 
       > .window {
         position: relative;
-        width: 150px;
-        height: 120px;
+        width: clamp(100px, 15vw, 150px);
+        height: clamp(80px, 12vw, 120px);
         background-color: #32a3a6;
         box-sizing: border-box;
         border: 4px solid #3a363c;
@@ -44,7 +44,7 @@
           @include flex(column, flex-start, flex-start);
           width: 100%;
           height: 100%;
-          padding: 0 8px;
+          padding: 0 clamp(4px, 1vw, 8px);
           border-top: 4px solid #ccc;
           border-right: 4px solid #7f4896;
           border-bottom: 11px solid #7f4896;
@@ -62,16 +62,16 @@
           }
 
           > .title-bar {
-            @include flex(row, center, flex-start, 8px);
+            @include flex(row, center, flex-start, clamp(4px, 1vw, 8px));
             width: 100%;
-            height: 26px;
+            height: clamp(18px, 3vw, 26px);
             border: none;
             box-sizing: border-box;
-            margin-bottom: 4px;
+            margin-bottom: clamp(2px, 0.5vw, 4px);
 
             > .button {
-              width: 14px;
-              height: 14px;
+              width: clamp(10px, 2vw, 14px);
+              height: clamp(10px, 2vw, 14px);
               border: 2px solid #211e21;
               border-radius: 3px;
 
@@ -103,11 +103,11 @@
             border-left: 4px solid #7f4896;
             border-right: 4px solid #ccc;
             border-bottom: 4px solid #ccc;
-            margin-bottom: 6px;
+            margin-bottom: clamp(4px, 1vw, 6px);
 
             > .content-text {
               @include flex(column, center, center);
-              font-size: 29px;
+              font-size: clamp(18px, 3vw, 29px);
               background: linear-gradient(to bottom, #ffffff 55%, #db4980 55%);
               -webkit-background-clip: text;
               -webkit-text-fill-color: transparent;
@@ -120,7 +120,7 @@
               background-color: #db4980;
               border-radius: 2px;
               margin-top: -2px;
-              margin-bottom: 6px;
+              margin-bottom: clamp(4px, 1vw, 6px);
 
               &.short {
                 width: 55%;
@@ -136,18 +136,19 @@
 
         > .title {
           color: #10C06B;
-          font-size: 24px;
+          font-size: clamp(22px, 3vw, 24px);
           text-shadow: 0.15px 0 currentColor,
           -0.15px 0 currentColor;
         }
 
         > .date {
-          margin-bottom: 8px;
+          margin-bottom: clamp(4px, 1vw, 8px);
           color: #d5d5d5;
+          font-size: clamp(19px, 2vw, 20px);
         }
 
         > .tasks {
-          @include flex(column, flex-start, flex-start, 4px);
+          @include flex(column, flex-start, flex-start, clamp(2px, 0.8vw, 4px));
         }
       }
 

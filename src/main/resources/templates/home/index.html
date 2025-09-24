@@ -17,14 +17,10 @@
     <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.3/gsap.min.js'></script>
     <script src='https://unpkg.com/gsap@3/dist/Draggable.min.js'></script>
 
-    <!-- partial:index.partial.html -->
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no"/>
-    <!-- Stats.js -->
     <script src="https://dl.dropbox.com/s/m1qor6z15o64wkc/stats.min.js?dl=0"></script>
-    <!-- dat.gui.js -->
     <script src="https://dl.dropbox.com/s/sk7fbhx9burholi/dat.gui.min.js?dl=0"></script>
     <link href="https://fonts.googleapis.com/css?family=Oswald:400&display=swap" rel="stylesheet">
-    <!--텍스트 이펙트-->
     <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Ruda:wght@900&amp;display=swap'>
 
     <script defer src="/assets/scripts/index.js" type="module"></script>
@@ -507,7 +503,6 @@
             <canvas></canvas>
         </div>
         <div class="canvasTTL">
-<!--            <p>THX</p>-->
             <section class="footer-text-effect">
                 <p class="vote">끝까지 봐주셔서<br>감사합니다.</p>
                 <p class="little"><span>앞으로도</span><span>계속 성장하겠습니다.</span></p>
@@ -522,6 +517,10 @@
                     <filter id="drawn2">
                         <feTurbulence baseFrequency="0.35" numOctaves="7" />
                         <feDisplacementMap in="SourceGraphic" scale="7" />
+                    </filter>
+                    <filter id="drawn2-mobile">
+                        <feTurbulence baseFrequency="0.15" numOctaves="3" />
+                        <feDisplacementMap in="SourceGraphic" scale="3" />
                     </filter>
                 </defs>
             </svg>
