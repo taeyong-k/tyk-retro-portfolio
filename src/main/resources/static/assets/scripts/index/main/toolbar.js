@@ -60,44 +60,44 @@
 //     });
 // });
 
-// // 툴바 이동중 막기 -> 문제: 이동중 스크롤, 클릭시 뒤틀림 발생
-// let isScrolling = false; // 이동 중 플래그
-//
-// document.querySelectorAll("#toolbar button").forEach(btn => {
-//     btn.addEventListener("click", () => {
-//         if (isScrolling) return; // 이동 중이면 무시
-//
-//         const targetId = btn.dataset.target;
-//         const targetEl = document.getElementById(targetId);
-//         if (!targetEl) return;
-//
-//         isScrolling = true; // 이동 시작
-//
-//         // scrollTo 이동
-//         window.scrollInstance.scrollTo(targetEl, {
-//             offset: 0,
-//             duration: 800,
-//             easing: [0.25, 0, 0.35, 1],
-//             callback: () => {
-//                 // 이동 끝난 후 위치 고정
-//                 const originalLerp = window.scrollInstance.lerp;
-//                 window.scrollInstance.lerp = 0;
-//
-//                 requestAnimationFrame(() => {
-//                     window.scrollInstance.lerp = originalLerp;
-//                     isScrolling = false; // 이동 종료 후 다시 허용
-//                 });
-//
-//                 window.scrollInstance.update();
-//             }
-//         });
-//     });
-// });
-//
-// // 이동 중 스크롤 막기
-// window.addEventListener("wheel", (e) => {
-//     if (isScrolling) e.preventDefault();
-// }, { passive: false });
+// 툴바 이동중 막기 -> 문제: 이동중 스크롤, 클릭시 뒤틀림 발생
+let isScrolling = false; // 이동 중 플래그
+
+document.querySelectorAll("#toolbar button").forEach(btn => {
+    btn.addEventListener("click", () => {
+        if (isScrolling) return; // 이동 중이면 무시
+
+        const targetId = btn.dataset.target;
+        const targetEl = document.getElementById(targetId);
+        if (!targetEl) return;
+
+        isScrolling = true; // 이동 시작
+
+        // scrollTo 이동
+        window.scrollInstance.scrollTo(targetEl, {
+            offset: 0,
+            duration: 800,
+            easing: [0.25, 0, 0.35, 1],
+            callback: () => {
+                // 이동 끝난 후 위치 고정
+                const originalLerp = window.scrollInstance.lerp;
+                window.scrollInstance.lerp = 0;
+
+                requestAnimationFrame(() => {
+                    window.scrollInstance.lerp = originalLerp;
+                    isScrolling = false; // 이동 종료 후 다시 허용
+                });
+
+                window.scrollInstance.update();
+            }
+        });
+    });
+});
+
+// 이동 중 스크롤 막기
+window.addEventListener("wheel", (e) => {
+    if (isScrolling) e.preventDefault();
+}, { passive: false });
 
 
 
