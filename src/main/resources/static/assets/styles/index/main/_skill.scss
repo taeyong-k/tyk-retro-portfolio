@@ -14,8 +14,7 @@
     box-sizing: border-box;
   }
 
-  height: 100vh;
-  padding: 60px 5vw;
+  padding: 60px 5vw 550px 5vw;
   display: block;
 
   > .skill-wrapper {
@@ -28,7 +27,7 @@
       font-weight: 900;
       text-shadow: 2px 2px 0 #000, 4px 4px 0 #444;
       letter-spacing: 1px;
-      padding-bottom: 35px;
+      padding-bottom: 70px;
     }
 
     > .skill-content {

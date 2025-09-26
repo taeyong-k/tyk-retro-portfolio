@@ -10,12 +10,11 @@
   }
 
   width: 100%;
-  height: 100vh;
-  padding: clamp(30px, 5vw, 60px) clamp(10px, 2vw, 14px);
+  padding: 60px 5vw 550px 5vw;
   display: block;
 
   > .career-wrapper {
-    @include flex(column, center, flex-start, clamp(24px, 6vw, 64px));
+    @include flex(column, center, center, clamp(24px, 6vw, 64px));
     max-width: 1024px;
     height: 100%;
     margin: 0 auto;

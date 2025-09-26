@@ -11,19 +11,25 @@
     <link rel="stylesheet" href="/assets/styles/index.min.css" type="text/css">
 
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/css/all.min.css'>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/3.1.1/gsap.min.js'></script>
-    <script src='https://unpkg.com/ionicons@5.0.0/dist/ionicons.js'></script>
+    <!--    <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/3.1.1/gsap.min.js'></script>-->
+    <script type="module" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.esm.js"></script>
 
     <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.3/gsap.min.js'></script>
     <script src='https://unpkg.com/gsap@3/dist/Draggable.min.js'></script>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no"/>
+    <!--    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no"/>-->
     <script src="https://dl.dropbox.com/s/m1qor6z15o64wkc/stats.min.js?dl=0"></script>
     <script src="https://dl.dropbox.com/s/sk7fbhx9burholi/dat.gui.min.js?dl=0"></script>
     <link href="https://fonts.googleapis.com/css?family=Oswald:400&display=swap" rel="stylesheet">
     <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Ruda:wght@900&amp;display=swap'>
 
+
+    <!--    스크롤 부분 처리중 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+
     <script defer src="/assets/scripts/index.js" type="module"></script>
+    <!--    <script defer src="/assets/scripts/scroll.js" type="module"></script>-->
 </head>
 <body>
 <div id="modal">
@@ -32,41 +38,41 @@
         <button class="close-button">닫기</button>
     </div>
 </div>
-
 <div class="image-modal">
     <div class="modal-content">
         <img src="" alt="img">
     </div>
     <button class="close-button">닫기</button>
 </div>
-<div id="root">
-    <div class="cursor cursor--large"></div>
-    <div class="cursor cursor--small"></div>
-    <header id="header">
-        <section id="toolbar" class="toolbar">
-            <main>
-                <button data-target="intro">
-                    <ion-icon name="home"></ion-icon>
-                </button>
-                <button data-target="about">
-                    <ion-icon name="person"></ion-icon>
-                </button>
-                <button data-target="career">
-                    <ion-icon name="briefcase"></ion-icon>
-                </button>
-                <button data-target="skills">
-                    <ion-icon name="settings"></ion-icon>
-                </button>
-                <button data-target="projects">
-                    <ion-icon name="folder"></ion-icon>
-                </button>
-            </main>
-            <div class="support">
-                <a href="https://github.com/taeyong-k" target="_blank"><i class="fab fa-github-square"></i></a>
-                <a href="#" target="_self"><i class="fas fa-envelope" style="font-size: 28px"></i></a>
-            </div>
-        </section>
-    </header>
+<div class="cursor cursor--large"></div>
+<div class="cursor cursor--small"></div>
+<header id="header">
+    <section id="toolbar" class="toolbar">
+        <main>
+            <button data-target="intro">
+                <ion-icon name="home"></ion-icon>
+            </button>
+            <button data-target="about">
+                <ion-icon name="person"></ion-icon>
+            </button>
+            <button data-target="career">
+                <ion-icon name="briefcase"></ion-icon>
+            </button>
+            <button data-target="skills">
+                <ion-icon name="settings"></ion-icon>
+            </button>
+            <button data-target="projects">
+                <ion-icon name="folder"></ion-icon>
+            </button>
+        </main>
+        <div class="support">
+            <a href="https://github.com/taeyong-k" target="_blank"><i class="fab fa-github-square"></i></a>
+            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=taeyong.k0902@gmail.com" target="_blank"><i
+                    class="fas fa-envelope" style="font-size: 28px"></i></a>
+        </div>
+    </section>
+</header>
+<div id="root" data-scroll-container>
     <main id="main">
         <article id="intro">
             <div class="video-wrapper">
@@ -75,8 +81,8 @@
         </article>
         <article id="about">
             <div class="about-container">
-                <div class="about-title">About Me</div>
-                <section class="about-row">
+                <div class="about-title fade-up">About Me</div>
+                <section class="about-row fade-up">
                     <section class="about-box box-padding">
                         <div class="about-inner-box">
                             <div class="about-title-bar">
@@ -110,7 +116,7 @@
                 </section>
                 <section class="lower-windows">
                     <div class="edu-container">
-                        <section class="edu-window box-padding">
+                        <section class="edu-window box-padding fade-up">
                             <div class="edu-title-bar">
                                 <span>EDUCATION</span>
                                 <span>X</span>
@@ -126,7 +132,7 @@
                                 </div>
                             </div>
                         </section>
-                        <section class="link-window box-padding">
+                        <section class="link-window box-padding fade-up">
                             <div class="link-title-bar">
                                 <span>LINKS</span>
                                 <span>X</span>
@@ -157,7 +163,7 @@
                                 </div>
                             </div>
                         </section>
-                        <section class="info-window box-padding">
+                        <section class="info-window box-padding fade-up">
                             <div class="info-title-bar" style="padding: 6px 10px;">
                                 <span>OK</span>
                                 <span>?</span>
@@ -173,7 +179,7 @@
         </article>
         <article id="career">
             <div class="career-wrapper">
-                <div class="career-container">
+                <div class="career-container fade-up">
                     <div class="window">
                         <div class="inner-shadow-wrapper">
                             <div class="title-bar">
@@ -196,7 +202,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="career-container">
+                <div class="career-container fade-up">
                     <div class="window">
                         <div class="inner-shadow-wrapper">
                             <div class="title-bar">
@@ -222,7 +228,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="career-container">
+                <div class="career-container fade-up">
                     <div class="window">
                         <div class="inner-shadow-wrapper">
                             <div class="title-bar">
@@ -251,9 +257,9 @@
         </article>
         <article id="skills">
             <div class="skill-wrapper">
-                <h2 class="title">skills</h2>
+                <h2 class="title fade-up">skills</h2>
                 <div class="skill-content">
-                    <ul class="skill-nav-list" id="skillNav">
+                    <ul class="skill-nav-list fade-up" id="skillNav">
                         <li style="--clr:#2483ff;">
                             <a href="#" data-category="languages">
                                 <span>Languages</span>
@@ -285,7 +291,7 @@
                             </a>
                         </li>
                     </ul>
-                    <div class="led-board">
+                    <div class="led-board fade-up">
                         <div class="skill-board" id="skillLeft">
                             <div class="skill-title">Languages</div>
                             <div class="skill-container"></div>
@@ -504,31 +510,41 @@
         </div>
         <div class="canvasTTL">
             <section class="footer-text-effect">
-                <p class="vote">끝까지 봐주셔서<br>감사합니다.</p>
-                <p class="little"><span>앞으로도</span><span>계속 성장하겠습니다.</span></p>
-                <p class="empathy">계속 배우며 더 나은<br>서비스를 만들겠습니다.</p>
+                <p class="vote fade-up">끝까지 봐주셔서<br>감사합니다.</p>
+                <p class="little fade-up"><span>앞으로도</span><span>계속 성장하겠습니다.</span></p>
+                <p class="empathy fade-up">계속 배우며 더 나은<br>서비스를 만들겠습니다.</p>
             </section>
             <svg viewBox="0 0 100 100">
                 <defs>
                     <filter id="drawn">
-                        <feTurbulence baseFrequency="0.45" numOctaves="7" />
-                        <feDisplacementMap in="SourceGraphic" scale="7" />
+                        <feTurbulence baseFrequency="0.45" numOctaves="7"/>
+                        <feDisplacementMap in="SourceGraphic" scale="7"/>
                     </filter>
                     <filter id="drawn2">
-                        <feTurbulence baseFrequency="0.35" numOctaves="7" />
-                        <feDisplacementMap in="SourceGraphic" scale="7" />
+                        <feTurbulence baseFrequency="0.35" numOctaves="7"/>
+                        <feDisplacementMap in="SourceGraphic" scale="7"/>
                     </filter>
                     <filter id="drawn2-mobile">
-                        <feTurbulence baseFrequency="0.15" numOctaves="3" />
-                        <feDisplacementMap in="SourceGraphic" scale="3" />
+                        <feTurbulence baseFrequency="0.15" numOctaves="3"/>
+                        <feDisplacementMap in="SourceGraphic" scale="3"/>
                     </filter>
                 </defs>
             </svg>
         </div>
         <div id="copyright">© 2025. Kim Tae Yong. All rights reserved.</div>
     </footer>
-
 </div>
+
+
+<!-- GSAP -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
+
+<!-- Locomotive Scroll -->
+<script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
+
+<!-- 스크롤 JS -->
+<script src="/assets/scripts/scroll.js"></script>
 
 </body>
 </html>

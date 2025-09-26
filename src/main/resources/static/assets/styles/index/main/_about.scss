@@ -9,11 +9,10 @@
     box-sizing: border-box;
   }
 
-  min-height: 100vh;
   //background-color: #0d1b1e;
   //background-image: repeating-linear-gradient(0deg, #0d1b1e 0px, #0d1b1e 2px, #0c181b 2px, #0c181b 4px);
   color: #f3d547;
-  padding: 60px 5vw;
+  padding: 60px 5vw 550px 5vw;
   display: block;
 
   > .about-container {
@@ -33,7 +32,7 @@
       text-shadow: 2px 2px 0 #000, 4px 4px 0 #444;
       letter-spacing: 1px;
       color: #f3d547;
-      padding-bottom: 35px;
+      padding-bottom: 70px;
     }
 
     > .about-row {
