@@ -123,7 +123,7 @@ window.addEventListener('DOMContentLoaded', () => {
     // 3️⃣ fade-up 요소 애니메이션
     gsap.utils.toArray(".fade-up").forEach(el => {
         gsap.fromTo(el,
-            { opacity: 0.3, y: 80, scale: 0.65, filter: "blur(4px)" },
+            {opacity: 0.3, y: 80, scale: 0.65, filter: "blur(4px)"},
             {
                 opacity: 1,
                 y: 0,
