@@ -1,0 +1,38 @@
+@charset "UTF-8";
+html, body {
+  height: 100%;
+  overflow: hidden; /* LocomotiveScroll이 스크롤 담당 */
+}
+
+[data-scroll-container] {
+  min-height: 100%;
+}
+
+#root {
+  width: 100%;
+  min-height: 150vh;
+  display: block;
+  cursor: none;
+  position: relative;
+}
+
+.cursor {
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  pointer-events: none;
+  z-index: 9999;
+}
+.cursor--large {
+  --size: 40px;
+  border: 1px solid rgb(255, 60, 60);
+}
+.cursor--small {
+  --size: 10px;
+  background: rgb(255, 60, 60);
+}
+
+/*# sourceMappingURL=index.css.map */
