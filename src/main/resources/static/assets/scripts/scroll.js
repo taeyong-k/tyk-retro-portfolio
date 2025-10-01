@@ -135,7 +135,7 @@ window.addEventListener('DOMContentLoaded', () => {
                     scroller: scrollContainer,
                     start: "top 100%",
                     end: "top 55%",
-                    scrub: 3
+                    scrub: 1.5
                 }
             }
         );
