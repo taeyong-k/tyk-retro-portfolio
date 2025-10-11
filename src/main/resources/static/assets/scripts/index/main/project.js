@@ -276,7 +276,8 @@ draggable(); // 드래그 회전 기능 활성화
 
 let previousActiveIndex = null; // 마지막으로 표시된 프로젝트 인덱스
 
-function updateRightArea(currentRotation, isFromDrag = false) {
+// function updateRightArea(currentRotation, isFromDrag = false) {
+window.updateRightArea = function (currentRotation, isFromDrag = false) {
     const snapUnit = degree * 2;
     let activeIndex = Math.round((currentRotation % 360) / snapUnit);
 

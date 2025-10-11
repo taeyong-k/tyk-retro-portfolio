@@ -5,7 +5,6 @@ import './index/main/skill.js'
 import './index/main/project.js'
 import './index/main/footer.js'
 
-// 루트 밖 버전 (툴바 때문에 수정중)
 document.addEventListener("DOMContentLoaded", () => {
     const { gsap } = window;
 

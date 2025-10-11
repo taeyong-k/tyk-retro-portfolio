@@ -12,7 +12,6 @@
 
 @import "../../_def";
 
-
 :root {
   --color: #95f9fe;
 }
@@ -624,12 +623,12 @@
         padding: clamp(130px, 15vw, 125px) clamp(10px, 5vw, 20px) clamp(120px, 3vw, 60px);
         top: auto;
         right: auto;
-        
+
         @media (max-width: 686px) {
-          padding: clamp(10px,12vw,125px) clamp(10px,5vw,20px) clamp(10px,10vw,60px);
+          padding: clamp(10px, 12vw, 125px) clamp(10px, 5vw, 20px) clamp(10px, 10vw, 60px);
         }
         @media (max-width: 540px) {
-          padding: clamp(50px,20vw,125px) clamp(10px,5vw,20px) clamp(10px,10vw,60px);
+          padding: clamp(50px, 20vw, 125px) clamp(10px, 5vw, 20px) clamp(10px, 10vw, 60px);
         }
 
         .info {
@@ -668,3 +667,5 @@
     }
   }
 }
+
+
