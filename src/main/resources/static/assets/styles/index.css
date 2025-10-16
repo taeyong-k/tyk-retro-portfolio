@@ -413,7 +413,7 @@
   position: relative;
 }
 #about > .about-container > .about-row > .about-box > .about-inner-box > .btn-box > .btn.btn-cancel::after {
-  content: "코드 작성 후 스트레칭은 필수 🏃‍♂️";
+  content: "코드 작성 후 🏃‍♂️ 스트레칭은 필수";
   position: absolute;
   top: -102px;
   left: 45px;

@@ -511,6 +511,15 @@
 //
 import {projectsData} from './projectData.js';
 
+// 전역 상태 객체 (스크롤, 드래그, 프로젝트 간 정보 공유용)
+window.AppState = {
+    currentRotation: 0,        // 현재 원형 갤러리 회전값
+    activeProjectIndex: 0,     // 현재 활성 프로젝트 index
+    isDragging: false,         // 드래그 중 여부
+    isScrolling: false,        // 스크롤 중 여부
+    animationTriggered: false  // project 섹션 애니메이션 실행 여부
+};
+
 document.addEventListener("DOMContentLoaded", () => {
     // 페이지 진입 시 첫 프로젝트(Pixterest) 정보 세팅
     updateRightArea(0, false);
@@ -537,10 +546,12 @@ const init = () => {
             entries.forEach(entry => {
                 if (entry.isIntersecting && !animationTriggered) {
                     animationTriggered = true;
+                    window.AppState.animationTriggered = animationTriggered;
                     runAnimation();
                 } else if (!entry.isIntersecting && animationTriggered) {
                     resetAnimation();
                     animationTriggered = false;
+                    window.AppState.animationTriggered = animationTriggered;
                 }
             });
         }, {threshold: 0.7}); // 화면 70% 보이면 실행
@@ -742,12 +753,14 @@ const draggable = () => {
 
         onDragStart: function () {
             start = this.rotation;
+            window.AppState.isDragging = true;
         },
         onDragEnd: function () {
             const rotation = this.rotation;
             const snapUnit = degree * 2; // 2개 단위 스냅
             const offset = Math.abs(rotation - start);
             let targetRotation;
+            window.AppState.isDragging = false;
 
             // 드래그 방향에 따라 회전값 계산
             if (rotation > start) {
@@ -772,6 +785,7 @@ const draggable = () => {
                 duration: 0.8,
                 ease: "power2.out",
                 onComplete: () => {
+                    window.AppState.currentRotation = targetRotation; // 현재 회전값 저장
                     // ➤ 드래그로 인한 회전일 때만 updateRightArea
                     updateRightArea(targetRotation, true);
                 }
@@ -796,6 +810,7 @@ window.updateRightArea = function (currentRotation, isFromDrag = false) {
 
     const isSameTrack = activeIndex === previousActiveIndex;
     previousActiveIndex = activeIndex;
+    window.AppState.activeProjectIndex = activeIndex;
     if (isFromDrag && isSameTrack) return;
 
     const projectData = projectsData[activeIndex];
@@ -926,6 +941,8 @@ function slidesPlugin() {
 
 // ✅ 최초 실행
 slidesPlugin();
+
+// 🔄 스크롤 상태는 scroll.js 등에서 window.AppState.isScrolling = true/false 로 제어 예정
 
 
 // 모달 열기 함수
