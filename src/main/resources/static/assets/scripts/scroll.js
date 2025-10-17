@@ -950,8 +950,11 @@
 // 1. 드래그 <-> 스크롤 정보 갱신 해주기
 // 2. 툴바 -> 프로젝트 처음부터 (핀터레스트)
 // 3. 트랙 애니메이션 너무 빠름 문제 (자동정렬 + 트랙 이름이 맞을듯) (드래그에는 맞는데, 스크롤에는 자동정렬될때로 하면될듯)
+// -> 4,5 번 오른쪽 영역 + 화면 벗어나는 등등 고려할 요소가 좀 많아서 일단 보류....(급한게 아니므로..)
 // 4. 프로젝트 갤러리 애니메이션 시작 %를 90%나 100%일때로 하기
 // 5. 프로젝트 스크롤 폭을 조금 줄이자 (너무 빠른듯)
+
+// 스크롤 아예 잠금 테스트 중... 일단 이건 안됌..!
 gsap.registerPlugin(ScrollTrigger);
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -990,6 +993,20 @@ window.addEventListener('DOMContentLoaded', () => {
     ScrollTrigger.addEventListener('refresh', () => window.scrollInstance.update());
     ScrollTrigger.refresh();
 
+    // ① 스크롤 잠금/해제 함수
+    function lockScroll() {
+        window.addEventListener('wheel', preventDefault, { passive: false });
+        window.addEventListener('touchmove', preventDefault, { passive: false });
+    }
+    function unlockScroll() {
+        window.removeEventListener('wheel', preventDefault);
+        window.removeEventListener('touchmove', preventDefault);
+    }
+    function preventDefault(e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+
     // 2️⃣ 프로젝트 섹션: pin + 회전 + 스냅
     const projectsSection = document.getElementById('projects');
     const itemsContainer = document.querySelector(".items");
@@ -1013,8 +1030,12 @@ window.addEventListener('DOMContentLoaded', () => {
                 end: () => `+=${projectsSection.offsetHeight}`,
                 pin: true,
                 scrub: true,
+                onEnter: () => lockScroll(),
+                onEnterBack: () => lockScroll(),
+                onLeave: () => unlockScroll(),
+                onLeaveBack: () => unlockScroll(),
                 onUpdate: self => {
-                    const progress = self.progress; // 0~1
+                    const progress = self.progress;
                     const rotation = degreePerTrack * (tracks - 1) * progress;
                     gsap.set(itemsContainer, { rotation });
 
@@ -1030,7 +1051,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
                         if (snapTween) snapTween.kill();
 
-                        // 가장 가까운 트랙 선택 (rotation clamp)
                         const activeTrackIndex = Math.round(rotation / degreePerTrack);
                         const clampedIndex = Math.max(0, Math.min(activeTrackIndex, tracks - 1));
                         const targetRotation = clampedIndex * degreePerTrack;
@@ -1048,7 +1068,6 @@ window.addEventListener('DOMContentLoaded', () => {
                                 window.AppState.activeProjectIndex = clampedIndex;
                                 if (window.updateRightArea) window.updateRightArea(targetRotation, true);
 
-                                // 🔹 프로젝트 섹션 내부 스냅 완료 후 스크롤 위치 동기화
                                 if (window.scrollInstance && window.scrollInstance.update) {
                                     window.scrollInstance.update();
                                 }
@@ -1058,7 +1077,6 @@ window.addEventListener('DOMContentLoaded', () => {
                         });
                     }, 120);
                 },
-                // 🔹 프로젝트 섹션 벗어날 때 화면 튐 방지
                 onLeave: self => {
                     if (window.scrollInstance) {
                         const currentY = window.scrollInstance.scroll.instance.scroll.y;
