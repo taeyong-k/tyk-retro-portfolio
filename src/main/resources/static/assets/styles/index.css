@@ -118,11 +118,6 @@
   transform: scale(1.1);
 }
 
-/* 애니메이션 진행 중 페이지 잠금 */
-.body-locked {
-  overflow: hidden; /* 스크롤 막기 */
-}
-
 #intro {
   overflow: hidden;
   position: relative;
@@ -2437,7 +2432,7 @@ svg {
 
 html, body {
   height: 100%;
-  overflow: hidden; /* LocomotiveScroll이 스크롤 담당 */
+  overflow: visible;
 }
 
 [data-scroll-container] {
@@ -2476,9 +2471,15 @@ body::before {
 #root {
   width: 100%;
   min-height: 150vh;
+  height: auto;
+  overflow: visible;
   display: block;
   cursor: none;
   position: relative;
+}
+
+#main {
+  will-change: transform;
 }
 
 .cursor {

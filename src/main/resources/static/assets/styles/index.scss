@@ -4,7 +4,7 @@
 
 html, body {
   height: 100%;
-  overflow: hidden; /* LocomotiveScroll이 스크롤 담당 */
+  overflow: visible;
 }
 
 [data-scroll-container] {
@@ -46,9 +46,15 @@ body {
 #root {
   width: 100%;
   min-height: 150vh;
+  height: auto;
+  overflow: visible;
   display: block;
   cursor: none;
   position: relative;
+}
+
+#main {
+  will-change: transform;
 }
 
 .cursor {

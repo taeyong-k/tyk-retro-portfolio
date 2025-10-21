@@ -946,69 +946,204 @@
 //     });
 // });
 
+// // 스크롤 아예 잠금 테스트 중... 일단 이건 안됌..!
+// gsap.registerPlugin(ScrollTrigger);
+//
+// window.addEventListener('DOMContentLoaded', () => {
+//     const scrollContainer = document.querySelector('[data-scroll-container]');
+//
+//     // 1️⃣ LocomotiveScroll 초기화
+//     window.scrollInstance = new LocomotiveScroll({
+//         el: scrollContainer,
+//         smooth: true,
+//         lerp: 0.07,
+//         multiplier: 0.7,
+//         getDirection: true,
+//         getSpeed: true,
+//         firefoxMultiplier: 50
+//     });
+//
+//     window.scrollInstance.on('scroll', ScrollTrigger.update);
+//
+//     ScrollTrigger.scrollerProxy(scrollContainer, {
+//         scrollTop(value) {
+//             return arguments.length
+//                 ? window.scrollInstance.scrollTo(value, 0, 0)
+//                 : window.scrollInstance.scroll.instance.scroll.y;
+//         },
+//         getBoundingClientRect() {
+//             return {
+//                 top: 0,
+//                 left: 0,
+//                 width: window.innerWidth,
+//                 height: window.innerHeight
+//             };
+//         },
+//         pinType: scrollContainer.style.transform ? "transform" : "fixed"
+//     });
+//
+//     ScrollTrigger.addEventListener('refresh', () => window.scrollInstance.update());
+//     ScrollTrigger.refresh();
+//
+//     // ① 스크롤 잠금/해제 함수
+//     function lockScroll() {
+//         window.addEventListener('wheel', preventDefault, { passive: false });
+//         window.addEventListener('touchmove', preventDefault, { passive: false });
+//     }
+//     function unlockScroll() {
+//         window.removeEventListener('wheel', preventDefault);
+//         window.removeEventListener('touchmove', preventDefault);
+//     }
+//     function preventDefault(e) {
+//         e.preventDefault();
+//         e.stopPropagation();
+//     }
+//
+//     // 2️⃣ 프로젝트 섹션: pin + 회전 + 스냅
+//     const projectsSection = document.getElementById('projects');
+//     const itemsContainer = document.querySelector(".items");
+//     let scrollTimeout;
+//     let snapTween = null;
+//
+//     if (projectsSection && itemsContainer) {
+//         const items = document.querySelectorAll(".item");
+//         const totalItems = items.length;
+//         const tracks = Math.floor(totalItems / 2);
+//         const degreePerItem = 360 / totalItems;
+//         const degreePerTrack = degreePerItem * 2; // 트랙 단위 회전
+//
+//         gsap.to(itemsContainer, {
+//             rotation: 0,
+//             ease: "none",
+//             scrollTrigger: {
+//                 trigger: projectsSection,
+//                 scroller: scrollContainer,
+//                 start: "top top",
+//                 end: () => `+=${projectsSection.offsetHeight}`,
+//                 pin: true,
+//                 scrub: true,
+//                 onEnter: () => lockScroll(),
+//                 onEnterBack: () => lockScroll(),
+//                 onLeave: () => unlockScroll(),
+//                 onLeaveBack: () => unlockScroll(),
+//                 onUpdate: self => {
+//                     const progress = self.progress;
+//                     const rotation = degreePerTrack * (tracks - 1) * progress;
+//                     gsap.set(itemsContainer, { rotation });
+//
+//                     window.AppState.isScrolling = true;
+//                     window.AppState.currentRotation = rotation;
+//
+//                     if (window.updateRightArea) window.updateRightArea(rotation);
+//
+//                     // 🕒 스크롤 멈춤 감지
+//                     if (scrollTimeout) clearTimeout(scrollTimeout);
+//                     scrollTimeout = setTimeout(() => {
+//                         window.AppState.isScrolling = false;
+//
+//                         if (snapTween) snapTween.kill();
+//
+//                         const activeTrackIndex = Math.round(rotation / degreePerTrack);
+//                         const clampedIndex = Math.max(0, Math.min(activeTrackIndex, tracks - 1));
+//                         const targetRotation = clampedIndex * degreePerTrack;
+//
+//                         snapTween = gsap.to(itemsContainer, {
+//                             rotation: targetRotation,
+//                             duration: 0.4,
+//                             ease: "power2.out",
+//                             onUpdate: () => {
+//                                 window.AppState.currentRotation = targetRotation;
+//                                 if (window.updateRightArea) window.updateRightArea(targetRotation);
+//                             },
+//                             onComplete: () => {
+//                                 window.AppState.currentRotation = targetRotation;
+//                                 window.AppState.activeProjectIndex = clampedIndex;
+//                                 if (window.updateRightArea) window.updateRightArea(targetRotation, true);
+//
+//                                 if (window.scrollInstance && window.scrollInstance.update) {
+//                                     window.scrollInstance.update();
+//                                 }
+//
+//                                 snapTween = null;
+//                             }
+//                         });
+//                     }, 120);
+//                 },
+//                 onLeave: self => {
+//                     if (window.scrollInstance) {
+//                         const currentY = window.scrollInstance.scroll.instance.scroll.y;
+//                         window.scrollInstance.scrollTo(currentY, { duration: 0 });
+//                     }
+//                 },
+//                 onLeaveBack: self => {
+//                     if (window.scrollInstance) {
+//                         const currentY = window.scrollInstance.scroll.instance.scroll.y;
+//                         window.scrollInstance.scrollTo(currentY, { duration: 0 });
+//                     }
+//                 }
+//             }
+//         });
+//     }
+//
+//     // 3️⃣ fade-up 요소 애니메이션
+//     gsap.utils.toArray(".fade-up").forEach(el => {
+//         gsap.fromTo(el,
+//             { opacity: 0.3, y: 80, scale: 0.65, filter: "blur(4px)" },
+//             {
+//                 opacity: 1,
+//                 y: 0,
+//                 scale: 1,
+//                 filter: "blur(0px)",
+//                 ease: "power2.out",
+//                 scrollTrigger: {
+//                     trigger: el,
+//                     scroller: scrollContainer,
+//                     start: "top 100%",
+//                     end: "top 55%",
+//                     scrub: 1.5
+//                 }
+//             }
+//         );
+//     });
+// });
+
 // 0. 아직 살짝씩 화면 튐 문제 (튈때도 있고 어긋날 때도 잇는??)...
+//   -> 해결 스크롤 효과 자체를 바꿈
 // 1. 드래그 <-> 스크롤 정보 갱신 해주기
-// 2. 툴바 -> 프로젝트 처음부터 (핀터레스트)
+// 2. 툴바로 이동시 프로젝트 첫 시작은 핀터레스트로 초기화
 // 3. 트랙 애니메이션 너무 빠름 문제 (자동정렬 + 트랙 이름이 맞을듯) (드래그에는 맞는데, 스크롤에는 자동정렬될때로 하면될듯)
 // -> 4,5 번 오른쪽 영역 + 화면 벗어나는 등등 고려할 요소가 좀 많아서 일단 보류....(급한게 아니므로..)
 // 4. 프로젝트 갤러리 애니메이션 시작 %를 90%나 100%일때로 하기
 // 5. 프로젝트 스크롤 폭을 조금 줄이자 (너무 빠른듯)
 
-// 스크롤 아예 잠금 테스트 중... 일단 이건 안됌..!
-gsap.registerPlugin(ScrollTrigger);
+// 스크롤 방식 자체를 변경 gsap로만 스무스 효과 적용
+gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
-window.addEventListener('DOMContentLoaded', () => {
-    const scrollContainer = document.querySelector('[data-scroll-container]');
-
-    // 1️⃣ LocomotiveScroll 초기화
-    window.scrollInstance = new LocomotiveScroll({
-        el: scrollContainer,
-        smooth: true,
-        lerp: 0.07,
-        multiplier: 0.7,
-        getDirection: true,
-        getSpeed: true,
-        firefoxMultiplier: 50
+window.addEventListener("DOMContentLoaded", () => {
+    // 1️⃣ ScrollSmoother 초기화
+    window.smoother = ScrollSmoother.create({
+        wrapper: "#root",
+        content: "#main",
+        smooth: 1.2,        // 부드러움 정도 (0.8~1.5 사이 조정 가능)
+        effects: true,
     });
 
-    window.scrollInstance.on('scroll', ScrollTrigger.update);
+    // 2️⃣ 인트로 애니메이션 동안 스크롤 잠금
+    const tvEnd = 2;
+    const root = document.querySelector("#root");
 
-    ScrollTrigger.scrollerProxy(scrollContainer, {
-        scrollTop(value) {
-            return arguments.length
-                ? window.scrollInstance.scrollTo(value, 0, 0)
-                : window.scrollInstance.scroll.instance.scroll.y;
-        },
-        getBoundingClientRect() {
-            return {
-                top: 0,
-                left: 0,
-                width: window.innerWidth,
-                height: window.innerHeight
-            };
-        },
-        pinType: scrollContainer.style.transform ? "transform" : "fixed"
-    });
+    smoother.paused(true);               // 스크롤Smoother 정지
+    root.style.overflow = "hidden";      // 스크롤바 숨김
+    document.body.style.overflow = "hidden";
 
-    ScrollTrigger.addEventListener('refresh', () => window.scrollInstance.update());
-    ScrollTrigger.refresh();
+    setTimeout(() => {
+        smoother.paused(false);          // 스크롤 재개
+        root.style.overflow = "";        // 스크롤바 복원
+        document.body.style.overflow = "";
+    }, tvEnd * 1000);
 
-    // ① 스크롤 잠금/해제 함수
-    function lockScroll() {
-        window.addEventListener('wheel', preventDefault, { passive: false });
-        window.addEventListener('touchmove', preventDefault, { passive: false });
-    }
-    function unlockScroll() {
-        window.removeEventListener('wheel', preventDefault);
-        window.removeEventListener('touchmove', preventDefault);
-    }
-    function preventDefault(e) {
-        e.preventDefault();
-        e.stopPropagation();
-    }
-
-    // 2️⃣ 프로젝트 섹션: pin + 회전 + 스냅
-    const projectsSection = document.getElementById('projects');
+    // 3️⃣ 프로젝트 섹션: pin + 회전 + 스냅
+    const projectsSection = document.getElementById("projects");
     const itemsContainer = document.querySelector(".items");
     let scrollTimeout;
     let snapTween = null;
@@ -1018,30 +1153,24 @@ window.addEventListener('DOMContentLoaded', () => {
         const totalItems = items.length;
         const tracks = Math.floor(totalItems / 2);
         const degreePerItem = 360 / totalItems;
-        const degreePerTrack = degreePerItem * 2; // 트랙 단위 회전
+        const degreePerTrack = degreePerItem * 2;
 
         gsap.to(itemsContainer, {
             rotation: 0,
             ease: "none",
             scrollTrigger: {
                 trigger: projectsSection,
-                scroller: scrollContainer,
                 start: "top top",
                 end: () => `+=${projectsSection.offsetHeight}`,
                 pin: true,
                 scrub: true,
-                onEnter: () => lockScroll(),
-                onEnterBack: () => lockScroll(),
-                onLeave: () => unlockScroll(),
-                onLeaveBack: () => unlockScroll(),
-                onUpdate: self => {
+                onUpdate: (self) => {
                     const progress = self.progress;
                     const rotation = degreePerTrack * (tracks - 1) * progress;
                     gsap.set(itemsContainer, { rotation });
 
                     window.AppState.isScrolling = true;
                     window.AppState.currentRotation = rotation;
-
                     if (window.updateRightArea) window.updateRightArea(rotation);
 
                     // 🕒 스크롤 멈춤 감지
@@ -1051,6 +1180,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
                         if (snapTween) snapTween.kill();
 
+                        // 가장 가까운 트랙 스냅
                         const activeTrackIndex = Math.round(rotation / degreePerTrack);
                         const clampedIndex = Math.max(0, Math.min(activeTrackIndex, tracks - 1));
                         const targetRotation = clampedIndex * degreePerTrack;
@@ -1066,36 +1196,21 @@ window.addEventListener('DOMContentLoaded', () => {
                             onComplete: () => {
                                 window.AppState.currentRotation = targetRotation;
                                 window.AppState.activeProjectIndex = clampedIndex;
-                                if (window.updateRightArea) window.updateRightArea(targetRotation, true);
-
-                                if (window.scrollInstance && window.scrollInstance.update) {
-                                    window.scrollInstance.update();
-                                }
-
+                                if (window.updateRightArea)
+                                    window.updateRightArea(targetRotation, true);
                                 snapTween = null;
-                            }
+                            },
                         });
                     }, 120);
                 },
-                onLeave: self => {
-                    if (window.scrollInstance) {
-                        const currentY = window.scrollInstance.scroll.instance.scroll.y;
-                        window.scrollInstance.scrollTo(currentY, { duration: 0 });
-                    }
-                },
-                onLeaveBack: self => {
-                    if (window.scrollInstance) {
-                        const currentY = window.scrollInstance.scroll.instance.scroll.y;
-                        window.scrollInstance.scrollTo(currentY, { duration: 0 });
-                    }
-                }
-            }
+            },
         });
     }
 
-    // 3️⃣ fade-up 요소 애니메이션
-    gsap.utils.toArray(".fade-up").forEach(el => {
-        gsap.fromTo(el,
+    // 4️⃣ fade-up 애니메이션 (원본 유지)
+    gsap.utils.toArray(".fade-up").forEach((el) => {
+        gsap.fromTo(
+            el,
             { opacity: 0.3, y: 80, scale: 0.65, filter: "blur(4px)" },
             {
                 opacity: 1,
@@ -1105,11 +1220,10 @@ window.addEventListener('DOMContentLoaded', () => {
                 ease: "power2.out",
                 scrollTrigger: {
                     trigger: el,
-                    scroller: scrollContainer,
                     start: "top 100%",
-                    end: "top 55%",
-                    scrub: 1.5
-                }
+                    end: "top 65%",
+                    scrub: 1.5,
+                },
             }
         );
     });

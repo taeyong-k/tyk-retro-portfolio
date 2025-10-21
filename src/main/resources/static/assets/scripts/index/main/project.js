@@ -521,8 +521,8 @@ window.AppState = {
 };
 
 document.addEventListener("DOMContentLoaded", () => {
-    // 페이지 진입 시 첫 프로젝트(Pixterest) 정보 세팅
-    updateRightArea(0, false);
+    document.documentElement.style.scrollBehavior = "smooth"; // ✅ 부드러운 스크롤 적용
+    updateRightArea(0, false);  // 페이지 진입 시 첫 프로젝트(Pixterest) 정보 세팅
 });
 
 const images = gsap.utils.toArray(".item");

@@ -13,37 +13,32 @@ document.addEventListener("DOMContentLoaded", () => {
     let isStuck = false;
     let mouse = { x: -100, y: -100 };
 
-    const scrollContainer = document.querySelector('[data-scroll-container]');
-    const scroll = new LocomotiveScroll({
-        el: scrollContainer,
-        smooth: true,
-        lerp: 0.08,
-        multiplier: 0.7
-    });
-
-    scroll.on('scroll', ScrollTrigger.update);
-
-    ScrollTrigger.scrollerProxy(scrollContainer, {
-        scrollTop(value) {
-            return arguments.length ? scroll.scrollTo(value, 0, 0) : scroll.scroll.instance.scroll.y;
-        },
-        getBoundingClientRect() {
-            return { top: 0, left: 0, width: window.innerWidth, height: window.innerHeight };
-        },
-        pinType: scrollContainer.style.transform ? "transform" : "fixed"
-    });
-
-    ScrollTrigger.addEventListener('refresh', () => scroll.update());
-    ScrollTrigger.refresh();
+    document.documentElement.style.scrollBehavior = "smooth";
 
     let cursorOuterOriginalState = { width: cursorOuter.offsetWidth, height: cursorOuter.offsetHeight };
     let isFirstMove = true;
 
-    const buttons = document.querySelectorAll("#toolbar button");
-    buttons.forEach(button => {
-        button.addEventListener("pointerenter", handleMouseEnter);
-        button.addEventListener("pointerleave", handleMouseLeave);
+    // toolbar 버튼
+    const toolbarButtons = document.querySelectorAll("#toolbar button");
+    toolbarButtons.forEach(btn => {
+        btn.addEventListener("pointerenter", handleMouseEnter);
+        btn.addEventListener("pointerleave", handleMouseLeave);
     });
+
+    // (추가) About 섹션 버튼
+    const aboutButtons = document.querySelectorAll("#about .btn-box button");
+    aboutButtons.forEach(btn => {
+        btn.addEventListener("pointerenter", handleMouseEnter);
+        btn.addEventListener("pointerleave", handleMouseLeave);
+    });
+
+    // (추가) skill 섹션 카테고리
+    const skillCategoryLinks = document.querySelectorAll("#skills .skill-nav-list li");
+    skillCategoryLinks.forEach(link => {
+        link.addEventListener("pointerenter", handleMouseEnter);
+        link.addEventListener("pointerleave", handleMouseLeave);
+    });
+
 
     document.body.addEventListener("pointermove", e => {
         mouse.x = e.clientX;
@@ -62,6 +57,35 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.addEventListener("pointerup", () => {
         gsap.to(cursorInner, { duration: 0.15, scale: 1 });
     });
+
+    // 커서 색상 업데이트 함수 (+추가)
+    window.updateCursorColor = (isScrolling) => {
+        if (isScrolling) {
+            gsap.to(cursorOuter, {
+                duration: 0.2,
+                borderColor: "#777777",
+                backgroundColor: "rgba(119,119,119,0.3)",
+                boxShadow: "0 0 8px rgba(119,119,119,0.6)"
+            });
+            gsap.to(cursorInner, {
+                duration: 0.2,
+                backgroundColor: "#777777",
+                boxShadow: "0 0 5px rgba(119,119,119,0.7)"
+            });
+        } else {
+            gsap.to(cursorOuter, {
+                duration: 0.2,
+                borderColor: "",
+                backgroundColor: "transparent",
+                boxShadow: "0 0 0 rgba(0,0,0,0)"
+            });
+            gsap.to(cursorInner, {
+                duration: 0.2,
+                backgroundColor: "rgb(255,60,60)",
+                boxShadow: "0 0 0 rgba(0,0,0,0)"
+            });
+        }
+    };
 
     function updateCursor() {
         gsap.set(cursorInner, {
@@ -86,12 +110,26 @@ document.addEventListener("DOMContentLoaded", () => {
         const targetBox = e.currentTarget.getBoundingClientRect();
         const style = window.getComputedStyle(e.currentTarget);
 
+        let width = targetBox.width;
+        let height = targetBox.height;
+        let x = targetBox.left;
+        let y = targetBox.top;
+
+        // skills li만 살짝 크게
+        if (e.currentTarget.closest("#skills")) {
+            const extra = 15; // 조정값
+            width += extra;
+            height += extra;
+            x -= extra / 2;
+            y -= extra / 2;
+        }
+
         gsap.to(cursorOuter, {
             duration: 0.2,
-            x: targetBox.left,
-            y: targetBox.top,
-            width: targetBox.width,
-            height: targetBox.height,
+            x,
+            y,
+            width,
+            height,
             borderRadius: style.borderRadius,
             backgroundColor: "rgba(255,255,255,0.1)"
         });
