@@ -505,9 +505,8 @@
 //     projectModal.classList.remove("show");
 //     document.body.style.overflow = "";
 // });
-//
-//
-//
+
+
 
 import {projectsData} from './projectData.js';
 
