@@ -508,7 +508,7 @@
 //
 //
 //
-//
+
 import {projectsData} from './projectData.js';
 
 // 전역 상태 객체 (스크롤, 드래그, 프로젝트 간 정보 공유용)
