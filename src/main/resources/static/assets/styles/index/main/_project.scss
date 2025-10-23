@@ -464,6 +464,7 @@
   height: 100vh;
   background: rgba(0, 0, 0, 0.7);
   opacity: 0;
+  cursor: none;
   pointer-events: none;
   backdrop-filter: blur(8px);
   transition: opacity 0.3s ease;
@@ -553,6 +554,7 @@
   height: 100%;
   background: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(8px);
+  cursor: none;
   z-index: 9999;
 
   opacity: 0;
@@ -584,7 +586,7 @@
     margin-top: 20px;
     padding: 8px 20px;
     border-radius: 6px;
-    cursor: pointer;
+    cursor: none;
     background: #0E8C55;
     color: #fff;
     border: none;
