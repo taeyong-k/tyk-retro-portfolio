@@ -631,8 +631,6 @@ const runAnimation = () => {
 
     galleryAnimationTimeline = gsap.timeline({
         onComplete: () => {
-            animateTrackLabels();
-
             // ✅ 항상 첫 번째 프로젝트(Pixterest)로 초기화
             previousActiveIndex = 0;
 
@@ -647,6 +645,8 @@ const runAnimation = () => {
             setTimeout(() => {
                 if (window.smoother) window.smoother.paused(false);
             }, 300); // 0.3초 안정화 시간후, 스크롤 다시 활성화
+
+            animateTrackLabels();
         }
     });
 
