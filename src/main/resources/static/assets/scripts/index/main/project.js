@@ -516,12 +516,11 @@ window.AppState = window.AppState || {
 };
 
 document.addEventListener("DOMContentLoaded", () => {
-    // 페이지 진입 시 첫 프로젝트(Pixterest) 정보 세팅
-    updateRightArea(0, false);
+    updateRightArea(0, false); // 최초 세팅
+    init();                    // 스크롤 감지 및 애니메이션 준비
 });
 
 const images = gsap.utils.toArray(".item");
-
 const imageSize = images.length;
 const total = images.length;
 const degree = 360 / total;

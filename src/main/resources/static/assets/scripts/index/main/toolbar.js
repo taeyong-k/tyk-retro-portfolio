@@ -229,6 +229,7 @@
 //     });
 // });
 
+// 스크롤 수정 직후, 툴바 수정
 document.querySelectorAll("#toolbar button").forEach(btn => {
     btn.addEventListener("click", () => {
         const targetEl = document.getElementById(btn.dataset.target);
