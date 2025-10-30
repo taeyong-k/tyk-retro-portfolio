@@ -966,7 +966,9 @@
 // });
 
 
-// test 중 (현재 코드는 원본코드임)
+// ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+// ★★★★★★★★★★★★★★★★★★★★★★★★★프로젝트 섹션 수정 -완★★★★★★★★★★★★★★★★★★★★★★★★★
+// ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
 import {projectsData} from './projectData.js';
 
 window.AppState = window.AppState || {
@@ -1195,20 +1197,31 @@ init(); // 스크롤 감지 및 애니메이션 준비
 let previousActiveIndex = null; // 마지막으로 표시된 프로젝트 인덱스
 
 window.updateRightArea = function (currentRotation, isFromDrag = false) {
-    const snapUnit = degree * 2;
-    let activeIndex = Math.round((currentRotation % 360) / snapUnit);
+    // 문자열이면 숫자로 변환
+    if (typeof currentRotation === "string") {
+        currentRotation = parseFloat(currentRotation);
+    }
 
-    if (activeIndex < 0) activeIndex += total / 2;
+    const snapUnit = degree * 2; // 한 트랙 당 회전 각도
+    const totalTracks = total / 2;
+
+    // 트랙 인덱스 계산
+    let activeIndex = Math.round((currentRotation % 360) / snapUnit);
+    if (activeIndex < 0) activeIndex += totalTracks;
 
     const isSameTrack = activeIndex === previousActiveIndex;
+
     previousActiveIndex = activeIndex;
     if (isFromDrag && isSameTrack) return;
 
     const projectData = projectsData[activeIndex];
     const rightArea = document.querySelector(".right-area");
-    if (!projectData || !rightArea) return;
 
-    // ✅ 변경 체크 후 DOM 갱신
+    if (!projectData || !rightArea) {
+        return;
+    }
+
+    // ✅ DOM 갱신
     if (rightArea.querySelector(".title h1").textContent !== projectData.title) {
         rightArea.querySelector(".title h1").textContent = projectData.title;
     }
@@ -1241,7 +1254,7 @@ window.updateRightArea = function (currentRotation, isFromDrag = false) {
             .join("");
         if (slideContainer.innerHTML !== newSlidesHTML) {
             slideContainer.innerHTML = newSlidesHTML;
-            slidesPlugin(); // 슬라이드 이벤트 재설정
+            slidesPlugin();
         }
     }
 
@@ -1252,24 +1265,27 @@ window.updateRightArea = function (currentRotation, isFromDrag = false) {
         animateTrackLabels();
     }
 
-    // 오른쪽 영역 등장 애니메이션
-    // + 드래그로 호출된 경우만 등장 애니메이션 실행
     if (isFromDrag) {
         const infoItems = rightArea.querySelectorAll(".info > *");
         const rightTimeline = gsap.timeline();
-        rightTimeline.fromTo(
-            rightArea,
-            {opacity: 0, x: 50, pointerEvents: "none"},
-            {opacity: 1, x: 0, duration: 1.5, ease: "power3.out", pointerEvents: "auto"}
-        );
-        rightTimeline.fromTo(
-            infoItems,
-            {y: 20, opacity: 0},
-            {y: 0, opacity: 1, duration: 1, stagger: 0.2, ease: "power3.out"},
-            "-=1.2"
-        );
+
+        // ✅ 수정: 갤러리 애니메이션이 끝난 경우만 실행
+        if (!window.AppState.isGalleryAnimating) {
+            rightTimeline.fromTo(
+                rightArea,
+                {opacity: 0, x: 50, pointerEvents: "none"},
+                {opacity: 1, x: 0, duration: 1.5, ease: "power3.out", pointerEvents: "auto"}
+            );
+            rightTimeline.fromTo(
+                infoItems,
+                {y: 20, opacity: 0},
+                {y: 0, opacity: 1, duration: 1, stagger: 0.2, ease: "power3.out"},
+                "-=1.2"
+            );
+        }
     }
 }
+
 
 // 화면 중앙에 있는 right-area의 track-label만 애니메이션 실행
 function animateTrackLabels() {
