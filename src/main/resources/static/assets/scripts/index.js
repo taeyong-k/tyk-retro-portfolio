@@ -39,6 +39,20 @@ document.addEventListener("DOMContentLoaded", () => {
         link.addEventListener("pointerleave", handleMouseLeave);
     });
 
+    // (추가) project 섹션 버튼
+    const projectButtons = document.querySelectorAll("#projects .button-area button");
+    projectButtons.forEach(btn => {
+        btn.addEventListener("pointerenter", handleMouseEnter);
+        btn.addEventListener("pointerleave", handleMouseLeave);
+    });
+
+    // (추가) image-modal 닫기 버튼
+    const modalCloseBtn = document.querySelectorAll("#image-modal .close-button");
+    modalCloseBtn.forEach(btn => {
+        btn.addEventListener("pointerenter", handleMouseEnter);
+        btn.addEventListener("pointerleave", handleMouseLeave);
+    });
+
 
     document.body.addEventListener("pointermove", e => {
         mouse.x = e.clientX;
