@@ -230,6 +230,7 @@
 // });
 
 // 스크롤 수정 직후, 툴바 수정
+// + 프로젝트 섹션 애니메이션 도중 스크롤 잠김 문제 수정
 document.querySelectorAll("#toolbar button").forEach(btn => {
     btn.addEventListener("click", () => {
         const targetEl = document.getElementById(btn.dataset.target);
@@ -237,19 +238,23 @@ document.querySelectorAll("#toolbar button").forEach(btn => {
         if (window.isScrollingToSection) return;
 
         window.isScrollingToSection = true;
-
-        // 클릭 중 커서 색상 즉시 변환
         if (window.updateCursorColor) window.updateCursorColor(true);
 
+        // ✅ 프로젝트 애니메이션 도중이면 스크롤 잠금 해제
+        if (window.AppState?.isGalleryAnimating) {
+            window.AppState.isGalleryAnimating = false;
+            if (window.smoother.paused()) window.smoother.paused(false);
+        }
+
+        // ✅ 스크롤 바로 이동
         window.smoother.scrollTo(targetEl, true);
 
         setTimeout(() => {
             window.isScrollingToSection = false;
-
-            // 이동 끝나면 커서 원래색 강제 복귀
             if (window.updateCursorColor) window.updateCursorColor(false);
         }, 700);
     });
 });
+
 
 

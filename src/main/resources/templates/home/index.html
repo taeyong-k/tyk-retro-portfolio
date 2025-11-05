@@ -31,7 +31,6 @@
     <!-- 스크롤 JS -->
     <script defer src="/assets/scripts/scroll.js"></script>
     <script defer src="/assets/scripts/index.js" type="module"></script>
-
 </head>
 <body>
 <div id="modal">
@@ -75,442 +74,447 @@
     </section>
 </header>
 <div id="root" data-scroll-container>
-    <main id="main">
-        <article id="intro">
-            <div class="video-wrapper">
-                <video autoplay muted playsinline src="/assets/videos/intro-video.mp4"></video>
-            </div>
-        </article>
-        <article id="about">
-            <div class="about-container">
-                <div class="about-title fade-up">About Me</div>
-                <section class="about-row fade-up">
-                    <section class="about-box box-padding">
-                        <div class="about-inner-box">
-                            <div class="about-title-bar">
-                                <span>ABOUT ME</span>
-                                <div class="about-title-bar-icon">
-                                    <span>_</span>
+    <div id="scroll-container">
+        <main id="main">
+            <article id="intro">
+                <div class="video-wrapper">
+                    <video autoplay muted playsinline src="/assets/videos/intro-video.mp4"></video>
+                </div>
+            </article>
+            <article id="about">
+                <div class="about-container">
+                    <div class="about-title fade-up">About Me</div>
+                    <section class="about-row fade-up">
+                        <section class="about-box box-padding">
+                            <div class="about-inner-box">
+                                <div class="about-title-bar">
+                                    <span>ABOUT ME</span>
+                                    <div class="about-title-bar-icon">
+                                        <span>_</span>
+                                    </div>
+                                </div>
+                                <div class="about-content-box">
+                                    <div class="info-line">Name: Kim Tae Yong</div>
+                                    <div class="info-line">Phone: 010-3581-7365</div>
+                                    <div class="info-line">Email: taeyong.k0902@gmail.com</div>
+                                    <div class="info-line">Address: Buk-gu, Pohang-si</div>
+                                </div>
+                                <div class="btn-box">
+                                    <button class="btn btn-ok">OK</button>
+                                    <button class="btn btn-cancel">Cancel</button>
                                 </div>
                             </div>
-                            <div class="about-content-box">
-                                <div class="info-line">Name: Kim Tae Yong</div>
-                                <div class="info-line">Phone: 010-3581-7365</div>
-                                <div class="info-line">Email: taeyong.k0902@gmail.com</div>
-                                <div class="info-line">Address: Buk-gu, Pohang-si</div>
+                        </section>
+                        <section class="contact-side-box">
+                            <div class="side-box box-padding">
+                                <div class="side-birth-title side-title-blue">BIRTHDAY</div>
+                                <div class="side-content">1996. 09.02</div>
                             </div>
-                            <div class="btn-box">
-                                <button class="btn btn-ok">OK</button>
-                                <button class="btn btn-cancel">Cancel</button>
+                            <div class="side-box box-padding">
+                                <div class="side-cont-title">Personality</div>
+                                <div class="side-content">ISTJ</div>
                             </div>
+                        </section>
+                    </section>
+                    <section class="lower-windows">
+                        <div class="edu-container">
+                            <section class="edu-window box-padding fade-up">
+                                <div class="edu-title-bar">
+                                    <span>EDUCATION</span>
+                                    <span>X</span>
+                                </div>
+                                <div class="edu-content-box">
+                                    <div class="edu-line">
+                                        <span>포항대동고등학교</span>
+                                        <span>2012.03 - 2015.02</span>
+                                    </div>
+                                    <div class="edu-line">
+                                        <span>배재대학교․전자공학과</span>
+                                        <span>2015.03 - 2022.02</span>
+                                    </div>
+                                </div>
+                            </section>
+                            <section class="link-window box-padding fade-up">
+                                <div class="link-title-bar">
+                                    <span>LINKS</span>
+                                    <span>X</span>
+                                </div>
+                                <div class="link-content-box">
+                                    <div class="link-box hint">
+                                        <a class="notion-link"
+                                           href="https://proximal-artichoke-2a0.notion.site/Y-DLog-1b78ab1dcef680f38ec6d013a823911a?pvs=4"
+                                           target="_blank">
+                                            <img alt="notion-icon" class="notion-icon"
+                                                 src="/assets/images/about/notion.logo.png">
+                                            Notion
+                                        </a>
+                                    </div>
+                                    <div class="link-box hint">
+                                        <a class="tistory-link" href="https://ty3804.tistory.com/" target="_blank">
+                                            <img alt="tistory-icon" class="tistory-icon"
+                                                 src="/assets/images/about/tistory.logo.png">
+                                            Tistory
+                                        </a>
+                                    </div>
+                                    <div class="link-box hint">
+                                        <a class="github-link" href="https://github.com/taeyong-k" target="_blank">
+                                            <img alt="github-icon" class="github-icon"
+                                                 src="/assets/images/about/github.logo.png">
+                                            GitHub
+                                        </a>
+                                    </div>
+                                </div>
+                            </section>
+                            <section class="info-window box-padding fade-up">
+                                <div class="info-title-bar" style="padding: 6px 10px;">
+                                    <span>OK</span>
+                                    <span>?</span>
+                                </div>
+                                <div class="info-content-box">
+                                    <p class="info-content-title">노력은 배신하지 않는다.</p>
+                                    <span class="info-content-caption">실패를 배움으로 삼아, 어제보다 나은 오늘을 만들어가는 개발자 김태용입니다. 배움의 재미를 따라 걷다 보니, 자연스럽게 개발이라는 길을 만나게 되었고, 이제는 백엔드 개발자로 한 걸음씩 성장해나가고 있습니다. 이제 시작이지만, 믿고 맡길 수 있는 개발자로 성장하고 싶습니다.</span>
+                                </div>
+                            </section>
                         </div>
                     </section>
-                    <section class="contact-side-box">
-                        <div class="side-box box-padding">
-                            <div class="side-birth-title side-title-blue">BIRTHDAY</div>
-                            <div class="side-content">1996. 09.02</div>
-                        </div>
-                        <div class="side-box box-padding">
-                            <div class="side-cont-title">Personality</div>
-                            <div class="side-content">ISTJ</div>
-                        </div>
-                    </section>
-                </section>
-                <section class="lower-windows">
-                    <div class="edu-container">
-                        <section class="edu-window box-padding fade-up">
-                            <div class="edu-title-bar">
-                                <span>EDUCATION</span>
-                                <span>X</span>
-                            </div>
-                            <div class="edu-content-box">
-                                <div class="edu-line">
-                                    <span>포항대동고등학교</span>
-                                    <span>2012.03 - 2015.02</span>
-                                </div>
-                                <div class="edu-line">
-                                    <span>배재대학교․전자공학과</span>
-                                    <span>2015.03 - 2022.02</span>
-                                </div>
-                            </div>
-                        </section>
-                        <section class="link-window box-padding fade-up">
-                            <div class="link-title-bar">
-                                <span>LINKS</span>
-                                <span>X</span>
-                            </div>
-                            <div class="link-content-box">
-                                <div class="link-box hint">
-                                    <a class="notion-link"
-                                       href="https://proximal-artichoke-2a0.notion.site/Y-DLog-1b78ab1dcef680f38ec6d013a823911a?pvs=4"
-                                       target="_blank">
-                                        <img alt="notion-icon" class="notion-icon"
-                                             src="/assets/images/about/notion.logo.png">
-                                        Notion
-                                    </a>
-                                </div>
-                                <div class="link-box hint">
-                                    <a class="tistory-link" href="https://ty3804.tistory.com/" target="_blank">
-                                        <img alt="tistory-icon" class="tistory-icon"
-                                             src="/assets/images/about/tistory.logo.png">
-                                        Tistory
-                                    </a>
-                                </div>
-                                <div class="link-box hint">
-                                    <a class="github-link" href="https://github.com/taeyong-k" target="_blank">
-                                        <img alt="github-icon" class="github-icon"
-                                             src="/assets/images/about/github.logo.png">
-                                        GitHub
-                                    </a>
-                                </div>
-                            </div>
-                        </section>
-                        <section class="info-window box-padding fade-up">
-                            <div class="info-title-bar" style="padding: 6px 10px;">
-                                <span>OK</span>
-                                <span>?</span>
-                            </div>
-                            <div class="info-content-box">
-                                <p class="info-content-title">노력은 배신하지 않는다.</p>
-                                <span class="info-content-caption">실패를 배움으로 삼아, 어제보다 나은 오늘을 만들어가는 개발자 김태용입니다. 배움의 재미를 따라 걷다 보니, 자연스럽게 개발이라는 길을 만나게 되었고, 이제는 백엔드 개발자로 한 걸음씩 성장해나가고 있습니다. 이제 시작이지만, 믿고 맡길 수 있는 개발자로 성장하고 싶습니다.</span>
-                            </div>
-                        </section>
-                    </div>
-                </section>
-            </div>
-        </article>
-        <article id="career">
-            <div class="career-wrapper">
-                <div class="career-container fade-up">
-                    <div class="window">
-                        <div class="inner-shadow-wrapper">
-                            <div class="title-bar">
-                                <div class="button btn1"></div>
-                                <div class="button btn2"></div>
-                                <div class="button btn3"></div>
-                            </div>
-                            <div class="content-box">
-                                <div class="content-text">커리어</div>
-                                <div class="underline"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="info">
-                        <div class="title">포항신협본점·신용협동</div>
-                        <div class="date">2024.07 - 2024.12</div>
-                        <div class="tasks">
-                            <p class="task">금융 전산 시스템을 활용해 출납창구 업무를 수행하며 데이터 관리와 업무 효율화를 경험했고,
-                                팀 단위 협업과 문제 해결을 통해 안정적인 시스템 운영 역량을 익혔습니다.</p>
-                        </div>
-                    </div>
                 </div>
-                <div class="career-container fade-up">
-                    <div class="window">
-                        <div class="inner-shadow-wrapper">
-                            <div class="title-bar">
-                                <div class="button btn1"></div>
-                                <div class="button btn2"></div>
-                                <div class="button btn3"></div>
-                            </div>
-                            <div class="content-box">
-                                <div class="content-text">교육</div>
-                                <div class="underline short"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="info">
-                        <div class="title">코리아IT아카데미</div>
-                        <div class="date">2025.02 - 2025.08</div>
-                        <div class="tasks">
-                            <p class="task">
-                                Spring MVC 기반의 백엔드 개발을 중심으로, 웹 서비스 구현에 필요한 전반적인 기술을 학습했습니다.
-                                6일 단기 프로젝트부터 한 달간의 팀 프로젝트까지 다양한 규모의 과제를 수행하며,
-                                설계와 개발은 물론 배포까지 실무에 가까운 경험을 쌓았습니다.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="career-container fade-up">
-                    <div class="window">
-                        <div class="inner-shadow-wrapper">
-                            <div class="title-bar">
-                                <div class="button btn1"></div>
-                                <div class="button btn2"></div>
-                                <div class="button btn3"></div>
-                            </div>
-                            <div class="content-box">
-                                <div class="content-text">교육</div>
-                                <div class="underline short"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="info">
-                        <div class="title">코리아IT아카데미</div>
-                        <div class="date">2020.06 - 2021.07</div>
-                        <div class="tasks">
-                            <p class="task">
-                                Java, Python, Linux, C/C++, 자료구조, CCNA, DBMS 등 기초 프로그래밍과 웹 보안 지식을 학습하며,
-                                기본 문법 이해와 간단한 코드 작성 능력을 익혔습니다.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </article>
-        <article id="skills">
-            <div class="skill-wrapper">
-                <h2 class="title fade-up">skills</h2>
-                <div class="skill-content">
-                    <ul class="skill-nav-list fade-up" id="skillNav">
-                        <li style="--clr:#2483ff;">
-                            <a href="#" data-category="languages">
-                                <span>Languages</span>
-                            </a>
-                        </li>
-                        <li style="--clr:#fff200;">
-                            <a href="#" data-category="frontend">
-                                <span>Frontend</span>
-                            </a>
-                        </li>
-                        <li style="--clr:#ff253f;">
-                            <a href="#" data-category="backend">
-                                <span>Backend</span>
-                            </a>
-                        </li>
-                        <li style="--clr:#25d366;">
-                            <a href="#" data-category="database">
-                                <span>Database</span>
-                            </a>
-                        </li>
-                        <li style="--clr:#f32ec8;">
-                            <a href="#" data-category="devOps">
-                                <span>DevOps</span>
-                            </a>
-                        </li>
-                        <li style="--clr:#00bcd4;">
-                            <a href="#" data-category="tools">
-                                <span>Tools</span>
-                            </a>
-                        </li>
-                    </ul>
-                    <div class="led-board fade-up">
-                        <div class="skill-board" id="skillLeft">
-                            <div class="skill-title">Languages</div>
-                            <div class="skill-container"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </article>
-        <div id="project-title" style="height: 400px; font-size:40px; color: white; display: flex; align-items: center; justify-content: center;">
-            <h1 class="fade-up">프</h1>
-            <h1 class="fade-up">로</h1>
-            <h1 class="fade-up">젝</h1>
-            <h1 class="fade-up">트</h1>
-        </div>
-        <article id="projects">
-            <main>
-                <div class="container">
-                    <div class="center">
-                        <div class="items">
-                            <div class="item">
-                                <div class="card">
-                                    <div class="inner">
-                                        <img class="image" src="/assets/images/project/logo/pixterest-logo.png"/>
-                                        <div class="track-label block-reveal">
-                                            <span class="reveal-text">TRACK 01</span>
-                                        </div>
-                                    </div>
+            </article>
+            <article id="career">
+                <div class="career-wrapper">
+                    <div class="career-container fade-up">
+                        <div class="window">
+                            <div class="inner-shadow-wrapper">
+                                <div class="title-bar">
+                                    <div class="button btn1"></div>
+                                    <div class="button btn2"></div>
+                                    <div class="button btn3"></div>
                                 </div>
-                            </div>
-                            <div class="item">
-                                <div class="card">
-                                    <div class="inner">
-                                        <img class="image" src="/assets/images/project/logo/pixterest-logo.png"
-                                             style="filter: grayscale(100) blur(6px);"/>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="card">
-                                    <div class="inner">
-                                        <img class="image"
-                                             src="/assets/images/project/logo/retro-portfolio-logo.jpg"/>
-                                        <div class="track-label block-reveal">
-                                            <span class="reveal-text">TRACK 02</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="card">
-                                    <div class="inner">
-                                        <img class="image" src="/assets/images/project/logo/retro-portfolio-logo.jpg"
-                                             style="filter: grayscale(100) blur(6px);"/>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="card">
-                                    <div class="inner">
-                                        <img class="image"
-                                             src="/assets/images/project/logo/readingMarathon-logo.jpg"/>
-                                        <div class="track-label block-reveal">
-                                            <span class="reveal-text">TRACK 03</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="card">
-                                    <div class="inner">
-                                        <img class="image" src="/assets/images/project/logo/readingMarathon-logo.jpg"
-                                             style="filter: grayscale(100) blur(6px);"/>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="card">
-                                    <div class="inner">
-                                        <img class="image"
-                                             src="/assets/images/project/logo/portfolio-logo.png"/>
-                                        <div class="track-label block-reveal">
-                                            <span class="reveal-text">TRACK 04</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="card">
-                                    <div class="inner">
-                                        <img class="image" src="/assets/images/project/logo/portfolio-logo.png"
-                                             style="filter: grayscale(100) blur(6px);"/>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="card">
-                                    <div class="inner">
-                                        <img class="image"
-                                             src="/assets/images/project/logo/movieQuiz-logo.png"/>
-                                        <div class="track-label block-reveal">
-                                            <span class="reveal-text">TRACK 05</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="card">
-                                    <div class="inner">
-                                        <img class="image" src="/assets/images/project/logo/movieQuiz-logo.png"
-                                             style="filter: grayscale(100) blur(6px);"/>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="right-area" data-site-url="https://pixterest.taeyong.dev/"
-                         data-github-url="https://github.com/taeyong-k/pixterest">
-                        <div class="gradient-border" id="box">
-                            <div class="container">
-                                <div class="slide"
-                                     style="background-image: url('/assets/images/project/pixterest/board.png');">
-
-                                </div>
-                                <div class="slide"
-                                     style="background-image: url('/assets/images/project/pixterest/pin.png');">
-
-                                </div>
-                                <div class="slide"
-                                     style="background-image: url('/assets/images/project/pixterest/home.png');">
-
-                                </div>
-                                <div class="slide"
-                                     style="background-image: url('/assets/images/project/pixterest/pin-more.png');">
-
-                                </div>
-                                <div class="slide"
-                                     style="background-image: url('/assets/images/project/pixterest/pin-edit.png');">
-
+                                <div class="content-box">
+                                    <div class="content-text">커리어</div>
+                                    <div class="underline"></div>
                                 </div>
                             </div>
                         </div>
                         <div class="info">
-                            <div class="header">
-                                <div class="title">
-                                    <h1></h1>
-                                </div>
-                                <div class="date">
-                                    <p></p>
-                                </div>
+                            <div class="title">포항신협본점·신용협동</div>
+                            <div class="date">2024.07 - 2024.12</div>
+                            <div class="tasks">
+                                <p class="task">금융 전산 시스템을 활용해 출납창구 업무를 수행하며 데이터 관리와 업무 효율화를 경험했고,
+                                    팀 단위 협업과 문제 해결을 통해 안정적인 시스템 운영 역량을 익혔습니다.</p>
                             </div>
-                            <div class="main">
-                                <div class="details">
-                                    <div class="type">
-                                        <div>
-                                            <h3>타입</h3>
-                                            <div>
-                                                <p></p>
-                                                <p></p>
-                                                <p></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="language">
-                                        <div>
-                                            <h3>언어/DB</h3>
-                                            <div>
-                                                <p></p>
-                                                <p></p>
-                                                <p></p>
-                                                <p></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="framework">
-                                        <div>
-                                            <h3>프레임워크/라이브러리</h3>
-                                            <div>
-                                                <p></p>
-                                                <p></p>
-                                                <p></p>
-                                                <p></p>
-                                                <p></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="etc">
-                                        <div>
-                                            <h3>ETC</h3>
-                                            <div>
-                                                <p></p>
-                                                <p></p>
-                                                <p></p>
-                                                <p></p>
-                                                <p></p>
-                                            </div>
-                                        </div>
-                                    </div>
+                        </div>
+                    </div>
+                    <div class="career-container fade-up">
+                        <div class="window">
+                            <div class="inner-shadow-wrapper">
+                                <div class="title-bar">
+                                    <div class="button btn1"></div>
+                                    <div class="button btn2"></div>
+                                    <div class="button btn3"></div>
                                 </div>
-                                <div class="feature">
-                                    <h3>주요 기능 및 특징</h3>
-                                    <ol>
-                                        <li></li>
-                                        <li></li>
-                                        <li></li>
-                                        <li></li>
-                                    </ol>
+                                <div class="content-box">
+                                    <div class="content-text">교육</div>
+                                    <div class="underline short"></div>
                                 </div>
                             </div>
                         </div>
-                        <div class="button-area">
-                            <button>보기</button>
-                            <button>깃 허브</button>
+                        <div class="info">
+                            <div class="title">코리아IT아카데미</div>
+                            <div class="date">2025.02 - 2025.08</div>
+                            <div class="tasks">
+                                <p class="task">
+                                    Spring MVC 기반의 백엔드 개발을 중심으로, 웹 서비스 구현에 필요한 전반적인 기술을 학습했습니다.
+                                    6일 단기 프로젝트부터 한 달간의 팀 프로젝트까지 다양한 규모의 과제를 수행하며,
+                                    설계와 개발은 물론 배포까지 실무에 가까운 경험을 쌓았습니다.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="career-container fade-up">
+                        <div class="window">
+                            <div class="inner-shadow-wrapper">
+                                <div class="title-bar">
+                                    <div class="button btn1"></div>
+                                    <div class="button btn2"></div>
+                                    <div class="button btn3"></div>
+                                </div>
+                                <div class="content-box">
+                                    <div class="content-text">교육</div>
+                                    <div class="underline short"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="info">
+                            <div class="title">코리아IT아카데미</div>
+                            <div class="date">2020.06 - 2021.07</div>
+                            <div class="tasks">
+                                <p class="task">
+                                    Java, Python, Linux, C/C++, 자료구조, CCNA, DBMS 등 기초 프로그래밍과 웹 보안 지식을 학습하며,
+                                    기본 문법 이해와 간단한 코드 작성 능력을 익혔습니다.
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </main>
-        </article>
+            </article>
+            <article id="skills">
+                <div class="skill-wrapper">
+                    <h2 class="title fade-up">skills</h2>
+                    <div class="skill-content">
+                        <ul class="skill-nav-list fade-up" id="skillNav">
+                            <li style="--clr:#2483ff;">
+                                <a href="#" data-category="languages">
+                                    <span>Languages</span>
+                                </a>
+                            </li>
+                            <li style="--clr:#fff200;">
+                                <a href="#" data-category="frontend">
+                                    <span>Frontend</span>
+                                </a>
+                            </li>
+                            <li style="--clr:#ff253f;">
+                                <a href="#" data-category="backend">
+                                    <span>Backend</span>
+                                </a>
+                            </li>
+                            <li style="--clr:#25d366;">
+                                <a href="#" data-category="database">
+                                    <span>Database</span>
+                                </a>
+                            </li>
+                            <li style="--clr:#f32ec8;">
+                                <a href="#" data-category="devOps">
+                                    <span>DevOps</span>
+                                </a>
+                            </li>
+                            <li style="--clr:#00bcd4;">
+                                <a href="#" data-category="tools">
+                                    <span>Tools</span>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="led-board fade-up">
+                            <div class="skill-board" id="skillLeft">
+                                <div class="skill-title">Languages</div>
+                                <div class="skill-container"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            <div id="project-title"
+                 style="height: 400px; font-size:40px; color: white; display: flex; align-items: center; justify-content: center;">
+                <h1 class="fade-up">프</h1>
+                <h1 class="fade-up">로</h1>
+                <h1 class="fade-up">젝</h1>
+                <h1 class="fade-up">트</h1>
+            </div>
+            <article id="projects">
+                <main>
+                    <div class="container">
+                        <div class="center">
+                            <div class="items">
+                                <div class="item">
+                                    <div class="card">
+                                        <div class="inner">
+                                            <img class="image" src="/assets/images/project/logo/pixterest-logo.png"/>
+                                            <div class="track-label block-reveal">
+                                                <span class="reveal-text">TRACK 01</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="card">
+                                        <div class="inner">
+                                            <img class="image" src="/assets/images/project/logo/pixterest-logo.png"
+                                                 style="filter: grayscale(100) blur(6px);"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="card">
+                                        <div class="inner">
+                                            <img class="image"
+                                                 src="/assets/images/project/logo/retro-portfolio-logo.jpg"/>
+                                            <div class="track-label block-reveal">
+                                                <span class="reveal-text">TRACK 02</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="card">
+                                        <div class="inner">
+                                            <img class="image"
+                                                 src="/assets/images/project/logo/retro-portfolio-logo.jpg"
+                                                 style="filter: grayscale(100) blur(6px);"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="card">
+                                        <div class="inner">
+                                            <img class="image"
+                                                 src="/assets/images/project/logo/readingMarathon-logo.jpg"/>
+                                            <div class="track-label block-reveal">
+                                                <span class="reveal-text">TRACK 03</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="card">
+                                        <div class="inner">
+                                            <img class="image"
+                                                 src="/assets/images/project/logo/readingMarathon-logo.jpg"
+                                                 style="filter: grayscale(100) blur(6px);"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="card">
+                                        <div class="inner">
+                                            <img class="image"
+                                                 src="/assets/images/project/logo/portfolio-logo.png"/>
+                                            <div class="track-label block-reveal">
+                                                <span class="reveal-text">TRACK 04</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="card">
+                                        <div class="inner">
+                                            <img class="image" src="/assets/images/project/logo/portfolio-logo.png"
+                                                 style="filter: grayscale(100) blur(6px);"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="card">
+                                        <div class="inner">
+                                            <img class="image"
+                                                 src="/assets/images/project/logo/movieQuiz-logo.png"/>
+                                            <div class="track-label block-reveal">
+                                                <span class="reveal-text">TRACK 05</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="card">
+                                        <div class="inner">
+                                            <img class="image" src="/assets/images/project/logo/movieQuiz-logo.png"
+                                                 style="filter: grayscale(100) blur(6px);"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="right-area" data-site-url="https://pixterest.taeyong.dev/"
+                             data-github-url="https://github.com/taeyong-k/pixterest">
+                            <div class="gradient-border" id="box">
+                                <div class="container">
+                                    <div class="slide"
+                                         style="background-image: url('/assets/images/project/pixterest/board.png');">
+
+                                    </div>
+                                    <div class="slide"
+                                         style="background-image: url('/assets/images/project/pixterest/pin.png');">
+
+                                    </div>
+                                    <div class="slide"
+                                         style="background-image: url('/assets/images/project/pixterest/home.png');">
+
+                                    </div>
+                                    <div class="slide"
+                                         style="background-image: url('/assets/images/project/pixterest/pin-more.png');">
+
+                                    </div>
+                                    <div class="slide"
+                                         style="background-image: url('/assets/images/project/pixterest/pin-edit.png');">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="info">
+                                <div class="header">
+                                    <div class="title">
+                                        <h1></h1>
+                                    </div>
+                                    <div class="date">
+                                        <p></p>
+                                    </div>
+                                </div>
+                                <div class="main">
+                                    <div class="details">
+                                        <div class="type">
+                                            <div>
+                                                <h3>타입</h3>
+                                                <div>
+                                                    <p></p>
+                                                    <p></p>
+                                                    <p></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="language">
+                                            <div>
+                                                <h3>언어/DB</h3>
+                                                <div>
+                                                    <p></p>
+                                                    <p></p>
+                                                    <p></p>
+                                                    <p></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="framework">
+                                            <div>
+                                                <h3>프레임워크/라이브러리</h3>
+                                                <div>
+                                                    <p></p>
+                                                    <p></p>
+                                                    <p></p>
+                                                    <p></p>
+                                                    <p></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="etc">
+                                            <div>
+                                                <h3>ETC</h3>
+                                                <div>
+                                                    <p></p>
+                                                    <p></p>
+                                                    <p></p>
+                                                    <p></p>
+                                                    <p></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="feature">
+                                        <h3>주요 기능 및 특징</h3>
+                                        <ol>
+                                            <li></li>
+                                            <li></li>
+                                            <li></li>
+                                            <li></li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="button-area">
+                                <button>보기</button>
+                                <button>깃 허브</button>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </article>
+        </main>
         <footer id="footer">
             <div id="myCanvas">
                 <canvas></canvas>
@@ -535,14 +539,12 @@
                             <feTurbulence baseFrequency="0.15" numOctaves="3"/>
                             <feDisplacementMap in="SourceGraphic" scale="3"/>
                         </filter>
-<!--                        <feTurbulence baseFrequency="0.525" numOctaves="7"/>-->
-<!--                        <feDisplacementMap in="SourceGraphic" scale="10.5"/>-->
                     </defs>
                 </svg>
             </div>
             <div id="copyright">© 2025. Kim Tae Yong. All rights reserved.</div>
         </footer>
-    </main>
+    </div>
 </div>
 </body>
 </html>

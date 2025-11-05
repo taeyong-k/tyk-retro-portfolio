@@ -1750,7 +1750,7 @@ window.addEventListener("DOMContentLoaded", () => {
     // 1️⃣ ScrollSmoother 초기화
     window.smoother = ScrollSmoother.create({
         wrapper: "#root",
-        content: "#main",
+        content: "#scroll-container",
         smooth: 2,
         effects: true,
     });

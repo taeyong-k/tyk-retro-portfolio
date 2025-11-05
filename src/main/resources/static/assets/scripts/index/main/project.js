@@ -993,10 +993,23 @@ let animationTriggered = false; // 애니메이션 실행 여부 플래그
 
 // 초기 설정 및 스크롤 이벤트 등록
 const init = () => {
+    const isMobile = window.innerWidth <= 800;
+
     gsap.set(images, {opacity: 0});
 
     const projectsSection = document.getElementById('projects');
     if (!projectsSection) return;
+
+    // 📱 모바일: 애니메이션 없이 바로 보이게
+    if (isMobile) {
+        gsap.set(images, { opacity: 1 });
+        const rightArea = document.querySelector(".right-area");
+        if (rightArea) {
+            gsap.set(rightArea, { opacity: 1, x: 0 });
+            gsap.set(".right-area .info > *", { opacity: 1, y: 0 });
+        }
+        return; // ❌ 모바일은 여기서 끝
+    }
 
     // IntersectionObserver 등록
     const observer = new IntersectionObserver(entries => {
@@ -1079,6 +1092,12 @@ const itemsContainer = document.querySelector(".items");
 
 // 프로젝트 이미지 원형 배치 및 애니메이션 실행
 const runAnimation = () => {
+    // ✅ 모바일에서는 모든 애니메이션 비활성화
+    if (window.innerWidth < 800) return;
+
+    // ✅ 툴바 이동 중이면 애니메이션 실행하지 않음
+    if (window.isScrollingToSection) return;
+
     window.AppState.isGalleryAnimating = true;
 
     // 새로운 애니메이션 시작 전에 혹시 이전 타임라인이 남아있다면 초기화
