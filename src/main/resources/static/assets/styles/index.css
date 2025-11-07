@@ -1608,6 +1608,23 @@
     padding: clamp(75px, 18vw, 170px) clamp(10px, 4vw, 200px) clamp(50px, 10vw, 70px) clamp(10px, 8vw, 350px);
   }
 }
+@media (max-height: 900px) {
+  #projects .container .right-area {
+    padding-top: clamp(60px, 8vh, 110px);
+    padding-bottom: clamp(40px, 8vh, 50px);
+  }
+}
+@media (max-height: 800px) {
+  #projects .container .right-area {
+    padding-top: clamp(15px, 4vh, 80px);
+    padding-bottom: clamp(30px, 4vh, 40px);
+  }
+}
+@media (max-height: 700px) {
+  #projects .container .right-area {
+    padding-top: clamp(5px, 1vh, 80px);
+  }
+}
 #projects .container .right-area #box {
   align-items: center;
   display: flex;
@@ -1890,7 +1907,7 @@
 #projects .card {
   display: block;
   width: clamp(260px, 35vw, 380px);
-  height: 380px;
+  height: clamp(260px, 40vh, 380px);
   color: #fff;
   user-select: none;
   border-radius: 17px;

@@ -97,6 +97,17 @@
       @media (max-width: 850px) {
         padding: clamp(75px, 18vw, 170px) clamp(10px, 4vw, 200px) clamp(50px, 10vw, 70px) clamp(10px, 8vw, 350px);
       }
+      @media (max-height: 900px) {
+        padding-top: clamp(60px, 8vh, 110px);
+        padding-bottom: clamp(40px, 8vh, 50px);
+      }
+      @media (max-height: 800px) {
+        padding-top: clamp(15px, 4vh, 80px);
+        padding-bottom: clamp(30px, 4vh, 40px);
+      }
+      @media (max-height: 700px) {
+        padding-top: clamp(5px, 1vh, 80px);
+      }
       // 800px에서 모바일 대응 (card 삭제)
 
       #box {
@@ -330,9 +341,8 @@
 
   .card {
     display: block;
-    //width: 380px;
     width: clamp(260px, 35vw, 380px);
-    height: 380px;
+    height: clamp(260px, 40vh, 380px);
     color: #fff;
     user-select: none;
     border-radius: 17px;
@@ -341,7 +351,6 @@
     position: relative;
 
     background: linear-gradient(135deg, #2d2724, #0f1c2c); // 다크 브라운: 무난
-    //background: linear-gradient(135deg, #252b22, #0f1c2c); // 다크 올리브: 오묘함
     padding: 10px; /* 테두리 두께 */
     box-sizing: border-box;
 
