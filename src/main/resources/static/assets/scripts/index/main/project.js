@@ -991,6 +991,42 @@ const degree = 360 / total;
 
 let animationTriggered = false; // 애니메이션 실행 여부 플래그
 
+// helper: 섹션을 스무스 스크롤로 뷰포트 상단에 맞춘 뒤 콜백 실행
+const scrollAndAlignThenRun = (el, cb) => {
+    if (!el) return cb();
+
+    const targetTop = 0;
+    const tolerance = 3;
+    let finished = false;
+
+    const tryFinish = () => {
+        const rect = el.getBoundingClientRect();
+        if (Math.abs(rect.top - targetTop) <= tolerance) {
+            if (finished) return;
+            finished = true;
+            window.removeEventListener('scroll', onScroll);
+            clearInterval(poll);
+            setTimeout(() => cb(), 60);
+        }
+    };
+
+    const onScroll = () => tryFinish();
+
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    const poll = setInterval(tryFinish, 40);
+
+    setTimeout(() => {
+        if (finished) return;
+        finished = true;
+        window.removeEventListener('scroll', onScroll);
+        clearInterval(poll);
+        cb();
+    }, 900);
+};
+
+
 // 초기 설정 및 스크롤 이벤트 등록
 const init = () => {
     const isMobile = window.innerWidth <= 800;
@@ -1014,15 +1050,18 @@ const init = () => {
     // IntersectionObserver 등록
     const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
-            if (entry.intersectionRatio >= 0.99 && !animationTriggered) {
+            const ratio = entry.intersectionRatio;
+            if (ratio >= 0.85 && !animationTriggered) {
                 animationTriggered = true;
-                runAnimation();
-            } else if (entry.intersectionRatio < 0.01 && animationTriggered) {
+                scrollAndAlignThenRun(projectsSection, runAnimation);
+            } else if (ratio < 0.05 && animationTriggered) {
                 resetAnimation();
                 animationTriggered = false;
             }
         });
     }, {threshold: Array.from({length: 101}, (_, i) => i / 100)});
+
+
     observer.observe(projectsSection);
 
     // 초기 강제 체크 (로드 직후 스크롤로 내려도 감지)
@@ -1037,13 +1076,12 @@ const checkProjectSection = () => {
 
     if (!animationTriggered && rect.top <= 0 && rect.bottom >= window.innerHeight) {
         animationTriggered = true;
-        runAnimation();
+        scrollAndAlignThenRun(projectsSection, runAnimation);
     } else if (animationTriggered && rect.bottom < window.innerHeight * 0.01) {
         resetAnimation();
         animationTriggered = false;
     }
 };
-
 
 let galleryAnimationTimeline = null; // 갤러리 애니메이션 타임라인을 저장할 변수
 
