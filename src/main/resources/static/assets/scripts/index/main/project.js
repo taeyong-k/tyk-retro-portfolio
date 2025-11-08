@@ -1221,6 +1221,8 @@ const runAnimation = () => {
         galleryAnimationTimeline.to(
             image,
             {
+                x: 0,   // 갤러리가 최종적으로 정착할 위치 (test중!!!!★★★★★★★★★★★★★★★★★★★★★★★★★★★)
+                y: 0,
                 transformOrigin: "-60vh center",
                 rotation:
                     index > imageSize / 2 ? degree * (imageSize - index) : rotationAngle,
@@ -1497,3 +1499,4 @@ projectCloseBtn.addEventListener("click", () => {
     projectModal.classList.remove("show");
     if (window.smoother) window.smoother.paused(false); // ✅ 스크롤 재개
 });
+

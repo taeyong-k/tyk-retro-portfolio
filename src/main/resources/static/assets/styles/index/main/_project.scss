@@ -72,6 +72,8 @@
       height: 100vh;
       // top / right / bottom / left
       padding: clamp(75px, 10vw, 125px) clamp(10px, 5vw, 200px) clamp(50px, 10vw, 60px) clamp(10px, 20vw, 350px);
+      will-change: transform;
+      transform: translateZ(0);
       overflow: hidden;
       pointer-events: none;
       opacity: 0;
@@ -98,6 +100,10 @@
         padding: clamp(75px, 18vw, 170px) clamp(10px, 4vw, 200px) clamp(50px, 10vw, 70px) clamp(10px, 8vw, 350px);
       }
       @media (max-height: 900px) {
+        padding-top: clamp(60px, 10vh, 110px);
+        padding-bottom: clamp(40px, 8vh, 50px);
+      }
+      @media (max-height: 850px) {
         padding-top: clamp(60px, 8vh, 110px);
         padding-bottom: clamp(40px, 8vh, 50px);
       }
