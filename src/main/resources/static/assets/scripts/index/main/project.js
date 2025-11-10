@@ -1061,11 +1061,9 @@ const init = () => {
         });
     }, {threshold: Array.from({length: 101}, (_, i) => i / 100)});
 
-
     observer.observe(projectsSection);
 
-    // 초기 강제 체크 (로드 직후 스크롤로 내려도 감지)
-    setTimeout(checkProjectSection, 100);
+    setTimeout(checkProjectSection, 100);   // 초기 강제 체크 (로드 직후 스크롤로 내려도 감지)
 };
 
 // 프로젝트 섹션 위치 강제 체크
@@ -1346,7 +1344,6 @@ window.updateRightArea = function (currentRotation, isFromDrag = false) {
         }
     }
 }
-
 
 // 화면 중앙에 있는 right-area의 track-label만 애니메이션 실행
 function animateTrackLabels() {
