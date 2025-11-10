@@ -1183,6 +1183,8 @@ const runAnimation = () => {
         const rotation = index > imageSize - 3 ? 0 : sign * value;
 
         gsap.set(image, {
+            x: 0,
+            y: 0,
             rotation: rotation,
             scale: 0.5,
         });
@@ -1221,7 +1223,7 @@ const runAnimation = () => {
         galleryAnimationTimeline.to(
             image,
             {
-                x: 0,   // 갤러리가 최종적으로 정착할 위치 (test중!!!!★★★★★★★★★★★★★★★★★★★★★★★★★★★)
+                x: 0,
                 y: 0,
                 transformOrigin: "-60vh center",
                 rotation:
