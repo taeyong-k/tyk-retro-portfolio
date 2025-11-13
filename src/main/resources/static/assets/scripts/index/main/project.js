@@ -969,6 +969,1150 @@
 // ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
 // ★★★★★★★★★★★★★★★★★★★★★★★★★프로젝트 섹션 수정 -완★★★★★★★★★★★★★★★★★★★★★★★★★
 // ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+// import {projectsData} from './projectData.js';
+//
+// window.AppState = window.AppState || {
+//     isScrolling: false,
+//     currentRotation: 0,
+//     activeProjectIndex: 0,
+//     isGalleryAnimating: false,
+//     hasInitialGalleryAnimationRun: false,
+// };
+//
+// document.addEventListener("DOMContentLoaded", () => {
+//     updateRightArea(0, false); // 최초 세팅
+//     init();                    // 스크롤 감지 및 애니메이션 준비
+// });
+//
+// const images = gsap.utils.toArray(".item");
+// const imageSize = images.length;
+// const total = images.length;
+// const degree = 360 / total;
+//
+// let animationTriggered = false; // 애니메이션 실행 여부 플래그
+//
+// // helper: 섹션을 스무스 스크롤로 뷰포트 상단에 맞춘 뒤 콜백 실행
+// const scrollAndAlignThenRun = (el, cb) => {
+//     if (!el) return cb();
+//
+//     const targetTop = 0;
+//     const tolerance = 3;
+//     let finished = false;
+//
+//     const tryFinish = () => {
+//         const rect = el.getBoundingClientRect();
+//         if (Math.abs(rect.top - targetTop) <= tolerance) {
+//             if (finished) return;
+//             finished = true;
+//             window.removeEventListener('scroll', onScroll);
+//             clearInterval(poll);
+//             setTimeout(() => cb(), 60);
+//         }
+//     };
+//
+//     const onScroll = () => tryFinish();
+//
+//     el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+//     window.addEventListener('scroll', onScroll, { passive: true });
+//
+//     const poll = setInterval(tryFinish, 40);
+//
+//     setTimeout(() => {
+//         if (finished) return;
+//         finished = true;
+//         window.removeEventListener('scroll', onScroll);
+//         clearInterval(poll);
+//         cb();
+//     }, 900);
+// };
+//
+//
+// // 초기 설정 및 스크롤 이벤트 등록
+// const init = () => {
+//     // const isMobile = window.innerWidth <= 800;
+//
+//     gsap.set(images, {opacity: 0});
+//
+//     const projectsSection = document.getElementById('projects');
+//     if (!projectsSection) return;
+//
+//     // // 📱 모바일: 애니메이션 없이 바로 보이게
+//     // if (isMobile) {
+//     //     gsap.set(images, { opacity: 1 });
+//     //     const rightArea = document.querySelector(".right-area");
+//     //     if (rightArea) {
+//     //         gsap.set(rightArea, { opacity: 1, x: 0 });
+//     //         gsap.set(".right-area .info > *", { opacity: 1, y: 0 });
+//     //     }
+//     //     return; // ❌ 모바일은 여기서 끝
+//     // }
+//
+//     // IntersectionObserver 등록
+//     const observer = new IntersectionObserver(entries => {
+//         entries.forEach(entry => {
+//             const ratio = entry.intersectionRatio;
+//             if (ratio >= 0.85 && !animationTriggered) {
+//                 animationTriggered = true;
+//                 scrollAndAlignThenRun(projectsSection, runAnimation);
+//             } else if (ratio < 0.05 && animationTriggered) {
+//                 resetAnimation();
+//                 animationTriggered = false;
+//             }
+//         });
+//     }, {threshold: Array.from({length: 101}, (_, i) => i / 100)});
+//
+//     observer.observe(projectsSection);
+//
+//     setTimeout(checkProjectSection, 100);   // 초기 강제 체크 (로드 직후 스크롤로 내려도 감지)
+// };
+//
+// // 프로젝트 섹션 위치 강제 체크
+// const checkProjectSection = () => {
+//     const projectsSection = document.getElementById('projects');
+//     if (!projectsSection) return;
+//     const rect = projectsSection.getBoundingClientRect();
+//
+//     if (!animationTriggered && rect.top <= 0 && rect.bottom >= window.innerHeight) {
+//         animationTriggered = true;
+//         scrollAndAlignThenRun(projectsSection, runAnimation);
+//     } else if (animationTriggered && rect.bottom < window.innerHeight * 0.01) {
+//         resetAnimation();
+//         animationTriggered = false;
+//     }
+// };
+//
+// let galleryAnimationTimeline = null; // 갤러리 애니메이션 타임라인을 저장할 변수
+//
+// // 애니메이션 상태 초기화 함수
+// const resetAnimation = () => {
+//     if (galleryAnimationTimeline) {
+//         galleryAnimationTimeline.kill(); // 특정 타임라인만 완전히 중지
+//         galleryAnimationTimeline = null; // 참조 초기화
+//     }
+//
+//     // 모든 애니메이션 타임라인 중지 및 초기화
+//     gsap.killTweensOf(images);
+//
+//     // 오른쪽 영역 관련 모든 애니메이션 중지
+//     const rightArea = document.querySelector(".right-area");
+//     const infoItems = rightArea?.querySelectorAll(".info > *") || [];
+//
+//     gsap.killTweensOf(rightArea);
+//     gsap.killTweensOf(infoItems);
+//
+//     // 이미지 상태 초기화
+//     gsap.set(images, {
+//         opacity: 0,
+//         x: 0,
+//         y: 0,
+//         rotation: 0,
+//         scale: 1,
+//         transformOrigin: "center center"
+//     });
+//
+//     // 오른쪽 영역 초기화
+//     if (rightArea) {
+//         gsap.set(rightArea, {opacity: 0, x: 50});
+//         gsap.set(infoItems, {opacity: 0, y: 20});
+//     }
+//
+//     // items 컨테이너 회전값 강제 리셋 (항상 첫 프로젝트가 중앙으로 오게)
+//     gsap.set(".items", {rotation: 0});
+//
+//     // ➤ track-label 초기화 추가
+//     const trackLabels = document.querySelectorAll('.track-label');
+//     trackLabels.forEach(label => label.classList.remove('animate'));
+// };
+//
+// const itemsContainer = document.querySelector(".items");
+//
+// // 프로젝트 이미지 원형 배치 및 애니메이션 실행
+// const runAnimation = () => {
+//     // ✅ 모바일에서는 모든 애니메이션 비활성화
+//     if (window.innerWidth < 800) return;
+//
+//     // ✅ 툴바 이동 중이면 애니메이션 실행하지 않음
+//     if (window.isScrollingToSection) return;
+//
+//     window.AppState.isGalleryAnimating = true;
+//
+//     // 새로운 애니메이션 시작 전에 혹시 이전 타임라인이 남아있다면 초기화
+//     if (galleryAnimationTimeline) {
+//         galleryAnimationTimeline.kill();
+//         galleryAnimationTimeline = null;
+//     }
+//
+//     itemsContainer.classList.remove("hover-enabled");   // 애니메이션 시작 전에는 hover 비활성화
+//     updateRightArea(0, false); // 첫 프로젝트 기준, 실제 데이터 바로 세팅
+//     gsap.set(".right-area", {opacity:0, x:50}); // 완전히 숨김 상태에서 시작
+//
+//     if (window.smoother) window.smoother.paused(true);  // ➤ 스크롤 잠금
+//
+//     galleryAnimationTimeline = gsap.timeline({
+//         onComplete: () => {
+//             // ✅ 항상 첫 번째 프로젝트(Pixterest)로 초기화
+//             previousActiveIndex = 0;
+//
+//             // 현재 중앙 트랙 index로 previousActiveIndex 초기화
+//             const centerRotation = 0; // 초기 중앙 기준 회전값
+//             const snapUnit = degree * 2;
+//             previousActiveIndex = Math.round((centerRotation % 360) / snapUnit);
+//             window.AppState.hasInitialGalleryAnimationRun = true;
+//
+//             itemsContainer.classList.add("hover-enabled");  // hover 활성화
+//
+//
+//             setTimeout(() => {
+//                 if (window.smoother) window.smoother.paused(false);
+//             }, 300); // 0.3초 안정화 시간후, 스크롤 다시 활성화
+//
+//             animateTrackLabels();
+//
+//             window.AppState.isGalleryAnimating = false;
+//         }
+//     });
+//
+//     images.forEach((image, index) => {
+//         gsap.set(image, {opacity: 1});
+//
+//         // 초기 회전 각도 및 크기 설정
+//         const sign = Math.floor((index / 2) % 2) ? 1 : -1;
+//         const value = Math.floor((index + 4) / 4) * 4;
+//         const rotation = index > imageSize - 3 ? 0 : sign * value;
+//
+//         gsap.set(image, {
+//             x: 0,
+//             y: 0,
+//             rotation: rotation,
+//             scale: 0.5,
+//         });
+//
+//         // 이미지가 화면 밖에서 날아오는 애니메이션
+//         galleryAnimationTimeline.from(
+//             image,
+//             {
+//                 x: 0,
+//                 y: index % 2
+//                     ? -window.innerHeight - image.clientHeight * 4
+//                     : window.innerHeight + image.clientHeight * 4,
+//                 rotation: index % 2 ? 200 : -200,
+//                 scale: 4,
+//                 opacity: 1,
+//                 ease: "power4.out",
+//                 duration: 1,
+//                 delay: 0.15 * Math.floor(index / 2),
+//             },
+//             0
+//         );
+//
+//         let rotationAngle = -index * degree;
+//
+//         // 최종 크기를 1로 복원
+//         galleryAnimationTimeline.to(
+//             image,
+//             {
+//                 scale: 1,
+//                 duration: 0,
+//             },
+//             0.15 * (imageSize / 2 - 1) + 1
+//         );
+//
+//         // 원형 배치로 정렬하는 애니메이션
+//         galleryAnimationTimeline.to(
+//             image,
+//             {
+//                 x: 0,
+//                 y: 0,
+//                 transformOrigin: "-60vh center",
+//                 rotation:
+//                     index > imageSize / 2 ? degree * (imageSize - index) : rotationAngle,
+//                 duration: 1,
+//                 ease: "power1.out",
+//             },
+//             0.15 * (imageSize / 2 - 1) + 1
+//         );
+//     });
+//
+//     // ➤ 오른쪽 영역 등장 애니메이션
+//     galleryAnimationTimeline.fromTo(
+//         ".right-area",                  // 애니메이션 적용 대상
+//         {opacity: 0, x: 50, pointerEvents: "none"},          // 시작 상태: 투명 + 오른쪽으로 50px 이동
+//         {opacity: 1, x: 0, duration: 0.8, ease: "power2.out", pointerEvents: "auto"}, // 종료 상태: 불투명 + 원래 위치
+//         "-=0.5"                         // 타이밍: 이전 애니메이션 끝나기 0.5초 전에 시작
+//     );
+//
+//     // ➤ 오른쪽 내부 정보 stagger 등장
+//     galleryAnimationTimeline.fromTo(
+//         ".right-area .info > *",         // 오른쪽 영역 info 하위 요소들을 아래에서 위로 순차적으로 나타나게 함
+//         {y: 20, opacity: 0},           // 시작 상태: 아래로 20px 이동 + 투명
+//         {y: 0, opacity: 1, duration: 0.6, stagger: 0.1, ease: "power2.out"}, // 종료 상태: 원래 위치 + 보이게, 0.6초, 0.1초 간격, 자연스러운 감속
+//         "-=0.3"                          // 이전 애니메이션 끝나기 0.3초 전에 시작
+//     );
+// };
+//
+// // 초기 실행
+// init(); // 스크롤 감지 및 애니메이션 준비
+//
+// let previousActiveIndex = null; // 마지막으로 표시된 프로젝트 인덱스
+//
+// window.updateRightArea = function (currentRotation, isFromDrag = false) {
+//     // 문자열이면 숫자로 변환
+//     if (typeof currentRotation === "string") {
+//         currentRotation = parseFloat(currentRotation);
+//     }
+//
+//     const snapUnit = degree * 2; // 한 트랙 당 회전 각도
+//     const totalTracks = total / 2;
+//
+//     // 트랙 인덱스 계산
+//     let activeIndex = Math.round((currentRotation % 360) / snapUnit);
+//     if (activeIndex < 0) activeIndex += totalTracks;
+//
+//     const isSameTrack = activeIndex === previousActiveIndex;
+//
+//     previousActiveIndex = activeIndex;
+//     if (isFromDrag && isSameTrack) return;
+//
+//     const projectData = projectsData[activeIndex];
+//     const rightArea = document.querySelector(".right-area");
+//
+//     if (!projectData || !rightArea) {
+//         return;
+//     }
+//
+//     // ✅ DOM 갱신
+//     if (rightArea.querySelector(".title h1").textContent !== projectData.title) {
+//         rightArea.querySelector(".title h1").textContent = projectData.title;
+//     }
+//     if (rightArea.querySelector(".date p").textContent !== projectData.date) {
+//         rightArea.querySelector(".date p").textContent = projectData.date;
+//     }
+//
+//     const updateInnerHTML = (containerSelector, dataArray) => {
+//         const container = rightArea.querySelector(containerSelector);
+//         if (!container) return;
+//         const newHTML = dataArray.map(d => `<p>${d}</p>`).join("");
+//         if (container.innerHTML !== newHTML) container.innerHTML = newHTML;
+//     }
+//
+//     updateInnerHTML(".type div div", projectData.type);
+//     updateInnerHTML(".language div div", projectData.language);
+//     updateInnerHTML(".framework div div", projectData.framework);
+//     updateInnerHTML(".etc div div", projectData.etc);
+//
+//     const featureList = rightArea.querySelector(".feature ol");
+//     if (featureList) {
+//         const newHTML = projectData.features.map(f => `<li>${f}</li>`).join("");
+//         if (featureList.innerHTML !== newHTML) featureList.innerHTML = newHTML;
+//     }
+//
+//     const slideContainer = rightArea.querySelector(".container");
+//     if (slideContainer) {
+//         const newSlidesHTML = projectData.slides
+//             .map(slide => `<div class="slide" style="background-image:url('${slide}')"></div>`)
+//             .join("");
+//         if (slideContainer.innerHTML !== newSlidesHTML) {
+//             slideContainer.innerHTML = newSlidesHTML;
+//             slidesPlugin();
+//         }
+//     }
+//
+//     rightArea.dataset.siteUrl = projectData.siteUrl;
+//     rightArea.dataset.githubUrl = projectData.githubUrl;
+//
+//     if (window.AppState.hasInitialGalleryAnimationRun && !window.AppState.isGalleryAnimating) {
+//         animateTrackLabels();
+//     }
+//
+//     if (isFromDrag) {
+//         const infoItems = rightArea.querySelectorAll(".info > *");
+//         const rightTimeline = gsap.timeline();
+//
+//         // ✅ 수정: 갤러리 애니메이션이 끝난 경우만 실행
+//         if (!window.AppState.isGalleryAnimating) {
+//             rightTimeline.fromTo(
+//                 rightArea,
+//                 {opacity: 0, x: 50, pointerEvents: "none"},
+//                 {opacity: 1, x: 0, duration: 1.5, ease: "power3.out", pointerEvents: "auto"}
+//             );
+//             rightTimeline.fromTo(
+//                 infoItems,
+//                 {y: 20, opacity: 0},
+//                 {y: 0, opacity: 1, duration: 1, stagger: 0.2, ease: "power3.out"},
+//                 "-=1.2"
+//             );
+//         }
+//     }
+// }
+//
+// // 화면 중앙에 있는 right-area의 track-label만 애니메이션 실행
+// function animateTrackLabels() {
+//     const trackLabels = document.querySelectorAll('.track-label');
+//     const centerX = window.innerWidth / 2;
+//
+//     let closestLabel = null;
+//     let minDistance = Infinity;
+//
+//     trackLabels.forEach(label => {
+//         const rect = label.getBoundingClientRect();
+//         const labelCenter = rect.left + rect.width / 2;
+//         const distance = Math.abs(centerX - labelCenter);
+//
+//         if (distance < minDistance) {
+//             minDistance = distance;
+//             closestLabel = label;
+//         }
+//     });
+//
+//     // 모든 라벨에서 animate 제거
+//     trackLabels.forEach(label => label.classList.remove('animate'));
+//
+//     // 화면 중앙에 있는 라벨만 animate 적용
+//     if (closestLabel) {
+//         closestLabel.classList.add('animate');
+//     }
+// }
+//
+//
+// // GSAP 이미지 슬라이드
+// function slidesPlugin() {
+//     const projects = document.querySelectorAll(".right-area");
+//
+//     projects.forEach((project) => {
+//         const slides = project.querySelectorAll(".slide");
+//
+//         // 초기 활성화 상태 (3번째 슬라이드)
+//         if (slides.length > 2) {
+//             slides.forEach(slide => slide.classList.remove("active"));
+//             slides[2].classList.add("active");
+//         }
+//
+//         slides.forEach((slide) => {
+//             slide.replaceWith(slide.cloneNode(true)); // 이벤트 초기화
+//         });
+//
+//         // 이벤트 재설정
+//         project.querySelectorAll(".slide").forEach((slide) => {
+//             slide.addEventListener("click", () => {
+//                 if (slide.classList.contains("active")) {
+//                     openModal(slide);
+//                     return;
+//                 }
+//                 project.querySelectorAll(".slide").forEach(s => s.classList.remove("active"));
+//                 slide.classList.add("active");
+//             });
+//         });
+//     });
+// }
+//
+//
+// // ✅ 최초 실행
+// slidesPlugin();
+//
+//
+// // 모달 열기 함수
+// function openModal(slide) {
+//     const modal = document.querySelector(".image-modal");
+//     const modalImg = modal.querySelector("img");
+//     const closeBtn = modal.querySelector(".close-button");
+//
+//     // 슬라이드 배경 이미지를 모달에 적용
+//     const bg = slide.style.backgroundImage;
+//     modalImg.src = bg.slice(5, -2); // url("...") 형태니까 자르기
+//
+//     modal.classList.add("show");
+//     if (window.smoother) window.smoother.paused(true); // 스크롤 잠금
+//
+//     // 버튼 폭 맞추는 함수
+//     const updateButtonWidth = () => {
+//         closeBtn.style.width = modalImg.clientWidth + "px";
+//     };
+//
+//     // 이미지 로드 후 초기 폭 설정
+//     modalImg.onload = updateButtonWidth;
+//
+//     // 리사이즈 시 폭 자동 업데이트
+//     window.addEventListener("resize", updateButtonWidth);
+//
+//     // 모달 닫기 함수
+//     const closeModal = () => {
+//         modal.classList.remove("show");
+//         if (window.smoother) window.smoother.paused(false); // ✅ 스크롤 재개
+//         window.removeEventListener("resize", updateButtonWidth); // 이벤트 제거
+//     };
+//
+//     // 모달 외부 클릭 시 닫기
+//     modal.addEventListener("click", (e) => {
+//         if (e.target === modal) closeModal();
+//     });
+//
+//     // 닫기 버튼 클릭 시
+//     closeBtn.addEventListener("click", closeModal);
+// }
+//
+//
+// const projectModal = document.getElementById("modal");
+// const modalMessage = document.getElementById("modalMessage");
+// const projectCloseBtn = projectModal.querySelector(".close-button");
+//
+// // 모든 프로젝트 버튼 처리
+// document.querySelectorAll(".right-area").forEach((project) => {
+//     const viewBtn = project.querySelector(".button-area button:nth-child(1)");
+//     const githubBtn = project.querySelector(".button-area button:nth-child(2)");
+//
+//     // "보기" 버튼 클릭
+//     viewBtn.addEventListener("click", () => {
+//         const siteUrl = project.dataset.siteUrl;
+//         if (siteUrl && siteUrl !== "#" && siteUrl !== "local") {
+//             window.open(siteUrl, "_blank");
+//         } else {
+//             modalMessage.innerHTML = "🚧 이 프로젝트는 현재 배포되지 않았습니다.<br>GitHub에서 코드를 확인하실 수 있습니다.";
+//             projectModal.classList.add("show");
+//             if (window.smoother) window.smoother.paused(true); // 스크롤 잠금
+//         }
+//     });
+//
+//     // "GitHub" 버튼 클릭
+//     githubBtn.addEventListener("click", () => {
+//         const githubUrl = project.dataset.githubUrl;
+//         if (githubUrl && githubUrl !== "#") {
+//             window.open(githubUrl, "_blank");
+//         } else {
+//             modalMessage.innerHTML = "🚧 GitHub 링크가 준비되지 않았습니다.";
+//             projectModal.classList.add("show");
+//             if (window.smoother) window.smoother.paused(true); // 스크롤 잠금
+//         }
+//     });
+// });
+//
+// // 모달 닫기: 외부 클릭
+// projectModal.addEventListener("click", (e) => {
+//     if (e.target === projectModal) {
+//         projectModal.classList.remove("show");
+//         if (window.smoother) window.smoother.paused(false); // ✅ 스크롤 재개
+//     }
+// });
+//
+// // 닫기 버튼 클릭
+// projectCloseBtn.addEventListener("click", () => {
+//     projectModal.classList.remove("show");
+//     if (window.smoother) window.smoother.paused(false); // ✅ 스크롤 재개
+// });
+
+
+// 수정해봣는데 뭔가 자잘자잘한 문제가 많음................. 되긴함.... 오류가 많긴해도 되긴해..ㅋㅋ;;
+// import {projectsData} from './projectData.js';
+//
+// const debounce = (func, delay) => {
+//     let timeout;
+//     return function (...args) {
+//         const context = this;
+//         clearTimeout(timeout);
+//         timeout = setTimeout(() => func.apply(context, args), delay);
+//     };
+// };
+//
+// window.AppState = window.AppState || {
+//     isScrolling: false,
+//     currentRotation: 0,
+//     activeProjectIndex: 0,
+//     isGalleryAnimating: false,
+//     hasInitialGalleryAnimationRun: false,
+//     isMobile: false,
+// };
+//
+// let previousActiveIndex = null; // 마지막으로 표시된 프로젝트 인덱스
+//
+// window.updateRightArea = function (currentRotation, isFromDrag = false) {
+//     // 문자열이면 숫자로 변환
+//     if (typeof currentRotation === "string") {
+//         currentRotation = parseFloat(currentRotation);
+//     }
+//
+//     const snapUnit = degree * 2; // 한 트랙 당 회전 각도
+//     const totalTracks = total / 2;
+//
+//     // 트랙 인덱스 계산
+//     let activeIndex = Math.round((currentRotation % 360) / snapUnit);
+//     if (activeIndex < 0) activeIndex += totalTracks;
+//
+//     const isSameTrack = activeIndex === previousActiveIndex;
+//
+//     previousActiveIndex = activeIndex;
+//     if (isFromDrag && isSameTrack) return;
+//
+//     const projectData = projectsData[activeIndex];
+//     const rightArea = document.querySelector(".right-area");
+//
+//     if (!projectData || !rightArea) {
+//         return;
+//     }
+//
+//     // ✅ DOM 갱신
+//     if (rightArea.querySelector(".title h1").textContent !== projectData.title) {
+//         rightArea.querySelector(".title h1").textContent = projectData.title;
+//     }
+//     if (rightArea.querySelector(".date p").textContent !== projectData.date) {
+//         rightArea.querySelector(".date p").textContent = projectData.date;
+//     }
+//
+//     const updateInnerHTML = (containerSelector, dataArray) => {
+//         const container = rightArea.querySelector(containerSelector);
+//         if (!container) return;
+//         const newHTML = dataArray.map(d => `<p>${d}</p>`).join("");
+//         if (container.innerHTML !== newHTML) container.innerHTML = newHTML;
+//     }
+//
+//     updateInnerHTML(".type div div", projectData.type);
+//     updateInnerHTML(".language div div", projectData.language);
+//     updateInnerHTML(".framework div div", projectData.framework);
+//     updateInnerHTML(".etc div div", projectData.etc);
+//
+//     const featureList = rightArea.querySelector(".feature ol");
+//     if (featureList) {
+//         const newHTML = projectData.features.map(f => `<li>${f}</li>`).join("");
+//         if (featureList.innerHTML !== newHTML) featureList.innerHTML = newHTML;
+//     }
+//
+//     const slideContainer = rightArea.querySelector(".container");
+//     if (slideContainer) {
+//         const newSlidesHTML = projectData.slides
+//             .map(slide => `<div class="slide" style="background-image:url('${slide}')"></div>`)
+//             .join("");
+//         if (slideContainer.innerHTML !== newSlidesHTML) {
+//             slideContainer.innerHTML = newSlidesHTML;
+//             slidesPlugin();
+//         }
+//     }
+//
+//     rightArea.dataset.siteUrl = projectData.siteUrl;
+//     rightArea.dataset.githubUrl = projectData.githubUrl;
+//
+//     if (window.AppState.hasInitialGalleryAnimationRun && !window.AppState.isGalleryAnimating) {
+//         animateTrackLabels();
+//     }
+//
+//     if (isFromDrag) {
+//         const infoItems = rightArea.querySelectorAll(".info > *");
+//         const rightTimeline = gsap.timeline();
+//
+//         // ✅ 수정: 갤러리 애니메이션이 끝난 경우만 실행
+//         if (!window.AppState.isGalleryAnimating) {
+//             rightTimeline.fromTo(
+//                 rightArea,
+//                 {opacity: 0, x: 50, pointerEvents: "none"},
+//                 {opacity: 1, x: 0, duration: 1.5, ease: "power3.out", pointerEvents: "auto"}
+//             );
+//             rightTimeline.fromTo(
+//                 infoItems,
+//                 {y: 20, opacity: 0},
+//                 {y: 0, opacity: 1, duration: 1, stagger: 0.2, ease: "power3.out"},
+//                 "-=1.2"
+//             );
+//         }
+//     }
+// }
+//
+// document.addEventListener("DOMContentLoaded", () => {
+//     window.AppState.isMobile = window.innerWidth <= 800;    // 모바일 대응
+//     gsap.set(".items", {opacity: 0, visibility: "hidden"}); // 최초 로드시, 갤러리 숨기기
+//
+//     handleResponsiveDisplay(); // 반응형 디스플레이 설정 호출
+//     updateRightArea(0, false); // 최초 세팅
+//     init();                    // 스크롤 감지 및 애니메이션 준비
+// });
+//
+// const images = gsap.utils.toArray(".item");
+// const imageSize = images.length;
+// const total = images.length;
+// const degree = 360 / total;
+//
+// let animationTriggered = false; // 애니메이션 실행 여부 플래그
+//
+// const scrollAndAlignThenRun = (el, cb) => {
+//     if (!el) return cb();
+//
+//     const targetTop = 0;
+//     const tolerance = 3;
+//     let finished = false;
+//
+//     const tryFinish = () => {
+//         const rect = el.getBoundingClientRect();
+//         if (Math.abs(rect.top - targetTop) <= tolerance) {
+//             if (finished) return;
+//             finished = true;
+//             window.removeEventListener('scroll', onScroll);
+//             clearInterval(poll);
+//             setTimeout(() => cb(), 60);
+//         }
+//     };
+//
+//     const onScroll = () => tryFinish();
+//
+//     el.scrollIntoView({behavior: 'smooth', block: 'start'});
+//     window.addEventListener('scroll', onScroll, {passive: true});
+//
+//     const poll = setInterval(tryFinish, 40);
+//
+//     setTimeout(() => {
+//         if (finished) return;
+//         finished = true;
+//         window.removeEventListener('scroll', onScroll);
+//         clearInterval(poll);
+//         cb();
+//     }, 900);
+// };
+//
+// // ✨ PC로 전환 시 갤러리 즉시 배치 ✨
+// const repositionGalleryItems = () => {
+//     images.forEach((image, index) => {
+//         let rotationAngle = -index * degree;
+//
+//         gsap.set(image, {
+//             x: 0,
+//             y: 0,
+//             scale: 1,
+//             transformOrigin: "-60vh center", // runAnimation과 동일하게 유지
+//             rotation: index > imageSize / 2 ? degree * (imageSize - index) : rotationAngle,
+//             opacity: 1, // 바로 보이도록 설정
+//         });
+//     });
+// };
+//
+// const itemsContainer = document.querySelector(".items");
+//
+// const init = () => {
+//     gsap.set(images, {opacity: 0}); // 갤러리 이미지 기본 상태를 투명하게 설정
+//
+//     const projectsSection = document.getElementById('projects');
+//     if (!projectsSection) return;
+//
+//     // IntersectionObserver는 모바일/PC 상관없이 항상 등록합니다.
+//     const observer = new IntersectionObserver(entries => {
+//         entries.forEach(entry => {
+//             const ratio = entry.intersectionRatio;
+//             if (!window.AppState.isMobile) {
+//                 if (ratio >= 0.85 && !animationTriggered) {
+//                     animationTriggered = true;
+//                     scrollAndAlignThenRun(projectsSection, runAnimation);
+//                 } else if (ratio < 0.05 && animationTriggered) {
+//                     resetAnimation();
+//                     animationTriggered = false;
+//                 }
+//             } else {
+//                 // 모바일 상태일 때는 애니메이션 트리거를 비활성화합니다.
+//                 if (animationTriggered) {
+//                     resetAnimation();
+//                     animationTriggered = false;
+//                 }
+//             }
+//         });
+//     }, {threshold: Array.from({length: 101}, (_, i) => i / 100)});
+//
+//     observer.observe(projectsSection);
+//
+//     // 초기 강제 체크 (로드 직후 스크롤로 내려도 감지)
+//     setTimeout(checkProjectSection, 100);
+//
+//     // ✨ 리사이즈 이벤트 리스너 추가 ✨
+//     window.addEventListener('resize', debounce(() => {
+//         const wasMobile = window.AppState.isMobile;
+//         const currentIsMobile = window.innerWidth <= 800;
+//         window.AppState.isMobile = currentIsMobile; // AppState 업데이트
+//
+//         // PC <-> 모바일 상태가 변경되었을 때만
+//         if (wasMobile !== currentIsMobile) {
+//             handleResponsiveDisplay(); // 상태가 바뀌면 디스플레이를 재설정
+//         }
+//         // PC -> PC 리사이즈 등, PC 상태에서는 갤러리 위치만 재조정 (runAnimation 실행 중이 아닐 때)
+//         else if (!currentIsMobile && !window.AppState.isGalleryAnimating) {
+//             repositionGalleryItems();
+//         }
+//     }, 250));
+// };
+//
+// const checkProjectSection = () => {
+//     const projectsSection = document.getElementById('projects');
+//     if (!projectsSection) return;
+//     const rect = projectsSection.getBoundingClientRect();
+//
+//     if (!window.AppState.isMobile) {
+//         if (!animationTriggered && rect.top <= 0 && rect.bottom >= window.innerHeight) {
+//             animationTriggered = true;
+//             scrollAndAlignThenRun(projectsSection, runAnimation);
+//         } else if (animationTriggered && rect.bottom < window.innerHeight * 0.01) {
+//             resetAnimation();
+//             animationTriggered = false;
+//         }
+//     } else {
+//         // 모바일 상태일 때는 강제 체크에서도 애니메이션 트리거 비활성화
+//         if (animationTriggered) {
+//             resetAnimation();
+//             animationTriggered = false;
+//         }
+//     }
+// };
+//
+// let galleryAnimationTimeline = null; // 갤러리 애니메이션 타임라인을 저장할 변수
+//
+// // 애니메이션 상태 초기화 함수
+// const resetAnimation = () => {
+//     if (galleryAnimationTimeline) {
+//         galleryAnimationTimeline.kill(); // 특정 타임라인만 완전히 중지
+//         galleryAnimationTimeline = null; // 참조 초기화
+//     }
+//
+//     // 모든 애니메이션 타임라인 중지 및 초기화
+//     gsap.killTweensOf(images);
+//
+//     // 오른쪽 영역 관련 모든 애니메이션 중지
+//     const rightArea = document.querySelector(".right-area");
+//     const infoItems = rightArea?.querySelectorAll(".info > *") || [];
+//
+//     gsap.killTweensOf(rightArea);
+//     gsap.killTweensOf(infoItems);
+//
+//     // 이미지 상태 초기화
+//     gsap.set(images, {
+//         opacity: 0,
+//         x: 0,
+//         y: 0,
+//         rotation: 0,
+//         scale: 1,
+//         transformOrigin: "center center"
+//     });
+//
+//     // 오른쪽 영역 초기화
+//     if (rightArea) {
+//         gsap.set(rightArea, {opacity: 0, x: 50});
+//         gsap.set(infoItems, {opacity: 0, y: 20});
+//     }
+//
+//     // items 컨테이너 회전값 강제 리셋 (항상 첫 프로젝트가 중앙으로 오게)
+//     gsap.set(".items", {rotation: 0});
+//
+//     // ➤ track-label 초기화 추가
+//     const trackLabels = document.querySelectorAll('.track-label');
+//     trackLabels.forEach(label => label.classList.remove('animate'));
+// };
+//
+// // ✨ PC와 모바일 모드에 따라 UI를 제어 ✨
+// const handleResponsiveDisplay = () => {
+//     const isMobile = window.AppState.isMobile;
+//     const itemsContainerElement = document.querySelector(".items"); // 갤러리 아이템들을 감싸는 컨테이너
+//     const rightArea = document.querySelector(".right-area"); // 정보 영역
+//
+//     if (isMobile) {
+//         // 모바일 모드일 때
+//         resetAnimation();  // 모든 GSAP 스타일 초기화
+//         gsap.set(".items", {opacity: 0, visibility: "hidden"}); // 갤러리 숨김 (JS로 제어)
+//         gsap.set(images, {opacity: 0}); // 개별 이미지도 확실히 숨김
+//
+//         if (rightArea) {
+//             // 정보 영역 보이게 설정
+//             gsap.set(rightArea, {opacity: 1, x: 0, visibility: "visible", pointerEvents: "auto"});
+//             gsap.set(".right-area .info > *", {opacity: 1, y: 0}); // 정보 내부 요소도 확실히 보이게
+//         }
+//         animationTriggered = false; // 모바일에서는 애니메이션 트리거 비활성화
+//     } else {
+//         // PC 모드일 때
+//         if (itemsContainerElement) {
+//             // 갤러리 컨테이너 보이게 설정
+//             gsap.set(itemsContainerElement, {opacity: 1, visibility: "visible"});
+//             repositionGalleryItems(); // PC로 전환 시 갤러리를 즉시 최종 위치로 배치 (등장 애니메이션 아님!)
+//         }
+//         if (rightArea) {
+//             // 정보 영역 숨김 (runAnimation이 나중에 보이게 할 것임)
+//             gsap.set(rightArea, {opacity: 0, x: 50, pointerEvents: "none"});
+//             gsap.set(".right-area .info > *", {opacity: 0, y: 20}); // info 내부 요소도 초기 상태로
+//         }
+//     }
+// };
+//
+// const runAnimation = () => {
+//     // ✅ 모바일에서는 모든 애니메이션 비활성화
+//     if (window.innerWidth < 800) return;
+//
+//     // ✅ 툴바 이동 중이면 애니메이션 실행하지 않음
+//     if (window.isScrollingToSection) return;
+//
+//     window.AppState.isGalleryAnimating = true;
+//
+//     // 새로운 애니메이션 시작 전에 혹시 이전 타임라인이 남아있다면 초기화
+//     if (galleryAnimationTimeline) {
+//         galleryAnimationTimeline.kill();
+//         galleryAnimationTimeline = null;
+//     }
+//
+//     itemsContainer.classList.remove("hover-enabled");   // 애니메이션 시작 전에는 hover 비활성화
+//     updateRightArea(0, false); // 첫 프로젝트 기준, 실제 데이터 바로 세팅
+//     gsap.set(".right-area", {opacity: 0, x: 50}); // 완전히 숨김 상태에서 시작
+//
+//     if (window.smoother) window.smoother.paused(true);  // ➤ 스크롤 잠금
+//
+//     galleryAnimationTimeline = gsap.timeline({
+//         onComplete: () => {
+//             // ✅ 항상 첫 번째 프로젝트(Pixterest)로 초기화
+//             previousActiveIndex = 0;
+//
+//             // 현재 중앙 트랙 index로 previousActiveIndex 초기화
+//             const centerRotation = 0; // 초기 중앙 기준 회전값
+//             const snapUnit = degree * 2;
+//             previousActiveIndex = Math.round((centerRotation % 360) / snapUnit);
+//             window.AppState.hasInitialGalleryAnimationRun = true;
+//
+//             itemsContainer.classList.add("hover-enabled");  // hover 활성화
+//
+//
+//             setTimeout(() => {
+//                 if (window.smoother) window.smoother.paused(false);
+//             }, 300); // 0.3초 안정화 시간후, 스크롤 다시 활성화
+//
+//             animateTrackLabels();
+//
+//             window.AppState.isGalleryAnimating = false;
+//         }
+//     });
+//
+//     images.forEach((image, index) => {
+//         gsap.set(image, {opacity: 1});
+//
+//         // 초기 회전 각도 및 크기 설정
+//         const sign = Math.floor((index / 2) % 2) ? 1 : -1;
+//         const value = Math.floor((index + 4) / 4) * 4;
+//         const rotation = index > imageSize - 3 ? 0 : sign * value;
+//
+//         gsap.set(image, {
+//             x: 0,
+//             y: 0,
+//             rotation: rotation,
+//             scale: 0.5,
+//         });
+//
+//         // 이미지가 화면 밖에서 날아오는 애니메이션
+//         galleryAnimationTimeline.from(
+//             image,
+//             {
+//                 x: 0,
+//                 y: index % 2
+//                     ? -window.innerHeight - image.clientHeight * 4
+//                     : window.innerHeight + image.clientHeight * 4,
+//                 rotation: index % 2 ? 200 : -200,
+//                 scale: 4,
+//                 opacity: 1,
+//                 ease: "power4.out",
+//                 duration: 1,
+//                 delay: 0.15 * Math.floor(index / 2),
+//             },
+//             0
+//         );
+//
+//         let rotationAngle = -index * degree;
+//
+//         // 최종 크기를 1로 복원
+//         galleryAnimationTimeline.to(
+//             image,
+//             {
+//                 scale: 1,
+//                 duration: 0,
+//             },
+//             0.15 * (imageSize / 2 - 1) + 1
+//         );
+//
+//         // 원형 배치로 정렬하는 애니메이션
+//         galleryAnimationTimeline.to(
+//             image,
+//             {
+//                 x: 0,
+//                 y: 0,
+//                 transformOrigin: "-60vh center",
+//                 rotation:
+//                     index > imageSize / 2 ? degree * (imageSize - index) : rotationAngle,
+//                 duration: 1,
+//                 ease: "power1.out",
+//             },
+//             0.15 * (imageSize / 2 - 1) + 1
+//         );
+//     });
+//
+//     // ➤ 오른쪽 영역 등장 애니메이션
+//     galleryAnimationTimeline.fromTo(
+//         ".right-area",                  // 애니메이션 적용 대상
+//         {opacity: 0, x: 50, pointerEvents: "none"},          // 시작 상태: 투명 + 오른쪽으로 50px 이동
+//         {opacity: 1, x: 0, duration: 0.8, ease: "power2.out", pointerEvents: "auto"}, // 종료 상태: 불투명 + 원래 위치
+//         "-=0.5"                         // 타이밍: 이전 애니메이션 끝나기 0.5초 전에 시작
+//     );
+//
+//     // ➤ 오른쪽 내부 정보 stagger 등장
+//     galleryAnimationTimeline.fromTo(
+//         ".right-area .info > *",         // 오른쪽 영역 info 하위 요소들을 아래에서 위로 순차적으로 나타나게 함
+//         {y: 20, opacity: 0},           // 시작 상태: 아래로 20px 이동 + 투명
+//         {y: 0, opacity: 1, duration: 0.6, stagger: 0.1, ease: "power2.out"}, // 종료 상태: 원래 위치 + 보이게, 0.6초, 0.1초 간격, 자연스러운 감속
+//         "-=0.3"                          // 이전 애니메이션 끝나기 0.3초 전에 시작
+//     );
+// };
+//
+// function slidesPlugin() {
+//     const projects = document.querySelectorAll(".right-area");
+//
+//     projects.forEach((project) => {
+//         const slides = project.querySelectorAll(".slide");
+//
+//         // 초기 활성화 상태 (3번째 슬라이드)
+//         if (slides.length > 2) {
+//             slides.forEach(slide => slide.classList.remove("active"));
+//             slides[2].classList.add("active");
+//         }
+//
+//         slides.forEach((slide) => {
+//             slide.replaceWith(slide.cloneNode(true)); // 이벤트 초기화
+//         });
+//
+//         // 이벤트 재설정
+//         project.querySelectorAll(".slide").forEach((slide) => {
+//             slide.addEventListener("click", () => {
+//                 if (slide.classList.contains("active")) {
+//                     openModal(slide);
+//                     return;
+//                 }
+//                 project.querySelectorAll(".slide").forEach(s => s.classList.remove("active"));
+//                 slide.classList.add("active");
+//             });
+//         });
+//     });
+// }
+//
+// slidesPlugin();
+//
+// // 화면 중앙에 있는 right-area의 track-label만 애니메이션 실행
+// function animateTrackLabels() {
+//     const trackLabels = document.querySelectorAll('.track-label');
+//     const centerX = window.innerWidth / 2;
+//
+//     let closestLabel = null;
+//     let minDistance = Infinity;
+//
+//     trackLabels.forEach(label => {
+//         const rect = label.getBoundingClientRect();
+//         const labelCenter = rect.left + rect.width / 2;
+//         const distance = Math.abs(centerX - labelCenter);
+//
+//         if (distance < minDistance) {
+//             minDistance = distance;
+//             closestLabel = label;
+//         }
+//     });
+//
+//     // 모든 라벨에서 animate 제거
+//     trackLabels.forEach(label => label.classList.remove('animate'));
+//
+//     // 화면 중앙에 있는 라벨만 animate 적용
+//     if (closestLabel) {
+//         closestLabel.classList.add('animate');
+//     }
+// }
+//
+// // 이미지 모달 열기 함수
+// function openModal(slide) {
+//     const modal = document.querySelector(".image-modal");
+//     const modalImg = modal.querySelector("img");
+//     const closeBtn = modal.querySelector(".close-button");
+//
+//     // 슬라이드 배경 이미지를 모달에 적용
+//     const bg = slide.style.backgroundImage;
+//     modalImg.src = bg.slice(5, -2); // url("...") 형태니까 자르기
+//
+//     modal.classList.add("show");
+//     if (window.smoother) window.smoother.paused(true); // 스크롤 잠금
+//
+//     // 버튼 폭 맞추는 함수
+//     const updateButtonWidth = () => {
+//         closeBtn.style.width = modalImg.clientWidth + "px";
+//     };
+//
+//     // 이미지 로드 후 초기 폭 설정
+//     modalImg.onload = updateButtonWidth;
+//
+//     // 리사이즈 시 폭 자동 업데이트
+//     window.addEventListener("resize", updateButtonWidth);
+//
+//     // 모달 닫기 함수
+//     const closeModal = () => {
+//         modal.classList.remove("show");
+//         if (window.smoother) window.smoother.paused(false); // ✅ 스크롤 재개
+//         window.removeEventListener("resize", updateButtonWidth); // 이벤트 제거
+//     };
+//
+//     // 모달 외부 클릭 시 닫기
+//     modal.addEventListener("click", (e) => {
+//         if (e.target === modal) closeModal();
+//     });
+//
+//     // 닫기 버튼 클릭 시
+//     closeBtn.addEventListener("click", closeModal);
+// }
+//
+// const projectModal = document.getElementById("modal");
+// const modalMessage = document.getElementById("modalMessage");
+// const projectCloseBtn = projectModal.querySelector(".close-button");
+//
+// // 모든 프로젝트 버튼 처리
+// document.querySelectorAll(".right-area").forEach((project) => {
+//     const viewBtn = project.querySelector(".button-area button:nth-child(1)");
+//     const githubBtn = project.querySelector(".button-area button:nth-child(2)");
+//
+//     // "보기" 버튼 클릭
+//     viewBtn.addEventListener("click", () => {
+//         const siteUrl = project.dataset.siteUrl;
+//         if (siteUrl && siteUrl !== "#" && siteUrl !== "local") {
+//             window.open(siteUrl, "_blank");
+//         } else {
+//             modalMessage.innerHTML = "🚧 이 프로젝트는 현재 배포되지 않았습니다.<br>GitHub에서 코드를 확인하실 수 있습니다.";
+//             projectModal.classList.add("show");
+//             if (window.smoother) window.smoother.paused(true); // 스크롤 잠금
+//         }
+//     });
+//
+//     // "GitHub" 버튼 클릭
+//     githubBtn.addEventListener("click", () => {
+//         const githubUrl = project.dataset.githubUrl;
+//         if (githubUrl && githubUrl !== "#") {
+//             window.open(githubUrl, "_blank");
+//         } else {
+//             modalMessage.innerHTML = "🚧 GitHub 링크가 준비되지 않았습니다.";
+//             projectModal.classList.add("show");
+//             if (window.smoother) window.smoother.paused(true); // 스크롤 잠금
+//         }
+//     });
+// });
+//
+// // 모달 닫기: 외부 클릭
+// projectModal.addEventListener("click", (e) => {
+//     if (e.target === projectModal) {
+//         projectModal.classList.remove("show");
+//         if (window.smoother) window.smoother.paused(false); // ✅ 스크롤 재개
+//     }
+// });
+//
+// // 닫기 버튼 클릭
+// projectCloseBtn.addEventListener("click", () => {
+//     projectModal.classList.remove("show");
+//     if (window.smoother) window.smoother.paused(false); // ✅ 스크롤 재개
+// });
+
+
+
+
+
+
+
+// 계획
+// 리셋,런 애니메이션 살짝 + 리사이즈 함수 추가햇는데... 뭔가 뭔가 조금 꼬이는듯한 문제가 존재
+// 뭔가 될때도 있고 안될때도 있고 뭔가 이상한.............. 뭔가가 꼬이는듯한??? (섹션 벗어낫다 돌아오면 또 정상이 되는...;;)
+// 등장애니메이션이랑 뭔가 관련된 문제가 존재함 (혹은 스크롤..관련 문제가???)
+// + 모바일 -> pc 갤러리 사라짐 문제!!!!!!!!!!!!!!!!
+// 추가 문제 820? 830?? 뭐 이때쯤에 스크롤 멈춤이나, 등장애니메이션 이나 뭔가 잘 적용이 안됨 이상함 뭔가가
+// 추가 스크롤 멈춤일때, 스크롤에 강제로 스크롤하면 오류! 왕창
 import {projectsData} from './projectData.js';
 
 window.AppState = window.AppState || {
@@ -1029,23 +2173,10 @@ const scrollAndAlignThenRun = (el, cb) => {
 
 // 초기 설정 및 스크롤 이벤트 등록
 const init = () => {
-    const isMobile = window.innerWidth <= 800;
-
     gsap.set(images, {opacity: 0});
 
     const projectsSection = document.getElementById('projects');
     if (!projectsSection) return;
-
-    // 📱 모바일: 애니메이션 없이 바로 보이게
-    if (isMobile) {
-        gsap.set(images, { opacity: 1 });
-        const rightArea = document.querySelector(".right-area");
-        if (rightArea) {
-            gsap.set(rightArea, { opacity: 1, x: 0 });
-            gsap.set(".right-area .info > *", { opacity: 1, y: 0 });
-        }
-        return; // ❌ 모바일은 여기서 끝
-    }
 
     // IntersectionObserver 등록
     const observer = new IntersectionObserver(entries => {
@@ -1111,9 +2242,11 @@ const resetAnimation = () => {
     });
 
     // 오른쪽 영역 초기화
-    if (rightArea) {
-        gsap.set(rightArea, {opacity: 0, x: 50});
-        gsap.set(infoItems, {opacity: 0, y: 20});
+    if (window.innerWidth >= 800) { // ✅ 모바일에서는 숨기지 않음  ★★★★★★★★★★★★★★★★★★★★
+        if (rightArea) {
+            gsap.set(rightArea, {opacity:0, x:50});
+            gsap.set(infoItems, {opacity:0, y:20});
+        }
     }
 
     // items 컨테이너 회전값 강제 리셋 (항상 첫 프로젝트가 중앙으로 오게)
@@ -1124,12 +2257,40 @@ const resetAnimation = () => {
     trackLabels.forEach(label => label.classList.remove('animate'));
 };
 
+// 모바일 전환 시 right-area 강제 표시        ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+const showMobileRightArea = () => {
+    const rightArea = document.querySelector(".right-area");
+    if (!rightArea) return;
+    gsap.set(".items", { opacity:0, display:"none" });
+    gsap.set(rightArea, { opacity:1, x:0, display:"block" });
+    gsap.set(".right-area .info > *", { opacity:1, y:0 });
+};
+
+window.addEventListener("resize", () => {   // ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+    if (window.innerWidth < 800) {
+        // 모바일 전환
+        if (galleryAnimationTimeline) {
+            galleryAnimationTimeline.kill();
+            galleryAnimationTimeline = null;
+        }
+        window.AppState.isGalleryAnimating = false;
+        showMobileRightArea();
+        if (window.smoother) window.smoother.paused(false);
+    } else {
+        // PC 전환 시 원상복구 (복구가 안됨 지금!!)
+        resetAnimation();
+        runAnimation(); // PC용 애니메이션 다시 실행
+    }
+});
+
 const itemsContainer = document.querySelector(".items");
 
 // 프로젝트 이미지 원형 배치 및 애니메이션 실행
 const runAnimation = () => {
-    // ✅ 모바일에서는 모든 애니메이션 비활성화
-    if (window.innerWidth < 800) return;
+    if (window.innerWidth < 800) {  // ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+        showMobileRightArea();
+        return;
+    }
 
     // ✅ 툴바 이동 중이면 애니메이션 실행하지 않음
     if (window.isScrollingToSection) return;
@@ -1498,4 +2659,3 @@ projectCloseBtn.addEventListener("click", () => {
     projectModal.classList.remove("show");
     if (window.smoother) window.smoother.paused(false); // ✅ 스크롤 재개
 });
-

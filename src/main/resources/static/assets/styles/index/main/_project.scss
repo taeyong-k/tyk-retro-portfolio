@@ -629,7 +629,8 @@
       position: relative;
 
       .center {
-        display: none;
+        opacity: 0;
+        pointer-events: none;
       }
 
       .right-area {
@@ -641,6 +642,8 @@
         padding: clamp(130px, 15vw, 125px) clamp(10px, 5vw, 20px) clamp(120px, 3vw, 60px);
         top: auto;
         right: auto;
+        opacity: 1;
+        x: 0;
 
         @media (max-width: 686px) {
           padding: clamp(10px, 12vw, 125px) clamp(10px, 5vw, 20px) clamp(10px, 10vw, 60px);
@@ -649,10 +652,16 @@
           padding: clamp(50px, 20vw, 125px) clamp(10px, 5vw, 20px) clamp(10px, 10vw, 60px);
         }
 
+        .gradient-border {
+          opacity: 1;
+        }
+
         .info {
           font-size: clamp(14px, 2.5vw, 18px);
+          opacity: 1;
 
           .header {
+            opacity: 1;
             .title {
               h1 {
                 font-size: clamp(25px, 4vw, 45px);
@@ -662,6 +671,7 @@
 
           .main {
             gap: clamp(10px, 2vw, 20px);
+            opacity: 1;
 
             h3 {
               font-size: clamp(16px, 2vw, 20px);
@@ -680,6 +690,7 @@
 
         .button-area {
           font-size: clamp(16px, 2.5vw, 18px);
+          opacity: 1;
         }
       }
     }
