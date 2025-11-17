@@ -2226,7 +2226,6 @@
     padding: clamp(130px, 15vw, 125px) clamp(10px, 5vw, 20px) clamp(120px, 3vw, 60px);
     top: auto;
     right: auto;
-    opacity: 1;
     x: 0;
   }
   #projects .container .right-area > * {
@@ -2249,22 +2248,14 @@
   }
 }
 @media (max-width: 800px) {
-  #projects .container .right-area .gradient-border {
-    opacity: 1;
-  }
   #projects .container .right-area .info {
     font-size: clamp(14px, 2.5vw, 18px);
-    opacity: 1;
-  }
-  #projects .container .right-area .info .header {
-    opacity: 1;
   }
   #projects .container .right-area .info .header .title h1 {
     font-size: clamp(25px, 4vw, 45px);
   }
   #projects .container .right-area .info .main {
     gap: clamp(10px, 2vw, 20px);
-    opacity: 1;
   }
   #projects .container .right-area .info .main h3 {
     font-size: clamp(16px, 2vw, 20px);
@@ -2279,7 +2270,6 @@
   }
   #projects .container .right-area .button-area {
     font-size: clamp(16px, 2.5vw, 18px);
-    opacity: 1;
   }
 }
 * {

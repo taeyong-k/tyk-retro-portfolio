@@ -2102,17 +2102,13 @@
 
 
 
-
-
-
-
-// 계획
-// 리셋,런 애니메이션 살짝 + 리사이즈 함수 추가햇는데... 뭔가 뭔가 조금 꼬이는듯한 문제가 존재
-// 뭔가 될때도 있고 안될때도 있고 뭔가 이상한.............. 뭔가가 꼬이는듯한??? (섹션 벗어낫다 돌아오면 또 정상이 되는...;;)
-// 등장애니메이션이랑 뭔가 관련된 문제가 존재함 (혹은 스크롤..관련 문제가???)
-// + 모바일 -> pc 갤러리 사라짐 문제!!!!!!!!!!!!!!!!
-// 추가 문제 820? 830?? 뭐 이때쯤에 스크롤 멈춤이나, 등장애니메이션 이나 뭔가 잘 적용이 안됨 이상함 뭔가가
-// 추가 스크롤 멈춤일때, 스크롤에 강제로 스크롤하면 오류! 왕창
+// pc <-> 모바일 반응형 수정!!!!!
+// 단, 모바일인데, 갤러리 등장 애니메이션.... 아직! 어떻게 할지 고민중!!!
+// (그냥 안되게끔만하면 약간 꼬임 뭔가 다른것도 건들여야할거같음..!)
+// 1. 미니 갤러리로 만들어서 둔다 (애니메이션 동일)                      (4순위 -> 성능 부담 + 구조 변경 부담s..)
+// 2. 뒤에 배경처럼 둔다 (엄청 흐리게 옅게 배경에서 돌아가도록)            (2순위 -> GPU 부담)
+// 3. 갤러리를 거의 일자 선마냥 줄여서 시간적 효과만 주기?                (3순위)
+// 4. 모바일일땐, 갤러리 등장 애니메이션만 안되도록 수정!                 (1순위 -best)
 import {projectsData} from './projectData.js';
 
 window.AppState = window.AppState || {
@@ -2124,6 +2120,7 @@ window.AppState = window.AppState || {
 };
 
 document.addEventListener("DOMContentLoaded", () => {
+    handleResize();
     updateRightArea(0, false); // 최초 세팅
     init();                    // 스크롤 감지 및 애니메이션 준비
 });
@@ -2156,8 +2153,8 @@ const scrollAndAlignThenRun = (el, cb) => {
 
     const onScroll = () => tryFinish();
 
-    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    window.addEventListener('scroll', onScroll, { passive: true });
+    el.scrollIntoView({behavior: 'smooth', block: 'start'});
+    window.addEventListener('scroll', onScroll, {passive: true});
 
     const poll = setInterval(tryFinish, 40);
 
@@ -2212,6 +2209,33 @@ const checkProjectSection = () => {
     }
 };
 
+const handleResize = () => {
+    const isMobile = window.innerWidth <= 800;
+    const rightArea = document.querySelector(".right-area");
+    const itemsContainer = document.querySelector(".items");
+
+    if (!rightArea || !itemsContainer) return;
+
+    if (isMobile) {
+        // 모바일: 갤러리 숨김, 오른쪽 영역 항상 표시
+        itemsContainer.style.display = "none";
+        rightArea.style.display = "block";
+
+        // 애니메이션 중지
+        if (galleryAnimationTimeline) galleryAnimationTimeline.kill();
+        galleryAnimationTimeline = null;
+        gsap.set(images, {opacity: 0});
+        updateRightArea(window.AppState.currentRotation); // 데이터 강제 렌더
+    } else {
+        // PC: 무조건 초기 애니메이션 호출 금지
+        itemsContainer.style.display = "flex";
+        rightArea.style.display = "block";
+        gsap.set(images, {opacity: 0});
+        gsap.set(rightArea, {opacity: 0, x: 50});
+    }
+};
+window.addEventListener("resize", handleResize);
+
 let galleryAnimationTimeline = null; // 갤러리 애니메이션 타임라인을 저장할 변수
 
 // 애니메이션 상태 초기화 함수
@@ -2242,55 +2266,31 @@ const resetAnimation = () => {
     });
 
     // 오른쪽 영역 초기화
-    if (window.innerWidth >= 800) { // ✅ 모바일에서는 숨기지 않음  ★★★★★★★★★★★★★★★★★★★★
-        if (rightArea) {
-            gsap.set(rightArea, {opacity:0, x:50});
-            gsap.set(infoItems, {opacity:0, y:20});
-        }
+    if (rightArea) {
+        gsap.set(rightArea, {opacity: 0, x: 50});
+        gsap.set(infoItems, {opacity: 0, y: 20});
     }
 
     // items 컨테이너 회전값 강제 리셋 (항상 첫 프로젝트가 중앙으로 오게)
     gsap.set(".items", {rotation: 0});
+
+    const itemsContainer = document.querySelector(".items");
+    if (itemsContainer && window.innerWidth > 800) {
+        gsap.set(itemsContainer, {rotation: 0});
+        itemsContainer.style.display = "flex";
+    }
 
     // ➤ track-label 초기화 추가
     const trackLabels = document.querySelectorAll('.track-label');
     trackLabels.forEach(label => label.classList.remove('animate'));
 };
 
-// 모바일 전환 시 right-area 강제 표시        ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
-const showMobileRightArea = () => {
-    const rightArea = document.querySelector(".right-area");
-    if (!rightArea) return;
-    gsap.set(".items", { opacity:0, display:"none" });
-    gsap.set(rightArea, { opacity:1, x:0, display:"block" });
-    gsap.set(".right-area .info > *", { opacity:1, y:0 });
-};
-
-window.addEventListener("resize", () => {   // ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
-    if (window.innerWidth < 800) {
-        // 모바일 전환
-        if (galleryAnimationTimeline) {
-            galleryAnimationTimeline.kill();
-            galleryAnimationTimeline = null;
-        }
-        window.AppState.isGalleryAnimating = false;
-        showMobileRightArea();
-        if (window.smoother) window.smoother.paused(false);
-    } else {
-        // PC 전환 시 원상복구 (복구가 안됨 지금!!)
-        resetAnimation();
-        runAnimation(); // PC용 애니메이션 다시 실행
-    }
-});
-
 const itemsContainer = document.querySelector(".items");
 
 // 프로젝트 이미지 원형 배치 및 애니메이션 실행
 const runAnimation = () => {
-    if (window.innerWidth < 800) {  // ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
-        showMobileRightArea();
-        return;
-    }
+    // // ✅ 모바일에서는 모든 애니메이션 비활성화
+    // if (window.innerWidth < 800) return;
 
     // ✅ 툴바 이동 중이면 애니메이션 실행하지 않음
     if (window.isScrollingToSection) return;
@@ -2305,7 +2305,7 @@ const runAnimation = () => {
 
     itemsContainer.classList.remove("hover-enabled");   // 애니메이션 시작 전에는 hover 비활성화
     updateRightArea(0, false); // 첫 프로젝트 기준, 실제 데이터 바로 세팅
-    gsap.set(".right-area", {opacity:0, x:50}); // 완전히 숨김 상태에서 시작
+    gsap.set(".right-area", {opacity: 0, x: 50}); // 완전히 숨김 상태에서 시작
 
     if (window.smoother) window.smoother.paused(true);  // ➤ 스크롤 잠금
 
@@ -2659,3 +2659,4 @@ projectCloseBtn.addEventListener("click", () => {
     projectModal.classList.remove("show");
     if (window.smoother) window.smoother.paused(false); // ✅ 스크롤 재개
 });
+
