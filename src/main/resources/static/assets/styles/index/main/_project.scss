@@ -363,6 +363,15 @@
     @media (max-width: 1000px) {
       width: clamp(260px, 28vw, 380px);
     }
+    @media (max-width: 800px) {
+      width: clamp(100px,25vw,380px);
+    }
+    @media (max-width: 750px) {
+      width: clamp(50px,18vw,380px);
+    }
+    @media (max-width: 700px) {
+      width: clamp(50px,12vw,380px);
+    }
 
     .inner {
       width: 100%;
@@ -400,6 +409,10 @@
   z-index: 10;
   pointer-events: none;
   overflow: hidden; /* 글자 영역 밖 숨김 */
+  
+  @media (max-width: 750px) {
+    right: auto;
+  }
 }
 
 .track-label .reveal-text {
@@ -621,7 +634,7 @@
 
 
 // 모바일 대응용
-@media (max-width: 800px) {
+@media (max-width: 650px) {
   #projects {
     height: 100vh;
 

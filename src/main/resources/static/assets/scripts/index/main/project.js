@@ -2210,7 +2210,7 @@ const checkProjectSection = () => {
 };
 
 const handleResize = () => {
-    const isMobile = window.innerWidth <= 800;
+    const isMobile = window.innerWidth <= 650;
     const rightArea = document.querySelector(".right-area");
     const itemsContainer = document.querySelector(".items");
 
@@ -2275,7 +2275,7 @@ const resetAnimation = () => {
     gsap.set(".items", {rotation: 0});
 
     const itemsContainer = document.querySelector(".items");
-    if (itemsContainer && window.innerWidth > 800) {
+    if (itemsContainer && window.innerWidth > 650) {
         gsap.set(itemsContainer, {rotation: 0});
         itemsContainer.style.display = "flex";
     }
@@ -2289,9 +2289,6 @@ const itemsContainer = document.querySelector(".items");
 
 // 프로젝트 이미지 원형 배치 및 애니메이션 실행
 const runAnimation = () => {
-    // // ✅ 모바일에서는 모든 애니메이션 비활성화
-    // if (window.innerWidth < 800) return;
-
     // ✅ 툴바 이동 중이면 애니메이션 실행하지 않음
     if (window.isScrollingToSection) return;
 

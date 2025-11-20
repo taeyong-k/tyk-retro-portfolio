@@ -1931,6 +1931,21 @@
     width: clamp(260px, 28vw, 380px);
   }
 }
+@media (max-width: 800px) {
+  #projects .card {
+    width: clamp(100px, 25vw, 380px);
+  }
+}
+@media (max-width: 750px) {
+  #projects .card {
+    width: clamp(50px, 18vw, 380px);
+  }
+}
+@media (max-width: 700px) {
+  #projects .card {
+    width: clamp(50px, 12vw, 380px);
+  }
+}
 #projects .card .inner {
   width: 100%;
   height: 100%;
@@ -1962,6 +1977,11 @@
   z-index: 10;
   pointer-events: none;
   overflow: hidden; /* 글자 영역 밖 숨김 */
+}
+@media (max-width: 750px) {
+  .track-label {
+    right: auto;
+  }
 }
 
 .track-label .reveal-text {
@@ -2201,7 +2221,7 @@
   filter: brightness(0.85);
 }
 
-@media (max-width: 800px) {
+@media (max-width: 650px) {
   #projects {
     height: 100vh;
   }
@@ -2237,17 +2257,17 @@
     flex-shrink: 1;
   }
 }
-@media (max-width: 800px) and (max-width: 686px) {
+@media (max-width: 650px) and (max-width: 686px) {
   #projects .container .right-area {
     padding: clamp(10px, 12vw, 125px) clamp(10px, 5vw, 20px) clamp(10px, 10vw, 60px);
   }
 }
-@media (max-width: 800px) and (max-width: 540px) {
+@media (max-width: 650px) and (max-width: 540px) {
   #projects .container .right-area {
     padding: clamp(50px, 20vw, 125px) clamp(10px, 5vw, 20px) clamp(10px, 10vw, 60px);
   }
 }
-@media (max-width: 800px) {
+@media (max-width: 650px) {
   #projects .container .right-area .info {
     font-size: clamp(14px, 2.5vw, 18px);
   }
