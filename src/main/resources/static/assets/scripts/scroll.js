@@ -1737,6 +1737,12 @@
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
 window.addEventListener("DOMContentLoaded", () => {
+    const isMobile = window.innerWidth <= 650;
+    if (isMobile) {
+        if (window.updateRightArea) window.updateRightArea(0, false);
+        return; // 🔥 모바일일 때 모든 애니메이션, ScrollTrigger, pin 완전 비활성화
+    }
+
     // 💡 스크롤 정규화 추가: 스크롤 이벤트의 일관성을 높여 부드러움을 개선
     ScrollTrigger.normalizeScroll(true);
 
