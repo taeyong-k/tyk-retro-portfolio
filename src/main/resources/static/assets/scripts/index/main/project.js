@@ -1500,9 +1500,6 @@
 // });
 
 
-
-
-
 // ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
 // ★★★★★★★★★★★★★★★★★★★★★★★★프로젝트 섹션 수정 -완 v2★★★★★★★★★★★★★★★★★★★★★★★★
 // ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
@@ -2057,18 +2054,6 @@
 // });
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 import {projectsData} from './projectData.js';
 
 window.AppState = window.AppState || {
@@ -2112,8 +2097,8 @@ const scrollAndAlignThenRun = (el, cb) => {
 
     const onScroll = () => tryFinish();
 
-    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    window.addEventListener('scroll', onScroll, { passive: true });
+    el.scrollIntoView({behavior: 'smooth', block: 'start'});
+    window.addEventListener('scroll', onScroll, {passive: true});
 
     const poll = setInterval(tryFinish, 40);
 
@@ -2129,23 +2114,10 @@ const scrollAndAlignThenRun = (el, cb) => {
 
 // 초기 설정 및 스크롤 이벤트 등록
 const init = () => {
-    // const isMobile = window.innerWidth <= 800;
-
     gsap.set(images, {opacity: 0});
 
     const projectsSection = document.getElementById('projects');
     if (!projectsSection) return;
-
-    // // 📱 모바일: 애니메이션 없이 바로 보이게
-    // if (isMobile) {
-    //     gsap.set(images, { opacity: 1 });
-    //     const rightArea = document.querySelector(".right-area");
-    //     if (rightArea) {
-    //         gsap.set(rightArea, { opacity: 1, x: 0 });
-    //         gsap.set(".right-area .info > *", { opacity: 1, y: 0 });
-    //     }
-    //     return; // ❌ 모바일은 여기서 끝
-    // }
 
     // IntersectionObserver 등록
     const observer = new IntersectionObserver(entries => {
@@ -2242,7 +2214,7 @@ const runAnimation = () => {
 
     itemsContainer.classList.remove("hover-enabled");   // 애니메이션 시작 전에는 hover 비활성화
     updateRightArea(0, false); // 첫 프로젝트 기준, 실제 데이터 바로 세팅
-    gsap.set(".right-area", {opacity:0, x:50}); // 완전히 숨김 상태에서 시작
+    gsap.set(".right-area", {opacity: 0, x: 50}); // 완전히 숨김 상태에서 시작
 
     if (window.smoother) window.smoother.paused(true);  // ➤ 스크롤 잠금
 
