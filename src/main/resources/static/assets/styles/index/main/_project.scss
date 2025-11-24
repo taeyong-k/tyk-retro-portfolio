@@ -60,6 +60,12 @@
       @media (max-width: 850px) {
         left: 2vw;
       }
+      @media (max-width: 700px) { // Mobile
+        left: 15vw;
+        z-index: 1;
+        filter: blur(8px);
+        opacity: 0.22;
+      }
     }
 
     .right-area {
@@ -99,6 +105,19 @@
       @media (max-width: 850px) {
         padding: clamp(75px, 18vw, 170px) clamp(10px, 4vw, 200px) clamp(50px, 10vw, 70px) clamp(10px, 8vw, 350px);
       }
+      @media (max-width: 700px) { // Mobile
+        z-index: 9;
+        @include flex(column, center, center);
+        position: relative;
+        width: 100%;
+        height: 100%;
+        margin: 0 auto;
+        padding-left: 25px;
+        padding-right: 35px;
+        top: auto;
+        right: auto;
+        x: 0;
+      }
       @media (max-height: 900px) {
         padding-top: clamp(60px, 10vh, 110px);
         padding-bottom: clamp(40px, 8vh, 50px);
@@ -111,10 +130,6 @@
         padding-top: clamp(15px, 4vh, 80px);
         padding-bottom: clamp(30px, 4vh, 40px);
       }
-      @media (max-height: 700px) {
-        padding-top: clamp(5px, 1vh, 80px);
-      }
-      // 800px에서 모바일 대응 (card 삭제)
 
       #box {
         @include flex(row, center, center);
@@ -190,6 +205,9 @@
           font-size: 14px;
           gap: 12px;
         }
+        @media (max-width: 700px) {
+          font-size: clamp(14px, 2.5vw, 18px);
+        }
 
         .header {
           padding-top: 12px;
@@ -206,6 +224,9 @@
               @media (max-width: 1150px) {
                 font-size: 35px;
               }
+              @media (max-width: 700px) {
+                font-size: clamp(25px, 4vw, 45px);
+              }
             }
           }
         }
@@ -221,6 +242,9 @@
           @media (max-width: 1150px) {
             gap: 10px;
           }
+          @media (max-width: 700px) {
+            gap: clamp(10px, 2vw, 20px);
+          }
 
           h3 {
             color: #f5f5f5;
@@ -234,6 +258,9 @@
             }
             @media (max-width: 1150px) {
               font-size: 16px;
+            }
+            @media (max-width: 700px) {
+              font-size: clamp(16px, 2vw, 20px);
             }
           }
 
@@ -250,6 +277,14 @@
             @media (max-width: 1150px) {
               font-size: 14px;
               gap: 12px;
+            }
+            @media (max-width: 700px) {
+              font-size: clamp(14px, 1.8vw, 16px);
+              gap: clamp(12px, 3vw, 26px);
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              flex-wrap: wrap;
             }
           }
         }
@@ -281,6 +316,9 @@
 
         @media (max-width: 1150px) {
           font-size: 16px;
+        }
+        @media (max-width: 700px) {
+          font-size: clamp(16px, 2.5vw, 18px);
         }
 
         button {
@@ -369,8 +407,8 @@
     @media (max-width: 750px) {
       width: clamp(50px,18vw,380px);
     }
-    @media (max-width: 700px) {
-      width: clamp(50px,12vw,380px);
+    @media (max-width: 700px) { // Mobile
+      width: clamp(260px, 35vw, 380px);
     }
 
     .inner {
@@ -633,72 +671,69 @@
 }
 
 
-// 모바일 대응용
-@media (max-width: 650px) {
-  #projects {
-    height: 100vh;
-
-    .container {
-      position: relative;
-
-      .center {
-        opacity: 0;
-        pointer-events: none;
-      }
-
-      .right-area {
-        @include flex(column, center, center);
-        position: relative;
-        width: 90%;
-        height: auto;
-        margin: 0 auto;
-        padding: clamp(130px, 15vw, 125px) clamp(10px, 5vw, 20px) clamp(120px, 3vw, 60px);
-        top: auto;
-        right: auto;
-        x: 0;
-
-        @media (max-width: 686px) {
-          padding: clamp(10px, 12vw, 125px) clamp(10px, 5vw, 20px) clamp(10px, 10vw, 60px);
-        }
-        @media (max-width: 540px) {
-          padding: clamp(50px, 20vw, 125px) clamp(10px, 5vw, 20px) clamp(10px, 10vw, 60px);
-        }
-
-        .info {
-          font-size: clamp(14px, 2.5vw, 18px);
-
-          .header {
-            .title {
-              h1 {
-                font-size: clamp(25px, 4vw, 45px);
-              }
-            }
-          }
-
-          .main {
-            gap: clamp(10px, 2vw, 20px);
-
-            h3 {
-              font-size: clamp(16px, 2vw, 20px);
-            }
-
-            .details {
-              font-size: clamp(14px, 1.8vw, 16px);
-              gap: clamp(12px, 3vw, 26px);
-              display: flex;
-              align-items: center;
-              justify-content: space-between;
-              flex-wrap: wrap;
-            }
-          }
-        }
-
-        .button-area {
-          font-size: clamp(16px, 2.5vw, 18px);
-        }
-      }
-    }
-  }
-}
+//// 모바일 대응용
+//@media (max-width: 650px) {
+//  #projects {
+//    height: 100vh;
+//
+//    .container {
+//      //position: relative;
+//
+//      //.center {
+//      //  opacity: 0;
+//      //  pointer-events: none;
+//      //}
+//
+//      .right-area {
+//        //@include flex(column, center, center);
+//        //position: relative;
+//        //width: 90%;
+//        //height: auto;
+//        //margin: 0 auto;
+//        padding: clamp(130px, 15vw, 125px) clamp(10px, 5vw, 20px) clamp(120px, 3vw, 60px);
+//        //top: auto;
+//        //right: auto;
+//        //x: 0;
+//
+//        @media (max-width: 686px) {
+//          padding: clamp(10px, 12vw, 125px) clamp(10px, 5vw, 20px) clamp(10px, 10vw, 60px);
+//        }
+//
+//        .info {
+//          font-size: clamp(14px, 2.5vw, 18px);
+//
+//          .header {
+//            .title {
+//              h1 {
+//                font-size: clamp(25px, 4vw, 45px);
+//              }
+//            }
+//          }
+//
+//          .main {
+//            gap: clamp(10px, 2vw, 20px);
+//
+//            h3 {
+//              font-size: clamp(16px, 2vw, 20px);
+//            }
+//
+//            .details {
+//              font-size: clamp(14px, 1.8vw, 16px);
+//              gap: clamp(12px, 3vw, 26px);
+//              display: flex;
+//              align-items: center;
+//              justify-content: space-between;
+//              flex-wrap: wrap;
+//            }
+//          }
+//        }
+//
+//        .button-area {
+//          font-size: clamp(16px, 2.5vw, 18px);
+//        }
+//      }
+//    }
+//  }
+//}
 
 

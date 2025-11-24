@@ -2080,7 +2080,6 @@ window.AppState = window.AppState || {
 };
 
 document.addEventListener("DOMContentLoaded", () => {
-    handleResize();
     updateRightArea(0, false); // 최초 세팅
     init();                    // 스크롤 감지 및 애니메이션 준비
 });
@@ -2113,8 +2112,8 @@ const scrollAndAlignThenRun = (el, cb) => {
 
     const onScroll = () => tryFinish();
 
-    el.scrollIntoView({behavior: 'smooth', block: 'start'});
-    window.addEventListener('scroll', onScroll, {passive: true});
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    window.addEventListener('scroll', onScroll, { passive: true });
 
     const poll = setInterval(tryFinish, 40);
 
@@ -2130,10 +2129,23 @@ const scrollAndAlignThenRun = (el, cb) => {
 
 // 초기 설정 및 스크롤 이벤트 등록
 const init = () => {
+    // const isMobile = window.innerWidth <= 800;
+
     gsap.set(images, {opacity: 0});
 
     const projectsSection = document.getElementById('projects');
     if (!projectsSection) return;
+
+    // // 📱 모바일: 애니메이션 없이 바로 보이게
+    // if (isMobile) {
+    //     gsap.set(images, { opacity: 1 });
+    //     const rightArea = document.querySelector(".right-area");
+    //     if (rightArea) {
+    //         gsap.set(rightArea, { opacity: 1, x: 0 });
+    //         gsap.set(".right-area .info > *", { opacity: 1, y: 0 });
+    //     }
+    //     return; // ❌ 모바일은 여기서 끝
+    // }
 
     // IntersectionObserver 등록
     const observer = new IntersectionObserver(entries => {
@@ -2168,35 +2180,6 @@ const checkProjectSection = () => {
         animationTriggered = false;
     }
 };
-
-const handleResize = () => {
-    const isMobile = window.innerWidth <= 650;
-    const rightArea = document.querySelector(".right-area");
-    const itemsContainer = document.querySelector(".items");
-
-    if (!rightArea || !itemsContainer) return;
-
-    if (isMobile) {
-        // 🔥 갤러리 DOM 자체 삭제
-        if (itemsContainer.parentNode) {
-            itemsContainer.parentNode.removeChild(itemsContainer);
-        }
-        rightArea.style.display = "block";
-
-        // 애니메이션 중지
-        if (galleryAnimationTimeline) galleryAnimationTimeline.kill();
-        galleryAnimationTimeline = null;
-        gsap.set(images, {opacity: 0});
-        updateRightArea(window.AppState.currentRotation); // 데이터 강제 렌더
-    } else {
-        // PC: 무조건 초기 애니메이션 호출 금지
-        itemsContainer.style.display = "flex";
-        rightArea.style.display = "block";
-        gsap.set(images, {opacity: 0});
-        gsap.set(rightArea, {opacity: 0, x: 50});
-    }
-};
-window.addEventListener("resize", handleResize);
 
 let galleryAnimationTimeline = null; // 갤러리 애니메이션 타임라인을 저장할 변수
 
@@ -2236,12 +2219,6 @@ const resetAnimation = () => {
     // items 컨테이너 회전값 강제 리셋 (항상 첫 프로젝트가 중앙으로 오게)
     gsap.set(".items", {rotation: 0});
 
-    const itemsContainer = document.querySelector(".items");
-    if (itemsContainer && window.innerWidth > 650) {
-        gsap.set(itemsContainer, {rotation: 0});
-        itemsContainer.style.display = "flex";
-    }
-
     // ➤ track-label 초기화 추가
     const trackLabels = document.querySelectorAll('.track-label');
     trackLabels.forEach(label => label.classList.remove('animate'));
@@ -2251,6 +2228,7 @@ const itemsContainer = document.querySelector(".items");
 
 // 프로젝트 이미지 원형 배치 및 애니메이션 실행
 const runAnimation = () => {
+
     // ✅ 툴바 이동 중이면 애니메이션 실행하지 않음
     if (window.isScrollingToSection) return;
 
@@ -2264,7 +2242,7 @@ const runAnimation = () => {
 
     itemsContainer.classList.remove("hover-enabled");   // 애니메이션 시작 전에는 hover 비활성화
     updateRightArea(0, false); // 첫 프로젝트 기준, 실제 데이터 바로 세팅
-    gsap.set(".right-area", {opacity: 0, x: 50}); // 완전히 숨김 상태에서 시작
+    gsap.set(".right-area", {opacity:0, x:50}); // 완전히 숨김 상태에서 시작
 
     if (window.smoother) window.smoother.paused(true);  // ➤ 스크롤 잠금
 
