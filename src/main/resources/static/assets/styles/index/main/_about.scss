@@ -9,10 +9,8 @@
     box-sizing: border-box;
   }
 
-  //background-color: #0d1b1e;
-  //background-image: repeating-linear-gradient(0deg, #0d1b1e 0px, #0d1b1e 2px, #0c181b 2px, #0c181b 4px);
   color: #f3d547;
-  padding: 60px 5vw 550px 5vw;
+  padding: 150px 5vw 550px 5vw;
   display: block;
 
   > .about-container {
@@ -26,22 +24,14 @@
       padding: 5px;
     }
 
-    > .about-title {
-      font-size: clamp(28px, 10vw, 60px);
-      font-weight: 900;
-      text-shadow: 2px 2px 0 #000, 4px 4px 0 #444;
-      letter-spacing: 1px;
-      color: #f3d547;
-      padding-bottom: 70px;
-    }
-
     > .about-row {
-      @include flex(row, center, center, 34px);
+      @include flex(row, center, center, clamp(16px, 2.5vw, 34px));
       width: 100%;
       padding-bottom: 30px;
 
       // 좁은 화면에서 세로로 정렬
       @media (max-width: 768px) {
+        align-items: flex-start;
         flex-direction: column;
         gap: 24px;
       }

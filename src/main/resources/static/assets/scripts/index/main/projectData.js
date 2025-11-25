@@ -1,6 +1,29 @@
 // assets/scripts/index/main/projectData.js
 export const projectsData = [
     {
+        title: "포트폴리오 (레트로)",
+        date: "2025.04.01 - 2025.10.25",
+        type: ["개인", "사이드", "반응형"],
+        language: ["Java", "HTML, SCSS, CSS, JS", "MariaDB", "JDK"],
+        framework: ["Spring Boot, Spring MVC", "Lombok", "GSAP", "Font Awesome, Ionicons"],
+        etc: ["IntelliJ, Maven", "Git, GitHub, Notion", "Google Cloud", "Cloudflare", "Gabia"],
+        features: [
+            "레트로 스타일 기반 포트폴리오 '포트폴리오-레트로버전 v2'를 1인 프로젝트로 개발하며, 이전 포트폴리오의 한계를 개선하고 시각적 완성도와 직관적인 UI/UX 구현을 목표로 진행했습니다.",
+            "HTML, CSS/SCSS, JavaScript, Thymeleaf, Font Awesome, Ionicons, Google Fonts를 활용해 원페이지 스크롤 구조와 레트로 테마, 커스텀 커서, 인터랙티브 이미지 갤러리 UI/UX를 구현했습니다.",
+            "GSAP(ScrollTrigger, ScrollSmoother, Timeline)을 활용해 스크롤 기반 애니메이션, 인터랙티브 이미지 갤러리, 트랙 라벨 Block Reveal, 이미지 슬라이드 및 모달 등 고난도 JS 구현을 수행했습니다.",
+            "모바일 대응, 화면 부하 최적화, 사용자 활동 기반 인터랙션 제어 등을 적용하여 안정적이고 자연스러운 포트폴리오 경험을 제공하도록 전체 구조와 동작을 최적화했습니다."
+        ],
+        slides: [
+            "/assets/images/project/retro-portfolio/career.png",
+            "/assets/images/project/retro-portfolio/about.png",
+            "/assets/images/project/retro-portfolio/intro.png",
+            "/assets/images/project/retro-portfolio/skill.png",
+            "/assets/images/project/retro-portfolio/project.png"
+        ],
+        siteUrl: "https://www.taeyong.dev/",
+        githubUrl: "https://github.com/taeyong-k/tyk-retro-portfolio"
+    },
+    {
         title: "Pixterest",
         date: "2025.06.20 - 25.08.05",
         type: ["팀", "사이드", "반응형"],
@@ -22,31 +45,6 @@ export const projectsData = [
         ],
         siteUrl: "https://pixterest.taeyong.dev/",
         githubUrl: "https://github.com/taeyong-k/pixterest"
-    },
-    { // 사용한 스킬은 다하고 나서 수정!!!!
-        title: "포트폴리오 (레트로)",
-        date: "2025.04.01 - 2025.09.진행중",
-        type: ["개인", "사이드", "반응형"],
-        language: ["Java", "HTML, SCSS, CSS, JS", "MariaDB", "JDK"],
-        // framework: ["Spring Boot, Spring MVC", "Thymeleaf", "MyBatis", "Lombok", "GSAP", "Font Awesome, Ionicons"],
-        framework: ["Spring Boot, Spring MVC", "Lombok", "GSAP", "Font Awesome, Ionicons"],
-        etc: ["IntelliJ, Maven", "Git, GitHub, Notion", "Google Cloud", "Cloudflare", "Gabia"],
-        features: [
-            "레트로 스타일 기반 포트폴리오 '포트폴리오-레트로버전 v2'를 1인 프로젝트로 개발하며, 이전 포트폴리오의 한계를 개선하고 시각적 완성도와 직관적인 UI/UX 구현을 목표로 진행했습니다.",
-            "HTML, CSS/SCSS, JavaScript, Thymeleaf로 원페이지 스크롤, 레트로 테마, 인터랙티브 애니메이션 및 LED 스킬 보드 UI/UX를 구현했습니다.",
-            "백엔드(Spring Boot, Spring MVC, JDBC, MariaDB)와 연동하여 프로젝트/커리어/스킬 데이터 관리, 세션 처리, DB 저장/조회 기능을 포함한 전체 포트폴리오 구조를 설계했습니다.",
-            "GSAP, Draggable, Block Reveal 등 라이브러리를 활용한 애니메이션 최적화, 모바일 반응형 대응, 부하 최소화, 사용자 활동 기반 인터랙션 제어 등 고도화된 프론트엔드 기능을 구현했습니다."
-
-        ],
-        slides: [
-            "/assets/images/project/retro-portfolio/career.png",
-            "/assets/images/project/retro-portfolio/about.png",
-            "/assets/images/project/retro-portfolio/intro.png",
-            "/assets/images/project/retro-portfolio/skill.png",
-            "/assets/images/project/retro-portfolio/project.png"
-        ],
-        siteUrl: "https://www.taeyong.dev/",
-        githubUrl: "https://github.com/taeyong-k/tyk-retro-portfolio"
     },
     {
         title: "독서 마라톤",

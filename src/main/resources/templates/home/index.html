@@ -11,24 +11,18 @@
     <link rel="stylesheet" href="/assets/styles/index.min.css" type="text/css">
 
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/css/all.min.css'>
-    <!--    <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/3.1.1/gsap.min.js'></script>-->
     <script type="module" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.esm.js"></script>
 
-    <!--    <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.3/gsap.min.js'></script>-->
     <script src='https://unpkg.com/gsap@3/dist/Draggable.min.js'></script>
 
-    <!--    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no"/>-->
     <script src="https://dl.dropbox.com/s/m1qor6z15o64wkc/stats.min.js?dl=0"></script>
     <script src="https://dl.dropbox.com/s/sk7fbhx9burholi/dat.gui.min.js?dl=0"></script>
     <link href="https://fonts.googleapis.com/css?family=Oswald:400&display=swap" rel="stylesheet">
     <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Ruda:wght@900&amp;display=swap'>
 
-    <!-- GSAP -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
-    <!-- ScrollSmoother -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollSmoother.min.js"></script>
-    <!-- 스크롤 JS -->
     <script defer src="/assets/scripts/scroll.js"></script>
     <script defer src="/assets/scripts/index.js" type="module"></script>
 </head>
@@ -83,9 +77,8 @@
             </article>
             <article id="about">
                 <div class="about-container">
-                    <div class="about-title fade-up">About Me</div>
-                    <section class="about-row fade-up">
-                        <section class="about-box box-padding">
+                    <section class="about-row">
+                        <section class="about-box box-padding fade-up">
                             <div class="about-inner-box">
                                 <div class="about-title-bar">
                                     <span>ABOUT ME</span>
@@ -106,11 +99,11 @@
                             </div>
                         </section>
                         <section class="contact-side-box">
-                            <div class="side-box box-padding">
+                            <div class="side-box box-padding fade-up">
                                 <div class="side-birth-title side-title-blue">BIRTHDAY</div>
                                 <div class="side-content">1996. 09.02</div>
                             </div>
-                            <div class="side-box box-padding">
+                            <div class="side-box box-padding fade-up">
                                 <div class="side-cont-title">Personality</div>
                                 <div class="side-content">ISTJ</div>
                             </div>
@@ -190,29 +183,6 @@
                                     <div class="button btn3"></div>
                                 </div>
                                 <div class="content-box">
-                                    <div class="content-text">커리어</div>
-                                    <div class="underline"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="info">
-                            <div class="title">포항신협본점·신용협동</div>
-                            <div class="date">2024.07 - 2024.12</div>
-                            <div class="tasks">
-                                <p class="task">금융 전산 시스템을 활용해 출납창구 업무를 수행하며 데이터 관리와 업무 효율화를 경험했고,
-                                    팀 단위 협업과 문제 해결을 통해 안정적인 시스템 운영 역량을 익혔습니다.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="career-container fade-up">
-                        <div class="window">
-                            <div class="inner-shadow-wrapper">
-                                <div class="title-bar">
-                                    <div class="button btn1"></div>
-                                    <div class="button btn2"></div>
-                                    <div class="button btn3"></div>
-                                </div>
-                                <div class="content-box">
                                     <div class="content-text">교육</div>
                                     <div class="underline short"></div>
                                 </div>
@@ -227,6 +197,29 @@
                                     6일 단기 프로젝트부터 한 달간의 팀 프로젝트까지 다양한 규모의 과제를 수행하며,
                                     설계와 개발은 물론 배포까지 실무에 가까운 경험을 쌓았습니다.
                                 </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="career-container fade-up">
+                        <div class="window">
+                            <div class="inner-shadow-wrapper">
+                                <div class="title-bar">
+                                    <div class="button btn1"></div>
+                                    <div class="button btn2"></div>
+                                    <div class="button btn3"></div>
+                                </div>
+                                <div class="content-box">
+                                    <div class="content-text">커리어</div>
+                                    <div class="underline"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="info">
+                            <div class="title">포항신협본점·신용협동</div>
+                            <div class="date">2024.07 - 2024.12</div>
+                            <div class="tasks">
+                                <p class="task">금융 전산 시스템을 활용해 출납창구 업무를 수행하며 데이터 관리와 업무 효율화를 경험했고,
+                                    팀 단위 협업과 문제 해결을 통해 안정적인 시스템 운영 역량을 익혔습니다.</p>
                             </div>
                         </div>
                     </div>
@@ -317,7 +310,8 @@
                                 <div class="item">
                                     <div class="card">
                                         <div class="inner">
-                                            <img class="image" src="/assets/images/project/logo/pixterest-logo.png"/>
+                                            <img class="image"
+                                                 src="/assets/images/project/logo/retro-portfolio-logo.jpg"/>
                                             <div class="track-label block-reveal">
                                                 <span class="reveal-text">TRACK 01</span>
                                             </div>
@@ -327,7 +321,8 @@
                                 <div class="item">
                                     <div class="card">
                                         <div class="inner">
-                                            <img class="image" src="/assets/images/project/logo/pixterest-logo.png"
+                                            <img class="image"
+                                                 src="/assets/images/project/logo/retro-portfolio-logo.jpg"
                                                  style="filter: grayscale(100) blur(6px);"/>
                                         </div>
                                     </div>
@@ -336,7 +331,7 @@
                                     <div class="card">
                                         <div class="inner">
                                             <img class="image"
-                                                 src="/assets/images/project/logo/retro-portfolio-logo.jpg"/>
+                                                 src="/assets/images/project/logo/pixterest-logo.png"/>
                                             <div class="track-label block-reveal">
                                                 <span class="reveal-text">TRACK 02</span>
                                             </div>
@@ -347,7 +342,7 @@
                                     <div class="card">
                                         <div class="inner">
                                             <img class="image"
-                                                 src="/assets/images/project/logo/retro-portfolio-logo.jpg"
+                                                 src="/assets/images/project/logo/pixterest-logo.png"
                                                  style="filter: grayscale(100) blur(6px);"/>
                                         </div>
                                     </div>
@@ -412,29 +407,24 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="right-area" data-site-url="https://pixterest.taeyong.dev/"
-                             data-github-url="https://github.com/taeyong-k/pixterest">
+                        <div class="right-area" data-site-url="https://www.taeyong.dev/"
+                             data-github-url="https://github.com/taeyong-k/tyk-retro-portfolio">
                             <div class="gradient-border" id="box">
                                 <div class="container">
                                     <div class="slide"
-                                         style="background-image: url('/assets/images/project/pixterest/board.png');">
-
+                                         style="background-image: url('/assets/images/project/retro-portfolio/career.png');">
                                     </div>
                                     <div class="slide"
-                                         style="background-image: url('/assets/images/project/pixterest/pin.png');">
-
+                                         style="background-image: url('/assets/images/project/retro-portfolio/about.png');">
                                     </div>
                                     <div class="slide"
-                                         style="background-image: url('/assets/images/project/pixterest/home.png');">
-
+                                         style="background-image: url('/assets/images/project/retro-portfolio/intro.png');">
                                     </div>
                                     <div class="slide"
-                                         style="background-image: url('/assets/images/project/pixterest/pin-more.png');">
-
+                                         style="background-image: url('/assets/images/project/retro-portfolio/skill.png');">
                                     </div>
                                     <div class="slide"
-                                         style="background-image: url('/assets/images/project/pixterest/pin-edit.png');">
-
+                                         style="background-image: url('/assets/images/project/retro-portfolio/project.png');">
                                     </div>
                                 </div>
                             </div>

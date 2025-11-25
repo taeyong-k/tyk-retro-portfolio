@@ -2054,6 +2054,9 @@
 // });
 
 
+// ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+// ★★★★★★★★★★★★★★★★★★★★★★★프로젝트 섹션 수정 -final★★★★★★★★★★★★★★★★★★★★★★★
+// ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
 import {projectsData} from './projectData.js';
 
 window.AppState = window.AppState || {
@@ -2157,6 +2160,8 @@ let galleryAnimationTimeline = null; // 갤러리 애니메이션 타임라인�
 
 // 애니메이션 상태 초기화 함수
 const resetAnimation = () => {
+    if (window.smoother) window.smoother.paused(false);
+
     if (galleryAnimationTimeline) {
         galleryAnimationTimeline.kill(); // 특정 타임라인만 완전히 중지
         galleryAnimationTimeline = null; // 참조 초기화
@@ -2196,10 +2201,31 @@ const resetAnimation = () => {
     trackLabels.forEach(label => label.classList.remove('animate'));
 };
 
+// 카드 배경 업데이트 함수
+const updateCardBackground = () => {
+    const isAnimationRunning = window.AppState.isGalleryAnimating;
+    const isMobile = window.innerWidth <= 700;
+
+    document.querySelectorAll(".card").forEach(card => {
+        if (isAnimationRunning) {
+            card.classList.remove("mobile-card");
+        } else {
+            if (isMobile) {
+                card.classList.add("mobile-card");
+            } else {
+                card.classList.remove("mobile-card");
+            }
+        }
+    });
+};
+window.addEventListener("resize", updateCardBackground);
+
 const itemsContainer = document.querySelector(".items");
+const gallery = document.querySelector(".center");
 
 // 프로젝트 이미지 원형 배치 및 애니메이션 실행
 const runAnimation = () => {
+    gallery.classList.remove("mobile-gallery");
 
     // ✅ 툴바 이동 중이면 애니메이션 실행하지 않음
     if (window.isScrollingToSection) return;
@@ -2239,6 +2265,8 @@ const runAnimation = () => {
             animateTrackLabels();
 
             window.AppState.isGalleryAnimating = false;
+
+            updateCardBackground();
         }
     });
 
@@ -2307,7 +2335,18 @@ const runAnimation = () => {
     galleryAnimationTimeline.fromTo(
         ".right-area",                  // 애니메이션 적용 대상
         {opacity: 0, x: 50, pointerEvents: "none"},          // 시작 상태: 투명 + 오른쪽으로 50px 이동
-        {opacity: 1, x: 0, duration: 0.8, ease: "power2.out", pointerEvents: "auto"}, // 종료 상태: 불투명 + 원래 위치
+        {
+            opacity: 1, x: 0, duration: 0.8, ease: "power2.out", pointerEvents: "auto",
+            onStart: () => {
+                if (window.innerWidth <= 700) {
+                    setTimeout(() => {
+                        if (gallery) gallery.classList.add("mobile-gallery");
+                    }, 420);
+                } else {
+                    if (gallery) gallery.classList.remove("mobile-gallery");
+                }
+            }
+        }, // 종료 상태: 불투명 + 원래 위치
         "-=0.5"                         // 타이밍: 이전 애니메이션 끝나기 0.5초 전에 시작
     );
 
