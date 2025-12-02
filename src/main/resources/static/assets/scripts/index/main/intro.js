@@ -1,9 +1,9 @@
 const $header = document.getElementById('header');
 const video = document.querySelector("#intro video");
-const tvEnd = 2; // TV 애니메이션 끝 시점
+const tvEnd = 2;
 
-video.removeAttribute('loop'); // loop 제거
-video.currentTime = 0; // 항상 처음부터
+video.removeAttribute('loop');
+video.currentTime = 0;
 video.play();
 
 // TV 애니메이션 끝나면 header 표시

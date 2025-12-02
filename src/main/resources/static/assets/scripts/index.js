@@ -129,9 +129,8 @@ document.addEventListener("DOMContentLoaded", () => {
         let x = targetBox.left;
         let y = targetBox.top;
 
-        // skills li만 살짝 크게
         if (e.currentTarget.closest("#skills")) {
-            const extra = 15; // 조정값
+            const extra = 15;
             width += extra;
             height += extra;
             x -= extra / 2;

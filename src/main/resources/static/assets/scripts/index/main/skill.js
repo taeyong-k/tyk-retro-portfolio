@@ -204,12 +204,10 @@ const skillSection = document.getElementById('skills');
 const observer = new IntersectionObserver(entries => {
     const entry = entries[0];
 
-    // 시작 조건: 30% 이상 보이면 시작
     if (entry.intersectionRatio >= 0.3) {
         startAutoRotate();
     }
 
-    // 멈춤 조건: 20% 이하만 남으면 멈춤
     if (entry.intersectionRatio <= 0.2) {
         stopAutoRotate();
         clearTimeout(inactivityTimer);
@@ -269,10 +267,8 @@ const skillContainer = document.querySelector('.skill-container');
 // 휠 감지해서 타이머 리셋
 if (skillContainer) {
     skillContainer.addEventListener('wheel', (e) => {
-        // 현재 선택된 카테고리가 tools 인지 확인
         const selectedLi = document.querySelector('#skillNav li.selected a');
         if (selectedLi && selectedLi.dataset.category === 'tools') {
-            // tools 스크롤 감지 시 자동전환 잠시 멈춤 & 타이머 재설정
             resetInactivityTimer();
         }
     });

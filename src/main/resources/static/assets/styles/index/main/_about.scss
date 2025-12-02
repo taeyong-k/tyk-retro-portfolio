@@ -139,11 +139,11 @@
                   text-align: left;
 
                   border: 4px solid #2b2b2b;
-                  box-shadow: inset 2px 0 0 rgba(0, 0, 0, 0.25), /* 왼쪽 어둡게 */
-                  inset 0 -2px 0 rgba(0, 0, 0, 0.25), /* 아래 어둡게 */
-                  inset -2px 0 0 rgba(255, 255, 255, 0.25), /* 오른쪽 밝게 */
-                  inset 0 2px 0 rgba(255, 255, 255, 0.25), /* 위 밝게 */
-                  4px 4px 0 rgba(0, 0, 0, 0.25); /* 외부 그림자 */
+                  box-shadow: inset 2px 0 0 rgba(0, 0, 0, 0.25),
+                  inset 0 -2px 0 rgba(0, 0, 0, 0.25),
+                  inset -2px 0 0 rgba(255, 255, 255, 0.25),
+                  inset 0 2px 0 rgba(255, 255, 255, 0.25),
+                  4px 4px 0 rgba(0, 0, 0, 0.25);
 
                   background-image: linear-gradient(to bottom, #d22 25px, transparent 25px);
                   background-repeat: no-repeat;
@@ -195,11 +195,11 @@
                   text-align: left;
 
                   border: 4px solid #2b2b2b;
-                  box-shadow: inset 2px 0 0 rgba(0, 0, 0, 0.25), /* 왼쪽 어둡게 */
-                  inset 0 -2px 0 rgba(0, 0, 0, 0.25), /* 아래 어둡게 */
-                  inset -2px 0 0 rgba(255, 255, 255, 0.25), /* 오른쪽 밝게 */
-                  inset 0 2px 0 rgba(255, 255, 255, 0.25), /* 위 밝게 */
-                  4px 4px 0 rgba(0, 0, 0, 0.25); /* 외부 그림자 */
+                  box-shadow: inset 2px 0 0 rgba(0, 0, 0, 0.25),
+                  inset 0 -2px 0 rgba(0, 0, 0, 0.25),
+                  inset -2px 0 0 rgba(255, 255, 255, 0.25),
+                  inset 0 2px 0 rgba(255, 255, 255, 0.25),
+                  4px 4px 0 rgba(0, 0, 0, 0.25);
 
                   background-image: linear-gradient(to bottom, #4a90a0 25px, transparent 25px);
                   background-repeat: no-repeat;
