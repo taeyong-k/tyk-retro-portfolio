@@ -205,8 +205,6 @@ const runAnimation = () => {
     });
 
     images.forEach((image, index) => {
-        gsap.set(image, {opacity: 1});
-
         // 초기 회전 각도 및 크기 설정
         const sign = Math.floor((index / 2) % 2) ? 1 : -1;
         const value = Math.floor((index + 4) / 4) * 4;
@@ -215,6 +213,7 @@ const runAnimation = () => {
         gsap.set(image, {
             x: 0,
             y: 0,
+            opacity: 1,
             rotation: rotation,
             scale: 0.5,
         });
@@ -527,3 +526,11 @@ projectCloseBtn.addEventListener("click", () => {
     projectModal.classList.remove("show");
     if (window.smoother) window.smoother.paused(false);
 });
+
+
+
+
+
+
+
+
