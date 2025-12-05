@@ -322,7 +322,6 @@ window.updateRightArea = function (currentRotation, isFromDrag = false) {
         return;
     }
 
-    // DOM 갱신
     if (rightArea.querySelector(".title h1").textContent !== projectData.title) {
         rightArea.querySelector(".title h1").textContent = projectData.title;
     }
@@ -408,12 +407,10 @@ function animateTrackLabels() {
 
     trackLabels.forEach(label => label.classList.remove('animate'));
 
-    // 화면 중앙에 있는 라벨만 animate 적용
     if (closestLabel) {
         closestLabel.classList.add('animate');
     }
 }
-
 
 // GSAP 이미지 슬라이드
 function slidesPlugin() {
@@ -447,7 +444,6 @@ function slidesPlugin() {
 }
 
 slidesPlugin();
-
 
 // 모달 열기 함수
 function openModal(slide) {
@@ -526,11 +522,3 @@ projectCloseBtn.addEventListener("click", () => {
     projectModal.classList.remove("show");
     if (window.smoother) window.smoother.paused(false);
 });
-
-
-
-
-
-
-
-
