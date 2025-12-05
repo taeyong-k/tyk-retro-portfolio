@@ -156,7 +156,7 @@
 }
 #about {
   color: #f3d547;
-  padding: 150px 5vw 550px 5vw;
+  padding: 350px 5vw 700px 5vw;
   display: block;
 }
 #about * {
@@ -826,7 +826,7 @@
 }
 #career {
   width: 100%;
-  padding: 60px 5vw 550px 5vw;
+  padding: 60px 5vw 700px 5vw;
   display: block;
 }
 #career * {
@@ -1108,7 +1108,7 @@
 }
 
 #skills {
-  padding: 60px 5vw 550px 5vw;
+  padding: 60px 5vw 700px 5vw;
   display: block;
 }
 #skills * {
