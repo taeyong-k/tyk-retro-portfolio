@@ -6,6 +6,15 @@ video.removeAttribute('loop');
 video.currentTime = 0;
 video.play();
 
+// 비디오 로딩 실패 fallback
+video.addEventListener('error', () => {
+    $header.classList.add('visible');
+});
+// 비디오 로딩되면 즉시 재생
+video.addEventListener('canplay', () => {
+    video.play();
+});
+
 // TV 애니메이션 끝나면 header 표시
 setTimeout(() => {
     $header.classList.add('visible');
