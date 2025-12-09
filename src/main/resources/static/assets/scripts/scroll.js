@@ -14,7 +14,7 @@ window.addEventListener("DOMContentLoaded", () => {
     window.smoother = ScrollSmoother.create({
         wrapper: "#root",
         content: "#scroll-container",
-        smooth: 2,
+        smooth: 5,
         effects: true,
     });
 
@@ -111,23 +111,44 @@ window.addEventListener("DOMContentLoaded", () => {
 
     // fade-up 애니메이션
     gsap.utils.toArray(".fade-up").forEach((el) => {
-        gsap.fromTo(
-            el,
-            {opacity: 0.3, y: 80, scale: 0.65, filter: "blur(4px)"},
-            {
-                opacity: 1,
-                y: 0,
-                scale: 1,
-                filter: "blur(0px)",
-                ease: "power2.out",
-                scrollTrigger: {
-                    trigger: el,
-                    start: "top 100%",
-                    end: "top 65%",
-                    scrub: 1.5,
-                },
-            }
-        );
+        if (!el.closest("#project-title")) {
+            gsap.fromTo(
+                el,
+                {opacity: 0.3, y: 80, scale: 0.65, filter: "blur(4px)"},
+                {
+                    opacity: 1,
+                    y: 0,
+                    scale: 1,
+                    filter: "blur(0px)",
+                    ease: "power2.out",
+                    scrollTrigger: {
+                        trigger: el,
+                        start: "top 100%",
+                        end: "top 60%",
+                        scrub: 2,
+                    },
+                }
+            );
+        }
     });
-});
 
+    // 프로젝트 타이틀 ('프', '로', '젝', '트') 개별 글자 애니메이션
+    gsap.fromTo(
+        "#project-title h1",
+        { opacity: 0.3, y: 80, scale: 0.65, filter: "blur(4px)" },
+        {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            filter: "blur(0px)",
+            ease: "slow(0.7, 0.7, false)",
+            stagger: 0.1,
+            scrollTrigger: {
+                trigger: "#project-title",
+                start: "top 95%",
+                end: "top 45%",
+                scrub: 3,
+            },
+        }
+    );
+});
