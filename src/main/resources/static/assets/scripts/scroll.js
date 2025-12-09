@@ -114,7 +114,7 @@ window.addEventListener("DOMContentLoaded", () => {
         if (!el.closest("#project-title")) {
             gsap.fromTo(
                 el,
-                {opacity: 0.3, y: 80, scale: 0.65, filter: "blur(4px)"},
+                {opacity: 0.3, y: 60, scale: 0.65, filter: "blur(4px)"},
                 {
                     opacity: 1,
                     y: 0,

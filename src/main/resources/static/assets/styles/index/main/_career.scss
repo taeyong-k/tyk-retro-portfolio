@@ -14,7 +14,7 @@
   display: block;
 
   > .career-wrapper {
-    @include flex(column, center, center, clamp(24px, 6vw, 64px));
+    @include flex(column, center, center, clamp(24px, 6vw, 76px));
     max-width: 1024px;
     height: 100%;
     margin: 0 auto;
