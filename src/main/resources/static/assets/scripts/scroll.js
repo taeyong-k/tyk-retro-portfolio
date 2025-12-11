@@ -132,7 +132,7 @@ window.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // 프로젝트 타이틀 ('프', '로', '젝', '트') 개별 글자 애니메이션
+    // 프로젝트 타이틀 개별 글자 애니메이션
     gsap.fromTo(
         "#project-title h1",
         { opacity: 0.3, y: 80, scale: 0.65, filter: "blur(4px)" },
