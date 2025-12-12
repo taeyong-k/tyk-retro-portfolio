@@ -82,33 +82,33 @@ window.addEventListener("DOMContentLoaded", () => {
                         if (window.updateRightArea) window.updateRightArea(finalRotation, true);
                     },
                 },
-                onUpdate: (self) => {
-                    window.AppState.isScrolling = true;
-
-                    if (!window.AppState.isSnapping && !window.AppState.isDragging) {
-                        const currentRotation = self.progress * (effectiveTracksForRotation * degreePerTrack);
-                        window.AppState.currentRotation = currentRotation;
-                        if (window.updateRightArea) window.updateRightArea(currentRotation);
-                    }
-
-                    clearTimeout(self.scrollTimeout);
-                    self.scrollTimeout = setTimeout(() => {
-                        window.AppState.isScrolling = false;
-                    }, 100);
-                },
                 // onUpdate: (self) => {
                 //     window.AppState.isScrolling = true;
                 //
-                //     const currentRotation = self.progress * (effectiveTracksForRotation * degreePerTrack);
-                //     window.AppState.currentRotation = currentRotation;
-                //
-                //     if (window.updateRightArea) window.updateRightArea(currentRotation);
+                //     if (!window.AppState.isSnapping && !window.AppState.isDragging) {
+                //         const currentRotation = self.progress * (effectiveTracksForRotation * degreePerTrack);
+                //         window.AppState.currentRotation = currentRotation;
+                //         if (window.updateRightArea) window.updateRightArea(currentRotation);
+                //     }
                 //
                 //     clearTimeout(self.scrollTimeout);
                 //     self.scrollTimeout = setTimeout(() => {
                 //         window.AppState.isScrolling = false;
                 //     }, 100);
                 // },
+                onUpdate: (self) => {
+                    window.AppState.isScrolling = true;
+
+                    const currentRotation = self.progress * (effectiveTracksForRotation * degreePerTrack);
+                    window.AppState.currentRotation = currentRotation;
+
+                    if (window.updateRightArea) window.updateRightArea(currentRotation);
+
+                    clearTimeout(self.scrollTimeout);
+                    self.scrollTimeout = setTimeout(() => {
+                        window.AppState.isScrolling = false;
+                    }, 100);
+                },
                 onEnter: () => {
                     window.AppState.activeProjectIndex = 0;
                 },
