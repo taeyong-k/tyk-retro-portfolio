@@ -96,6 +96,19 @@ window.addEventListener("DOMContentLoaded", () => {
                         window.AppState.isScrolling = false;
                     }, 100);
                 },
+                // onUpdate: (self) => {
+                //     window.AppState.isScrolling = true;
+                //
+                //     const currentRotation = self.progress * (effectiveTracksForRotation * degreePerTrack);
+                //     window.AppState.currentRotation = currentRotation;
+                //
+                //     if (window.updateRightArea) window.updateRightArea(currentRotation);
+                //
+                //     clearTimeout(self.scrollTimeout);
+                //     self.scrollTimeout = setTimeout(() => {
+                //         window.AppState.isScrolling = false;
+                //     }, 100);
+                // },
                 onEnter: () => {
                     window.AppState.activeProjectIndex = 0;
                 },
