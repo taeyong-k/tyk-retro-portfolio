@@ -431,13 +431,23 @@ function slidesPlugin() {
 
         // 이벤트 재설정
         project.querySelectorAll(".slide").forEach((slide) => {
-            slide.addEventListener("click", () => {
+            slide.addEventListener("pointerdown", () => {
+                if (window.smoother) window.smoother.paused(true);
+
                 if (slide.classList.contains("active")) {
                     openModal(slide);
                     return;
                 }
                 project.querySelectorAll(".slide").forEach(s => s.classList.remove("active"));
                 slide.classList.add("active");
+
+                setTimeout(() => {
+                    const modal = document.querySelector(".image-modal");
+                    const isModalOpen = modal && modal.classList.contains("show");
+                    if (!isModalOpen && window.smoother) {
+                        window.smoother.paused(false);
+                    }
+                }, 30);
             });
         });
     });

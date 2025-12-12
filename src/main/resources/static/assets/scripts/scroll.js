@@ -94,7 +94,7 @@ window.addEventListener("DOMContentLoaded", () => {
                     clearTimeout(self.scrollTimeout);
                     self.scrollTimeout = setTimeout(() => {
                         window.AppState.isScrolling = false;
-                    }, 150);
+                    }, 100);
                 },
                 onEnter: () => {
                     window.AppState.activeProjectIndex = 0;
