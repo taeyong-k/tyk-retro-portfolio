@@ -488,7 +488,6 @@ function openModal(slide) {
     closeBtn.addEventListener("click", closeModal);
 }
 
-
 const projectModal = document.getElementById("modal");
 const modalMessage = document.getElementById("modalMessage");
 const projectCloseBtn = projectModal.querySelector(".close-button");
