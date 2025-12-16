@@ -14,7 +14,7 @@ window.addEventListener("DOMContentLoaded", () => {
     window.smoother = ScrollSmoother.create({
         wrapper: "#root",
         content: "#scroll-container",
-        smooth: 5,
+        smooth: 3,
         effects: true,
     });
 
