@@ -10,7 +10,6 @@ window.addEventListener("DOMContentLoaded", () => {
         isSnapping: false,
     };
 
-    // ScrollSmoother 초기화
     window.smoother = ScrollSmoother.create({
         wrapper: "#root",
         content: "#scroll-container",
@@ -18,7 +17,6 @@ window.addEventListener("DOMContentLoaded", () => {
         effects: true,
     });
 
-    // 인트로 애니메이션 동안 스크롤 잠금
     const tvEnd = 2;
     const root = document.querySelector("#root");
 
@@ -32,7 +30,7 @@ window.addEventListener("DOMContentLoaded", () => {
         document.body.style.overflow = "";
     }, tvEnd * 1000);
 
-    // 프로젝트 섹션: pin + 회전 + 스냅 + 폭 제한
+    // 프로젝트 섹션
     const projectsSection = document.getElementById("projects");
     const itemsContainer = document.querySelector(".items");
 
