@@ -37,7 +37,6 @@
 - **기획/문서:** Notion
 - **폰트 / 타이포그래피:** Press Start 2P, NeoDunggeunmo, DotGothic16, IBM Plex Sans KR
 
-
 ## ☁️ 배포 환경
 
 - **서버 호스팅:** Google Cloud
